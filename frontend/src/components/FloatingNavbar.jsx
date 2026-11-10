@@ -35,7 +35,7 @@ export default function FloatingNavbar({ activeTab, setActiveTab }) {
     },
     { 
       value: 'about', 
-      label: 'Syllabus & About', 
+      label: 'Architecture', 
       icon: <BookOpen className="size-4 shrink-0" />,
       color: '#3730a3',
       foreground: '#ffffff'

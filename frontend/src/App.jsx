@@ -6,6 +6,7 @@ import WhatIfSimulator from './components/WhatIfSimulator';
 import HistoricalAnalytics from './components/HistoricalAnalytics';
 import ModelPerformance from './components/ModelPerformance';
 import AboutProject from './components/AboutProject';
+import HairlineNewsletterFooter from './components/HairlineNewsletterFooter';
 
 class TabErrorBoundary extends Component {
   constructor(props) {
@@ -69,29 +70,8 @@ export default function App() {
           </TabErrorBoundary>
         </main>
 
-        {/* Compact Refractive Glass Footer */}
-        <footer 
-          style={{ 
-            marginTop: '2.5rem', 
-            padding: '1.25rem 1.75rem', 
-            borderRadius: '16px',
-            background: 'rgba(3, 2, 14, 0.55)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            borderTop: '1px solid rgba(255, 255, 255, 0.18)',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.6)',
-            textAlign: 'center', 
-            fontSize: '0.82rem', 
-            color: 'var(--text-muted)' 
-          }}
-        >
-          <p style={{ color: 'var(--text-silver)', fontWeight: 600 }}>
-            Predictive Modeling of Next-Day Rainfall for Kolkata Using Machine Learning
-          </p>
-          <p style={{ marginTop: '0.35rem', fontSize: '0.75rem' }}>
-            Techno India University, West Bengal — Environmental Studies (EVS) | Data: Copernicus ECMWF ERA5 & IMD Standards
-          </p>
-        </footer>
+        {/* Hairline UI Glassmorphism Newsletter Footer with Big Precicast Typography */}
+        <HairlineNewsletterFooter />
       </div>
     </div>
   );

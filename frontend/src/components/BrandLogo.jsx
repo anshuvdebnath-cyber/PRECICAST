@@ -9,7 +9,7 @@ export default function BrandLogo() {
     <div style={{ display: 'inline-flex', alignItems: 'center', userSelect: 'none', cursor: 'default' }}>
       <span 
         style={{ 
-          fontSize: '1.35rem', 
+          fontSize: '1.4rem', 
           fontWeight: 700, 
           letterSpacing: '-0.035em',
           color: '#ffffff',
@@ -19,7 +19,7 @@ export default function BrandLogo() {
           padding: '0.1rem 0.4rem',
         }}
       >
-        precicast
+        Precicast
       </span>
     </div>
   );

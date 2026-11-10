@@ -204,8 +204,8 @@ export default function ModelPerformance() {
           </div>
         </HairlineCard>
 
-        {/* Hairline UI Official Earnings Chart Card (Utilizing 100% of Space Below) */}
-        <HairlineCard style={{ padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        {/* Hairline UI Official Earnings Chart Card */}
+        <HairlineCard style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
               <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
@@ -227,36 +227,6 @@ export default function ModelPerformance() {
               format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
               className="w-full bg-transparent shadow-none"
             />
-          </div>
-
-          {/* Operational Performance Breakdown Matrix utilizing the bottom space */}
-          <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.12)' }}>
-            <div style={{ fontSize: '0.80rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <BarChart2 size={15} />
-              <span>IMD Operational Category Benchmark Accuracies</span>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '0.75rem' }}>
-              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Dry (&lt;2.5 mm)</div>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#34d399' }}>84.6%</div>
-                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Baseline</div>
-              </div>
-              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Light (2.5–15 mm)</div>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#38bdf8' }}>82.2%</div>
-                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Synoptic Trace</div>
-              </div>
-              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Moderate (16–64 mm)</div>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#8aa2ff' }}>81.0%</div>
-                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Monsoon Core</div>
-              </div>
-              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Deluge (≥65 mm)</div>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fbbf24' }}>88.5%</div>
-                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Waterlogging</div>
-              </div>
-            </div>
           </div>
         </HairlineCard>
       </div>

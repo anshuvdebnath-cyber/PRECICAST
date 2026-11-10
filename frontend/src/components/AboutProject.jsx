@@ -85,7 +85,7 @@ export default function AboutProject() {
               <TextMorph>System Specifications</TextMorph>
             </HairlineBadge>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-              <TextMorph>precicast Machine Learning Pipeline</TextMorph>
+              <TextMorph>Precicast Machine Learning Pipeline</TextMorph>
             </h3>
           </div>
         </div>

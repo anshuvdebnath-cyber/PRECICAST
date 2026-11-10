@@ -111,7 +111,7 @@ export default function LiveForecastHero() {
 
       {/* 2. Main Glass Hero Dashboard Card with Hairline Glass */}
       <HairlineCard style={{ marginTop: '1.5rem', padding: '2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'stretch' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '2rem', alignItems: 'stretch' }}>
           
           {/* Left Column: Big Prediction Summary Card */}
           <HairlineCard variant="inner" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '1.75rem' }}>
@@ -139,7 +139,7 @@ export default function LiveForecastHero() {
 
                 <div>
                   <h2 style={{ 
-                    fontSize: '2.6rem', 
+                    fontSize: '2.5rem', 
                     fontWeight: 700, 
                     color: isRain ? '#38bdf8' : '#34d399',
                     letterSpacing: '-0.03em',
@@ -197,14 +197,14 @@ export default function LiveForecastHero() {
             </div>
           </HairlineCard>
 
-          {/* Right Column: Physical Atmospheric Drivers Grid (2x2) with NumberRoll */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1.25rem' }}>
+          {/* Right Column: Physical Atmospheric Drivers 2x2 Grid with Strict Sizing */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '1.25rem' }}>
             <HairlineCard variant="inner" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '1.4rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', marginBottom: '0.5rem' }}>
                 <Droplets size={19} />
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Relative Humidity</span>
               </div>
-              <div style={{ fontSize: '2.4rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0' }}>
+              <div style={{ fontSize: 'clamp(1.75rem, 2.1vw, 2.15rem)', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0', whiteSpace: 'nowrap' }}>
                 <NumberRoll value={telemetryState.humidity} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix="%" />
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Near-surface saturation index</span>
@@ -215,7 +215,7 @@ export default function LiveForecastHero() {
                 <Gauge size={19} />
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Surface Pressure</span>
               </div>
-              <div style={{ fontSize: '2.4rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0' }}>
+              <div style={{ fontSize: 'clamp(1.75rem, 2.1vw, 2.15rem)', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0', whiteSpace: 'nowrap' }}>
                 <NumberRoll value={telemetryState.pressure} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix=" hPa" />
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Barometric trough pressure</span>
@@ -226,7 +226,7 @@ export default function LiveForecastHero() {
                 <Wind size={19} />
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Max Wind Speed</span>
               </div>
-              <div style={{ fontSize: '2.4rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0' }}>
+              <div style={{ fontSize: 'clamp(1.75rem, 2.1vw, 2.15rem)', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0', whiteSpace: 'nowrap' }}>
                 <NumberRoll value={telemetryState.wind} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix=" km/h" />
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Maritime advection velocity</span>
@@ -237,7 +237,7 @@ export default function LiveForecastHero() {
                 <Sun size={19} />
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Mean Cloud Cover</span>
               </div>
-              <div style={{ fontSize: '2.4rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0' }}>
+              <div style={{ fontSize: 'clamp(1.75rem, 2.1vw, 2.15rem)', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.25rem 0', whiteSpace: 'nowrap' }}>
                 <NumberRoll value={telemetryState.cloud} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix="%" />
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Solar radiative deck shielding</span>

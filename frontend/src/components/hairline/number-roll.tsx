@@ -64,9 +64,10 @@ function columns(text: string): Column[] {
   return out.reverse();
 }
 
-const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollIn }: { digit: number; trend: number; duration: number; reduced: boolean; rollIn: boolean }) {
-  const [start] = React.useState(() => MIDDLE + (rollIn ? 0 : digit));
-  const posRef = React.useRef(start);
+const Digit = React.memo(function Digit({ digit, trend, duration, reduced, stagger = 0 }: { digit: number; trend: number; duration: number; reduced: boolean; stagger?: number }) {
+  // Start at 0 on mount to provide the signature odometer roll
+  const [mounted, setMounted] = React.useState(false);
+  const posRef = React.useRef(MIDDLE);
   const stripRef = React.useRef<HTMLSpanElement>(null);
 
   const place = React.useCallback(
@@ -79,7 +80,26 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
     [duration],
   );
 
+  // Initial mount animation: rolls from 0 to digit
+  React.useEffect(() => {
+    if (!mounted) {
+      setMounted(true);
+      if (reduced) {
+        posRef.current = MIDDLE + digit;
+        place(posRef.current, false);
+      } else {
+        const timer = setTimeout(() => {
+          posRef.current = MIDDLE + digit;
+          place(posRef.current, true);
+        }, stagger);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [mounted, digit, reduced, place, stagger]);
+
+  // Subsequent value updates: rolls from current to new digit
   React.useLayoutEffect(() => {
+    if (!mounted) return;
     const current = posRef.current;
     const showing = ((current % 10) + 10) % 10;
     if (showing === digit) return;
@@ -106,7 +126,7 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
     }
     posRef.current = target;
     place(target, true);
-  }, [digit, trend, reduced, place]);
+  }, [digit, trend, reduced, place, mounted]);
 
   const settle = () => {
     posRef.current = MIDDLE + (((posRef.current % 10) + 10) % 10);
@@ -116,15 +136,15 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
   return (
     <span 
       className="relative inline-flex items-center justify-center overflow-hidden [clip-path:inset(0)] h-[1.15em] leading-none"
-      style={{ verticalAlign: 'middle' }}
+      style={{ verticalAlign: 'middle', width: '0.62em', minWidth: '0.62em' }}
     >
-      <span className="invisible leading-none select-none px-[0.01em]">{digit}</span>
+      <span className="invisible leading-none select-none">8</span>
       <span
         ref={stripRef}
         aria-hidden="true"
         onTransitionEnd={settle}
         className="absolute inset-x-0 top-0 block whitespace-pre text-center leading-none select-none"
-        style={{ transform: `translateY(${(-start * 100) / (SETS * 10)}%)` }}
+        style={{ transform: `translateY(${(-MIDDLE * 100) / (SETS * 10)}%)`, willChange: 'transform' }}
       >
         {STRIP}
       </span>
@@ -205,7 +225,13 @@ export function NumberRoll({
                 {c.char}
               </span>
             ) : (
-              <Digit digit={c.digit} trend={trend} duration={duration} reduced={still} rollIn={false} />
+              <Digit 
+                digit={c.digit} 
+                trend={trend} 
+                duration={duration} 
+                reduced={still} 
+                stagger={c.key.startsWith('d') ? Math.min(Number(c.key.slice(1)) * 25, 200) : 0} 
+              />
             )}
           </span>
         ))}

@@ -287,14 +287,14 @@ export function EarningsChart({
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-6 [--gutter:52px] @md:[--gutter:64px] [--plot:220px] @md:[--plot:250px]">
-        {/* Title and Segmented Switch */}
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5 mb-2">
-          <p className="text-[13px] text-muted-foreground @md:text-[14px] font-semibold">{title}</p>
-          <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex shrink-0 rounded-full bg-black/60 border border-white/10 p-1 gap-1">
+      <div className="p-4 @md:p-6 [--gutter:54px] @md:[--gutter:66px] [--plot:270px] @md:[--plot:310px]">
+        {/* Title and Segmented Switch with Generous Spacing */}
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 mb-3">
+          <p className="text-[13.5px] text-muted-foreground @md:text-[14.5px] font-semibold">{title}</p>
+          <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex flex-wrap items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg">
             <span
               aria-hidden="true"
-              className="absolute inset-y-1 left-0 rounded-full bg-indigo-600/50 border border-indigo-400/50 shadow-sm"
+              className="absolute inset-y-1.5 left-0 rounded-full bg-indigo-600/70 border border-indigo-400/80 shadow-[0_2px_14px_rgba(99,102,241,0.55)]"
               style={{
                 width: pill.width,
                 transform: `translateX(${pill.left}px)`,
@@ -321,7 +321,7 @@ export function EarningsChart({
                     choose(periods[next].id);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`cursor-pointer relative h-7.5 rounded-full px-3 text-[12px] font-medium @md:h-8 @md:px-3.5 @md:text-[13px] tabular-nums transition-colors duration-300 ${FOCUS} ${
+                  className={`cursor-pointer relative h-8.5 rounded-full px-4 text-[13px] font-medium @md:h-9 @md:px-4.5 @md:text-[14px] tabular-nums transition-all duration-300 ${FOCUS} ${
                     selected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -437,21 +437,21 @@ export function EarningsChart({
               />
             ))}
 
-            {/* Readout Tooltip (Enlarged and Clear) */}
+            {/* Readout Tooltip (Enlarged, Clear & Prominent) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute top-[2px] flex h-[28px] -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-slate-950/95 px-3 text-[13px] border border-white/20 shadow-xl backdrop-blur-md"
+              className="pointer-events-none absolute top-[2px] flex h-[36px] -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full bg-slate-950/95 px-4 text-[14px] border border-indigo-400/50 shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(99,102,241,0.4)] backdrop-blur-xl"
               style={{
-                left: col ? `clamp(70px, ${col.left + col.width / 2}%, calc(100% - 70px))` : "50%",
+                left: col ? `clamp(110px, ${col.left + col.width / 2}%, calc(100% - 110px))` : "50%",
                 opacity: shown ? 1 : 0,
                 scale: shown ? "1" : "0.94",
                 transition: reduced ? "none" : `left 380ms ${THROW}, opacity 200ms ${EASE}, scale 260ms ${EASE}`,
               }}
             >
-              <span className="text-muted-foreground font-medium">
+              <span className="text-sky-200 font-medium text-[13.5px]">
                 <TextMorph>{shown ? (shown.title ?? shown.label) : " "}</TextMorph>
               </span>
-              <span className="font-bold tabular-nums text-foreground">
+              <span className="font-extrabold tabular-nums text-white text-[15px]">
                 <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} suffix={suffix} duration={600} />
               </span>
             </div>
