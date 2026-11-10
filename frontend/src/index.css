@@ -568,3 +568,43 @@ input[type="range"]::-webkit-slider-thumb:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Hairline UI Motion & Micro-Interactions Keyframes                          */
+/* -------------------------------------------------------------------------- */
+@keyframes hairline-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes hairline-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hairline-spin {
+  animation: hairline-spin 0.9s linear infinite;
+}
+
+/* Hairline Card Hover State */
+.hairline-card:hover {
+  border-top-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    0 28px 70px -15px rgba(0, 0, 0, 0.98),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.60),
+    0 0 38px -4px rgba(110, 110, 248, 0.32);
+}

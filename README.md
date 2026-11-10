@@ -171,22 +171,26 @@ PRECICAST automatically bins continuous millimeter predictions into official **I
 
 ---
 
-## 🎨 UI/UX Architecture & Modern Web Design
+## 🎨 UI/UX Architecture & Hairline UI Micro-Interactions
 
-The frontend is built using **React 18 + Vite** with a modern design system:
+The frontend is built using **React 18 + Vite** integrated with the **Hairline UI** design system, harmonized strictly with our project's ethereal aurora color spectrum:
 
-* **WebGL GLSL Stepped Reeded Louver Shader:**
+* **WebGL GLSL Stepped Reeded Louver Shader (Background Canvas):**
   * Ultra-high density vertical transparent glass louvers (`numPanels = 28 – 70+`, ~26px per slat).
   * Real cylindrical refraction (`panelNorm`), specular edge catch-lights, and ambient shadow grooves.
   * Symmetrical U-shaped aurora wave horizon with pure pitch jet black (`#000000`) upper void.
   * Calibrated 60 FPS multi-frequency harmonic fluid wave motion (non-interactable: `pointer-events: none`).
-* **Minimalist Floating Glassmorphism Navbar:**
-  * Optical isobar wave monogram insignia with specular rim lighting.
-  * Single-line clean horizontal pill layout: `PRECICAST` brand mark + tab navigation pills.
-  * Zero visual clutter (removed location tags, AUC badges, and subheadings from the header).
-* **Interactive What-If Scenario Simulator:**
-  * Real-time sliders for Relative Humidity, Surface Pressure, Maximum Temperature, and Wind Speed.
-  * Live probability re-computation and quantitative millimeter estimates.
+* **Hairline UI Liquid Tabs (`FloatingNavbar.jsx`):**
+  * Active pill indicator with surface tension physics (`cubic-bezier(0.34, 1.36, 0.64, 1)`): the lead edge draws out, pinches slightly, and settles with zero overshoot.
+  * 3% tactile press give (`active:scale-[0.97]`).
+* **Hairline UI Precision Sliders (`WhatIfSimulator.jsx`):**
+  * Recessed hairline groove track (`MATERIAL_RECESS`), glowing liquid fill gradient (`#5230e0` to `#8aa2ff`), and floating value tooltip bubble that elevates dynamically on drag and hover.
+* **Hairline UI Odometer Number Rolling (`HairlineNumberRoll.jsx`):**
+  * Micro-interaction digit rolls with `cubic-bezier(0.16, 1, 0.3, 1)` for all live telemetry metrics, model probabilities, and rainfall amounts.
+* **Hairline UI Tactile Action Buttons (`HairlineActionButton.jsx`):**
+  * Promise-driven state morphing: `idle` → spinning satellite loader → green checkmark confirmation (`Live Telemetry Synced`) → `idle`.
+* **Hairline UI Badges & Glass Surfaces (`HairlineBadge.jsx`, `HairlineCard.jsx`):**
+  * Breathing live status dots (`dot="pulse"`), ultra-fine 1px hairline borders (`rgba(255, 255, 255, 0.12)`), and specular top rim reflections.
 * **Historical Reanalysis Analytics:**
   * Multi-decadal rainfall trend visualizations and seasonal distribution charts via **Recharts**.
 * **Academic EVS Syllabus Mapping:**
@@ -337,3 +341,4 @@ This project was developed for academic submission at **Techno India University,
 <p align="center">
   <b>PRECICAST</b> — Engineered with precision for Kolkata's dynamic atmosphere.
 </p>
+

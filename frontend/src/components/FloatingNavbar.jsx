@@ -1,6 +1,7 @@
 import React from 'react';
 import { CloudRain, Sliders, LineChart, Cpu, BookOpen } from 'lucide-react';
 import BrandLogo from './BrandLogo';
+import HairlineLiquidTabs from './hairline/HairlineLiquidTabs';
 
 export default function FloatingNavbar({ activeTab, setActiveTab }) {
   const tabs = [
@@ -17,25 +18,12 @@ export default function FloatingNavbar({ activeTab, setActiveTab }) {
         {/* Brand Identity */}
         <BrandLogo />
 
-        {/* Tab Controls with Smooth Sliding Pill */}
-        <div className="nav-tab-container">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`nav-tab-pill ${isActive ? 'active' : ''}`}
-                aria-selected={isActive}
-              >
-                <Icon size={15} className="nav-icon" />
-                <span className="nav-label">{tab.label}</span>
-                {isActive && <div className="nav-active-glow" />}
-              </button>
-            );
-          })}
-        </div>
+        {/* Hairline UI Liquid Tabs with Surface Tension */}
+        <HairlineLiquidTabs
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
       </nav>
     </header>
   );

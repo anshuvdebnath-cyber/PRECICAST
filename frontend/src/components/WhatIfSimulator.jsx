@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Sliders, Droplets, Gauge, Cloud, CloudRain } from 'lucide-react';
+import HairlineCard from './hairline/HairlineCard';
+import HairlineSlider from './hairline/HairlineSlider';
+import HairlineBadge from './hairline/HairlineBadge';
+import HairlineNumberRoll from './hairline/HairlineNumberRoll';
 
 export default function WhatIfSimulator() {
   const [humidity, setHumidity] = useState(85);
@@ -25,19 +29,19 @@ export default function WhatIfSimulator() {
     }
 
     let cat = 'Dry / No Rain';
-    let catClass = 'badge-dry';
+    let tone = 'success';
     if (predAmount >= 64.5) {
       cat = 'Heavy Downpour (Severe Waterlogging Risk)';
-      catClass = 'badge-alert';
+      tone = 'warning';
     } else if (predAmount >= 15.6) {
       cat = 'Moderate Rain';
-      catClass = 'badge-rain';
+      tone = 'rain';
     } else if (predAmount >= 0.1) {
       cat = 'Light Rain';
-      catClass = 'badge-rain';
+      tone = 'rain';
     }
 
-    return { prob, isRain, predAmount, cat, catClass };
+    return { prob, isRain, predAmount, cat, tone };
   };
 
   const sim = computePrediction();
@@ -50,33 +54,38 @@ export default function WhatIfSimulator() {
   };
 
   return (
-    <div className="glass-card" style={{ marginBottom: '2.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
+    <HairlineCard style={{ marginBottom: '2.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#00c8ff', marginBottom: '0.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-cyan-bright)', marginBottom: '0.25rem' }}>
             <Sliders size={20} />
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff' }}>Interactive What-If Weather Simulator</h3>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+              Interactive What-If Weather Simulator
+            </h3>
           </div>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-silver)' }}>
             Simulate custom atmospheric conditions in Kolkata and watch the ML model re-calculate rain probability in real time.
           </p>
         </div>
 
-        {/* Preset Buttons with 0.7 Specular Highlights */}
+        {/* Preset Pills with Tactile 3% Give & Hairline Rim */}
         <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
           <button 
+            type="button"
             onClick={() => applyPreset(95, 988, 100, 35)}
             className="preset-pill preset-pill-alert"
           >
             ⚡ Cyclonic Storm
           </button>
           <button 
+            type="button"
             onClick={() => applyPreset(88, 998, 90, 15)}
             className="preset-pill preset-pill-cyan"
           >
             🌧️ Active Monsoon
           </button>
           <button 
+            type="button"
             onClick={() => applyPreset(50, 1017, 5, 0)}
             className="preset-pill preset-pill-emerald"
           >
@@ -86,71 +95,51 @@ export default function WhatIfSimulator() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
-        {/* Sliders Column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
-          {/* Slider 1: Relative Humidity */}
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-silver)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
-                <Droplets size={15} color="#00c8ff" /> Relative Humidity
-              </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#00c8ff', fontSize: '0.95rem' }}>{humidity}%</span>
-            </div>
-            <input 
-              type="range" min="30" max="100" value={humidity} 
-              onChange={(e) => setHumidity(Number(e.target.value))} 
-            />
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Atmospheric saturation directly accelerates droplet coalescence</span>
-          </div>
+        {/* Hairline Sliders Column */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <HairlineSlider
+            label="Relative Humidity"
+            value={humidity}
+            min={30}
+            max={100}
+            step={1}
+            unit="%"
+            onChange={setHumidity}
+          />
 
-          {/* Slider 2: Surface Pressure */}
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-silver)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
-                <Gauge size={15} color="#38bdf8" /> Surface Pressure
-              </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#38bdf8', fontSize: '0.95rem' }}>{pressure} hPa</span>
-            </div>
-            <input 
-              type="range" min="980" max="1025" value={pressure} 
-              onChange={(e) => setPressure(Number(e.target.value))} 
-            />
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Low pressure trough indicates tropical convergence and cyclonic updraft</span>
-          </div>
+          <HairlineSlider
+            label="Surface Pressure"
+            value={pressure}
+            min={980}
+            max={1025}
+            step={1}
+            unit="hPa"
+            onChange={setPressure}
+          />
 
-          {/* Slider 3: Cloud Cover Fraction */}
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-silver)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
-                <Cloud size={15} color="#fbbf24" /> Cloud Cover Fraction
-              </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#fbbf24', fontSize: '0.95rem' }}>{cloud}%</span>
-            </div>
-            <input 
-              type="range" min="0" max="100" value={cloud} 
-              onChange={(e) => setCloud(Number(e.target.value))} 
-            />
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Thick multi-level cloud decks correlate with widespread rain</span>
-          </div>
+          <HairlineSlider
+            label="Cloud Cover Fraction"
+            value={cloud}
+            min={0}
+            max={100}
+            step={1}
+            unit="%"
+            onChange={setCloud}
+          />
 
-          {/* Slider 4: Today's Rainfall */}
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-silver)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
-                <CloudRain size={15} color="#a78bfa" /> Today's Observed Rain
-              </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#a78bfa', fontSize: '0.95rem' }}>{rainToday} mm</span>
-            </div>
-            <input 
-              type="range" min="0" max="50" value={rainToday} 
-              onChange={(e) => setRainToday(Number(e.target.value))} 
-            />
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Precipitation persistence momentum (monsoon surge vs break phase)</span>
-          </div>
+          <HairlineSlider
+            label="Today's Observed Rain"
+            value={rainToday}
+            min={0}
+            max={50}
+            step={1}
+            unit="mm"
+            onChange={setRainToday}
+          />
         </div>
 
-        {/* Live Simulation Glass Result Card with 0.7 Glossiness */}
-        <div className="glass-inner-card" style={{ padding: '2rem', textAlign: 'center' }}>
+        {/* Live Simulation Hairline Glass Result Card */}
+        <HairlineCard variant="inner" style={{ padding: '2rem', textAlign: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Simulated Forecast Result
           </span>
@@ -161,9 +150,11 @@ export default function WhatIfSimulator() {
               fontWeight: 800, 
               color: sim.isRain ? '#00c8ff' : '#34d399', 
               fontFamily: 'var(--font-sans)',
-              textShadow: sim.isRain ? '0 0 25px rgba(0, 200, 255, 0.5)' : '0 0 25px rgba(52, 211, 153, 0.5)'
+              textShadow: sim.isRain ? '0 0 25px rgba(0, 200, 255, 0.45)' : '0 0 25px rgba(52, 211, 153, 0.45)',
+              display: 'inline-flex',
+              justifyContent: 'center'
             }}>
-              {(sim.prob * 100).toFixed(0)}%
+              <HairlineNumberRoll value={sim.prob * 100} decimals={0} suffix="%" />
             </span>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-silver)', marginTop: '0.2rem' }}>
               Simulated Rain Probability
@@ -171,9 +162,9 @@ export default function WhatIfSimulator() {
           </div>
 
           <div style={{ marginBottom: '1.5rem' }}>
-            <span className={`badge ${sim.catClass}`} style={{ fontSize: '0.82rem', padding: '0.45rem 1.1rem' }}>
+            <HairlineBadge tone={sim.tone} dot="pulse" size="md">
               {sim.cat}
-            </span>
+            </HairlineBadge>
           </div>
 
           <div style={{
@@ -188,7 +179,9 @@ export default function WhatIfSimulator() {
           }}>
             <div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Estimated Volume</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#00c8ff' }}>{sim.predAmount.toFixed(1)} mm</div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--accent-cyan-bright)' }}>
+                <HairlineNumberRoll value={sim.predAmount} decimals={1} suffix=" mm" />
+              </div>
             </div>
             <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.10)' }}></div>
             <div>
@@ -198,8 +191,8 @@ export default function WhatIfSimulator() {
               </div>
             </div>
           </div>
-        </div>
+        </HairlineCard>
       </div>
-    </div>
+    </HairlineCard>
   );
 }
