@@ -1,0 +1,211 @@
+{
+  "annual_trends": [
+    {
+      "year": "2010",
+      "rainfall_mm": 1162.7,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 100,
+      "extreme_days": 0
+    },
+    {
+      "year": "2011",
+      "rainfall_mm": 1820.2,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 110,
+      "extreme_days": 4
+    },
+    {
+      "year": "2012",
+      "rainfall_mm": 1261.2,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 118,
+      "extreme_days": 0
+    },
+    {
+      "year": "2013",
+      "rainfall_mm": 1570.2,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 107,
+      "extreme_days": 1
+    },
+    {
+      "year": "2014",
+      "rainfall_mm": 1378.5,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 103,
+      "extreme_days": 2
+    },
+    {
+      "year": "2015",
+      "rainfall_mm": 1838.7,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 117,
+      "extreme_days": 2
+    },
+    {
+      "year": "2016",
+      "rainfall_mm": 1612.6,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 123,
+      "extreme_days": 1
+    },
+    {
+      "year": "2017",
+      "rainfall_mm": 2237.1,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 135,
+      "extreme_days": 5
+    },
+    {
+      "year": "2018",
+      "rainfall_mm": 1786.9,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 134,
+      "extreme_days": 0
+    },
+    {
+      "year": "2019",
+      "rainfall_mm": 1666.5,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 135,
+      "extreme_days": 2
+    },
+    {
+      "year": "2020",
+      "rainfall_mm": 1892.7,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 148,
+      "extreme_days": 2
+    },
+    {
+      "year": "2021",
+      "rainfall_mm": 2168.2,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 143,
+      "extreme_days": 1
+    },
+    {
+      "year": "2022",
+      "rainfall_mm": 1651.6,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 143,
+      "extreme_days": 0
+    },
+    {
+      "year": "2023",
+      "rainfall_mm": 1882.3,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 132,
+      "extreme_days": 0
+    },
+    {
+      "year": "2024",
+      "rainfall_mm": 2083.4,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 135,
+      "extreme_days": 2
+    },
+    {
+      "year": "2025",
+      "rainfall_mm": 1950.7,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 149,
+      "extreme_days": 0
+    },
+    {
+      "year": "2026",
+      "rainfall_mm": 2065.8,
+      "imd_normal_mm": 1650.0,
+      "rainy_days": 150,
+      "extreme_days": 0
+    }
+  ],
+  "monthly_averages": [
+    {
+      "month": "Jan",
+      "avg_rainfall_mm": 12.1,
+      "is_monsoon": false
+    },
+    {
+      "month": "Feb",
+      "avg_rainfall_mm": 22.1,
+      "is_monsoon": false
+    },
+    {
+      "month": "Mar",
+      "avg_rainfall_mm": 36.6,
+      "is_monsoon": false
+    },
+    {
+      "month": "Apr",
+      "avg_rainfall_mm": 69.9,
+      "is_monsoon": false
+    },
+    {
+      "month": "May",
+      "avg_rainfall_mm": 128.4,
+      "is_monsoon": false
+    },
+    {
+      "month": "Jun",
+      "avg_rainfall_mm": 265.2,
+      "is_monsoon": true
+    },
+    {
+      "month": "Jul",
+      "avg_rainfall_mm": 370.9,
+      "is_monsoon": true
+    },
+    {
+      "month": "Aug",
+      "avg_rainfall_mm": 364.7,
+      "is_monsoon": true
+    },
+    {
+      "month": "Sep",
+      "avg_rainfall_mm": 291.4,
+      "is_monsoon": true
+    },
+    {
+      "month": "Oct",
+      "avg_rainfall_mm": 160.2,
+      "is_monsoon": false
+    },
+    {
+      "month": "Nov",
+      "avg_rainfall_mm": 26.5,
+      "is_monsoon": false
+    },
+    {
+      "month": "Dec",
+      "avg_rainfall_mm": 18.5,
+      "is_monsoon": false
+    }
+  ],
+  "historical_cyclones": [
+    {
+      "name": "Super Cyclone Amphan",
+      "date": "2020-05-20",
+      "rainfall_mm": 99.1,
+      "min_pressure_hpa": 964.5,
+      "max_wind_kmh": 68.9,
+      "description": "Category 5 equivalent super cyclone landfall over Gangetic delta. Lowest barometric pressure recorded in decades."
+    },
+    {
+      "name": "Very Severe Cyclone Bulbul",
+      "date": "2019-11-09",
+      "rainfall_mm": 89.3,
+      "min_pressure_hpa": 1002.0,
+      "max_wind_kmh": 37.7,
+      "description": "Severe post-monsoon cyclonic inundation paralyzing southern Kolkata and coastal 24 Parganas."
+    },
+    {
+      "name": "Extreme Monsoon Waterlogging",
+      "date": "2021-09-20",
+      "rainfall_mm": 58.8,
+      "min_pressure_hpa": 1000.7,
+      "max_wind_kmh": 14.4,
+      "description": "Heavy localized monsoon downpour triggering widespread urban waterlogging across Central Avenue and Ballygunge."
+    }
+  ]
+}

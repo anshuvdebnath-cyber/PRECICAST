@@ -1,0 +1,48 @@
+{
+  "dataset_name": "Kolkata Atmospheric & Precipitation Daily Reanalysis",
+  "primary_source": "Copernicus Climate Change Service (C3S) / ECMWF ERA5",
+  "service_provider": "Open-Meteo Historical Weather API (https://open-meteo.com)",
+  "coordinates": {
+    "latitude": 22.57,
+    "longitude": 88.36,
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "country": "India"
+  },
+  "temporal_range": {
+    "start_date": "2010-01-01",
+    "end_date": "2026-11-05",
+    "total_days": 6153
+  },
+  "extraction_timestamp": "2026-11-09T22:56:53.052834",
+  "rain_criteria": {
+    "rain_imd_day": "Precipitation >= 2.5 mm (Standard India Meteorological Department definition of an official Rainy Day)",
+    "light_rain": "0.1 to 15.5 mm",
+    "moderate_rain": "15.6 to 64.4 mm",
+    "heavy_rain": ">= 64.5 mm"
+  },
+  "features_extracted": [
+    "date",
+    "temp_max",
+    "temp_min",
+    "temp_mean",
+    "temp_range",
+    "humidity_mean",
+    "humidity_max",
+    "humidity_min",
+    "dew_point_mean",
+    "dew_point_depression",
+    "surface_pressure_mean",
+    "surface_pressure_min",
+    "surface_pressure_max",
+    "cloud_cover_mean",
+    "wind_speed_max",
+    "wind_direction_dominant",
+    "wind_u_mean",
+    "wind_v_mean",
+    "solar_radiation_sum",
+    "precipitation_hours",
+    "precipitation_sum",
+    "rain_imd_day"
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "model_metadata": {
+    "model_architecture": "Two-Stage Compound XGBoost (Classifier + Regressor)",
+    "location": "Kolkata, West Bengal (22.57\u00b0N, 88.36\u00b0E)",
+    "timeline_span": "2010 to 2026",
+    "training_window": "2010-01-08 to 2023-12-31",
+    "test_window": "2024-01-01 to 2026-11-04",
+    "total_training_days": 5106,
+    "total_test_days": 1039,
+    "number_of_features": 34
+  },
+  "classification_metrics": {
+    "accuracy": 83.16,
+    "roc_auc": 0.9126,
+    "f1_score": 0.8009,
+    "precision": 0.791,
+    "recall": 0.8111,
+    "confusion_matrix": {
+      "true_negatives": 512,
+      "false_positives": 93,
+      "false_negatives": 82,
+      "true_positives": 352
+    }
+  },
+  "regression_metrics": {
+    "mae_mm": 4.01,
+    "rmse_mm": 7.94,
+    "r2_score": 0.3372
+  },
+  "baseline_comparison": {
+    "persistence_accuracy": 80.75,
+    "persistence_mae": 5.1,
+    "xgboost_accuracy": 83.16,
+    "xgboost_mae": 4.01,
+    "error_reduction_pct": 21.3
+  },
+  "top_feature_importance": [
+    {
+      "feature": "rain_today_flag",
+      "importance": 0.6661
+    },
+    {
+      "feature": "precip_today",
+      "importance": 0.1027
+    },
+    {
+      "feature": "rain_streak_days",
+      "importance": 0.0435
+    },
+    {
+      "feature": "is_monsoon_core",
+      "importance": 0.0382
+    },
+    {
+      "feature": "dew_point_depression",
+      "importance": 0.0146
+    },
+    {
+      "feature": "dew_point_mean",
+      "importance": 0.012
+    },
+    {
+      "feature": "cloud_cover_mean",
+      "importance": 0.0102
+    },
+    {
+      "feature": "precip_cum_3d",
+      "importance": 0.0065
+    },
+    {
+      "feature": "surface_pressure_min",
+      "importance": 0.0061
+    },
+    {
+      "feature": "humidity_mean",
+      "importance": 0.0053
+    }
+  ],
+  "roc_curve_samples": [
+    {
+      "fpr": 0.0,
+      "tpr": 0.0
+    },
+    {
+      "fpr": 0.0066,
+      "tpr": 0.1866
+    },
+    {
+      "fpr": 0.0149,
+      "tpr": 0.3779
+    },
+    {
+      "fpr": 0.0248,
+      "tpr": 0.4378
+    },
+    {
+      "fpr": 0.0314,
+      "tpr": 0.4954
+    },
+    {
+      "fpr": 0.043,
+      "tpr": 0.5207
+    },
+    {
+      "fpr": 0.0545,
+      "tpr": 0.5691
+    },
+    {
+      "fpr": 0.0628,
+      "tpr": 0.606
+    },
+    {
+      "fpr": 0.0711,
+      "tpr": 0.6659
+    },
+    {
+      "fpr": 0.0843,
+      "tpr": 0.7005
+    },
+    {
+      "fpr": 0.1025,
+      "tpr": 0.7465
+    },
+    {
+      "fpr": 0.1157,
+      "tpr": 0.7673
+    },
+    {
+      "fpr": 0.124,
+      "tpr": 0.7811
+    },
+    {
+      "fpr": 0.1405,
+      "tpr": 0.7949
+    },
+    {
+      "fpr": 0.1554,
+      "tpr": 0.8157
+    },
+    {
+      "fpr": 0.1835,
+      "tpr": 0.8318
+    },
+    {
+      "fpr": 0.2165,
+      "tpr": 0.8618
+    },
+    {
+      "fpr": 0.2479,
+      "tpr": 0.8756
+    },
+    {
+      "fpr": 0.2645,
+      "tpr": 0.894
+    },
+    {
+      "fpr": 0.2909,
+      "tpr": 0.9032
+    },
+    {
+      "fpr": 0.3041,
+      "tpr": 0.9194
+    },
+    {
+      "fpr": 0.3289,
+      "tpr": 0.9332
+    },
+    {
+      "fpr": 0.357,
+      "tpr": 0.9516
+    },
+    {
+      "fpr": 0.4248,
+      "tpr": 0.9608
+    },
+    {
+      "fpr": 0.4397,
+      "tpr": 0.977
+    },
+    {
+      "fpr": 0.5174,
+      "tpr": 0.9885
+    },
+    {
+      "fpr": 0.6942,
+      "tpr": 1.0
+    }
+  ],
+  "feature_columns": [
+    "temp_mean",
+    "temp_max",
+    "temp_min",
+    "diurnal_temp_range",
+    "humidity_mean",
+    "humidity_max",
+    "dew_point_mean",
+    "dew_point_depression",
+    "vapor_pressure_deficit",
+    "surface_pressure_mean",
+    "surface_pressure_min",
+    "delta_pressure_24h",
+    "delta_pressure_48h",
+    "pressure_anomaly_30d",
+    "cloud_cover_mean",
+    "wind_speed_max",
+    "wind_u_mean",
+    "wind_v_mean",
+    "moisture_flux_proxy",
+    "solar_radiation_sum",
+    "precip_today",
+    "precip_lag1",
+    "precip_lag2",
+    "precip_lag3",
+    "precip_lag7",
+    "precip_cum_3d",
+    "precip_cum_7d",
+    "rain_streak_days",
+    "rain_today_flag",
+    "rain_lag1_flag",
+    "month",
+    "sin_doy",
+    "cos_doy",
+    "is_monsoon_core"
+  ]
+}
