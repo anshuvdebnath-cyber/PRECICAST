@@ -11,7 +11,7 @@ export default function HairlineNewsletterFooter() {
           background: '#111114',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           borderRadius: '24px',
-          padding: 'clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.25rem, 3.5vw, 2.5rem) clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3.5vw, 2.5rem)',
+          padding: 'clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.25rem, 3.5vw, 2.5rem) clamp(2rem, 4vw, 3.25rem) clamp(1.25rem, 3.5vw, 2.5rem)',
           overflow: 'hidden',
           boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.65)'
         }}
@@ -61,7 +61,7 @@ export default function HairlineNewsletterFooter() {
           </div>
         </div>
 
-        {/* Big Signature Typography (Exact Kept Replica: Hollow Stroke Outlines with Solid Fill Wave on Hover) */}
+        {/* Big Signature Typography: Connected Letters with Subtle Soft Diminishing Glow */}
         <div 
           style={{ 
             display: 'flex', 
@@ -70,45 +70,40 @@ export default function HairlineNewsletterFooter() {
             userSelect: 'none', 
             width: '100%',
             overflow: 'hidden',
-            lineHeight: 0.88
+            lineHeight: 0.85
           }}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {brandLetters.map((char, idx) => {
             const isHovered = hoveredIndex === idx;
-            const dist = hoveredIndex !== null ? Math.abs(hoveredIndex - idx) : null;
 
-            // Exact reproduction of Kept reference screenshot:
-            // - Active hovered letter: solid crisp off-white (#f4f4f5, no stroke)
-            // - Immediate neighbor (dist === 1): solid medium gray (#52525b, no stroke)
-            // - Distant letters (dist >= 2 or unhovered): hollow stroke outline only
-            let fillStyle = 'transparent';
-            let strokeStyle = '1.5px rgba(255, 255, 255, 0.22)';
-            
-            if (isHovered) {
-              fillStyle = '#f4f4f5';
-              strokeStyle = 'none';
-            } else if (dist === 1) {
-              fillStyle = '#52525b';
-              strokeStyle = 'none';
-            }
+            // Soft, understated glow (low brightness, refined atmospheric sheen)
+            const fillStyle = isHovered ? '#f4f4f5' : 'transparent';
+            const strokeStyle = isHovered ? '0px transparent' : '1.5px rgba(255, 255, 255, 0.22)';
+            const shadowStyle = isHovered 
+              ? '0 0 16px rgba(255, 255, 255, 0.45), 0 0 32px rgba(160, 180, 255, 0.22)' 
+              : 'none';
 
             return (
               <span
                 key={idx}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 style={{
-                  display: 'inline-flex',
-                  justifyContent: 'center',
-                  alignItems: 'baseline',
+                  display: 'inline-block',
                   cursor: 'pointer',
-                  padding: '0 clamp(0.12rem, 0.85vw, 0.95rem)',
-                  fontSize: 'clamp(4rem, 14.5vw, 16.5rem)',
+                  // Connected letters, enlarged hero typography
+                  fontSize: 'clamp(4.5rem, 15.5vw, 16.5rem)',
                   fontWeight: 800,
+                  letterSpacing: '-0.035em',
+                  margin: '0 -0.015em',
                   fontFamily: 'Outfit, sans-serif',
                   color: fillStyle,
                   WebkitTextStroke: strokeStyle,
-                  transition: 'color 140ms ease, -webkit-text-stroke 140ms ease'
+                  textShadow: shadowStyle,
+                  // Responsive ignition on hover (140ms); gentle, slow fade out (850ms) when cursor leaves
+                  transition: isHovered 
+                    ? 'color 140ms ease-out, text-shadow 140ms ease-out, -webkit-text-stroke 140ms ease-out' 
+                    : 'color 850ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 850ms cubic-bezier(0.16, 1, 0.3, 1), -webkit-text-stroke 850ms cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
                 {char}
