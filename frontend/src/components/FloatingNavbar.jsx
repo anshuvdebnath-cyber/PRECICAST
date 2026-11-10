@@ -28,7 +28,7 @@ export default function FloatingNavbar({ activeTab, setActiveTab }) {
     },
     { 
       value: 'model', 
-      label: 'Model (83.2%)', 
+      label: 'Model', 
       icon: <Cpu className="size-4 shrink-0" />,
       color: '#4f46e5',
       foreground: '#ffffff'

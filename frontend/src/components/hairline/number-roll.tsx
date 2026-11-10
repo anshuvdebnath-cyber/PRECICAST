@@ -136,7 +136,7 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
   };
 
   return (
-    <span className="relative inline-block [clip-path:inset(0)]">
+    <span className="relative inline-block overflow-hidden [clip-path:inset(0)]" style={{ verticalAlign: 'baseline' }}>
       <span className="invisible">{digit}</span>
       <span
         ref={stripRef}

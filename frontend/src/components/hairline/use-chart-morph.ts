@@ -1,5 +1,5 @@
-﻿// Hairline UI Â· morphing-chart Â· MIT License
-// Copyright (c) 2026 Hairline UI Â· https://hairlineui.com/license#components
+﻿// Hairline UI · morphing-chart · MIT License
+// Copyright (c) 2026 Hairline UI · https://hairlineui.com/license#components
 
 'use client';
 
@@ -9,15 +9,15 @@ import * as React from 'react';
  * The morphing chart's engine. Bars, beads, the line and the area are four drawings of the same
  * points, so a change of shape is a choreography over shared geometry, never a cross-fade:
  *
- *   bars â line    each bar condenses up into a bead on its value; a thread is strung through the
+ *   bars -> line    each bar condenses up into a bead on its value; a thread is strung through the
  *                  beads from the left, and each bead melts into it as the thread passes
- *   line â bars    the thread is pulled out to the right; each bead swells back as the tail leaves
+ *   line -> bars    the thread is pulled out to the right; each bead swells back as the tail leaves
  *                  it and drips a stick to the axis, which lands and spreads into its bar
- *   line â area    the fill pours down from the line to the axis, left to right
- *   area â line    it drains back up into the line
- *   bars â area    the bars widen until they touch and fade to the wash; the steps they make melt
+ *   line -> area    the fill pours down from the line to the axis, left to right
+ *   area -> line    it drains back up into the line
+ *   bars -> area    the bars widen until they touch and fade to the wash; the steps they make melt
  *                  into the curve and the thread runs along the top
- *   area â bars    the curve sets into steps, which part into bars and fill in
+ *   area -> bars    the curve sets into steps, which part into bars and fill in
  *
  * Every change is a tape: a pose that is a pure function of time. One frame loop plays it forward
  * or backward (asking for the shape it came from runs it back from where it is), and a finger can
@@ -243,6 +243,11 @@ function pose(P: Pose, from: ChartShape, to: ChartShape, t: number, n: number) {
   }
 }
 
+interface TransformableStyle extends CSSStyleDeclaration {
+  scale?: string;
+  translate?: string;
+}
+
 export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count: number; shape: ChartShape; reduced: boolean; barWidth?: number }) {
   const columns = React.useRef<(SVGPathElement | null)[]>([]);
   const columnGroup = React.useRef<SVGGElement>(null);
@@ -275,7 +280,13 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
     const S = st.current;
     if (!S) return;
     if (S.pose.m.length !== count) {
-      const keep = (a: Float32Array) => Float32Array.from({ length: count }, (_, i) => a[i] ?? a[a.length - 1] ?? 0);
+      const keep = (a: Float32Array): Float32Array => {
+        const next = new Float32Array(count);
+        for (let i = 0; i < count; i++) {
+          next[i] = a[i] ?? (a.length > 0 ? a[a.length - 1] : 0);
+        }
+        return next;
+      };
       S.vals = keep(S.vals); S.from = keep(S.from); S.to = keep(S.to);
       if (S.route) S.shown = S.route.dir > 0 ? S.route.to : S.route.from;
       S.pose = poseFor(count);
@@ -334,9 +345,9 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
 
     // The wash: solid for bars, a fading gradient for the area. Columns paint with a plain fill until it starts.
     const washing = P.wash > 0.001 ? '1' : '';
-    if (g && g.dataset.washing !== washing) {
-      g.dataset.washing = washing;
-      g.setAttribute('fill', washing ? (g.dataset.wash ?? '') : 'var(--chart-1, var(--primary))');
+    if (g && g.getAttribute('data-washing') !== washing) {
+      g.setAttribute('data-washing', washing);
+      g.setAttribute('fill', washing ? (g.getAttribute('data-wash') ?? '') : 'var(--chart-1, var(--primary))');
     }
     const [s0, s1] = stops.current;
     if (s0) s0.setAttribute('stop-opacity', String(r2(lerp(1, WASH_TOP, P.wash))));
@@ -398,11 +409,16 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
       if (showing !== S.beadOn) {
         S.beadOn = showing;
         bd.style.opacity = rl.style.opacity = showing ? '1' : '0';
-        bd.style.scale = showing ? '1' : '0.4';
+        const bds = bd.style as TransformableStyle;
+        if (bds.scale !== undefined) bds.scale = showing ? '1' : '0.4';
       }
       const x = S.beadX, y = lerp(curveAt(xs, ys, tg, x), near(x), P.step);
-      bd.style.translate = `${r2(x - 4.5)}px ${r2(y - 4.5)}px`;
-      rl.style.translate = `${r2(x - 0.5)}px 0`;
+      const bds = bd.style as TransformableStyle;
+      const rls = rl.style as TransformableStyle;
+      bds.translate = `${r2(x - 4.5)}px ${r2(y - 4.5)}px`;
+      rls.translate = `${r2(x - 0.5)}px 0`;
+      bd.style.transform = `translate(${r2(x - 4.5)}px, ${r2(y - 4.5)}px) scale(${showing ? 1 : 0.4})`;
+      rl.style.transform = `translate(${r2(x - 0.5)}px, 0)`;
     }
   };
 
@@ -457,7 +473,7 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
 
   /**
    * Where the shape is on the switch's axis (0 bars, 1 line, 2 area). Null while a tape that isn't
-   * on that axis runs (line â bars, area â line, bars â area are their own choreographies).
+   * on that axis runs (line -> bars, area -> line, bars <-> area are their own choreographies).
    */
   const position = () => {
     const S = st.current;
@@ -516,7 +532,7 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
       const S = st.current;
       if (!S) return;
       for (let i = 0; i < count; i++) {
-        S.from[i] = opts.from ?? S.vals[i];
+        S.from[i] = opts.from ?? S.vals[i] ?? 0;
         S.to[i] = values[i] ?? 0;
       }
       S.maxFrom = opts.from !== undefined ? max : S.max;
@@ -570,4 +586,3 @@ export function useChartMorph({ count, shape, reduced, barWidth = 24 }: { count:
     },
   };
 }
-

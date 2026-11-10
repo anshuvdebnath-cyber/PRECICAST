@@ -1,79 +1,41 @@
 import React from 'react';
-import { GraduationCap } from 'lucide-react';
+import { Database, ShieldCheck, Cpu, CloudRain } from 'lucide-react';
 import HairlineCard from './hairline/HairlineCard';
 import HairlineBadge from './hairline/HairlineBadge';
 import TextMorph from './hairline/text-morph';
 
 export default function AboutProject() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {/* University Card with Hairline Glass */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '1000px', margin: '0 auto' }}>
+      {/* Official Scientific Data Sources & Citations */}
       <HairlineCard>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-          <div style={{ 
-            background: 'rgba(82, 46, 230, 0.20)', 
-            padding: '0.85rem', 
-            borderRadius: '16px', 
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+          <div style={{
+            background: 'rgba(82, 46, 230, 0.22)',
+            padding: '0.65rem',
+            borderRadius: '12px',
             color: '#adc7ff',
             borderTop: '1px solid rgba(255, 255, 255, 0.45)',
-            boxShadow: '0 8px 24px rgba(82, 46, 230, 0.35)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <GraduationCap size={32} />
+            <Database size={24} />
           </div>
           <div>
             <HairlineBadge tone="rain" dot="pulse">
-              <TextMorph>Academic Credentials</TextMorph>
+              <TextMorph>Verified Data Architecture</TextMorph>
             </HairlineBadge>
-            <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: '#ffffff', marginTop: '0.35rem', letterSpacing: '-0.02em' }}>
-              Techno India University, West Bengal
-            </h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-silver)' }}>
-              Syllabus for B.Tech — Environmental Studies (EVS) | Group B: Project & Presentation
-            </p>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em' }}>
+              <TextMorph>Official Scientific Data Sources & Citations</TextMorph>
+            </h3>
           </div>
         </div>
-
-        <div className="grid-3" style={{ marginTop: '1.5rem' }}>
-          <HairlineCard variant="inner">
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Assigned Domain
-            </span>
-            <div style={{ fontSize: '1.05rem', fontWeight: 650, color: '#adc7ff', marginTop: '0.35rem' }}>
-              <TextMorph>Topic 1: Climate Change & Weather Prediction</TextMorph>
-            </div>
-          </HairlineCard>
-          <HairlineCard variant="inner">
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Sub-Topic Focus
-            </span>
-            <div style={{ fontSize: '1.05rem', fontWeight: 650, color: '#34d399', marginTop: '0.35rem' }}>
-              <TextMorph>Rainfall Prediction Using Machine Learning</TextMorph>
-            </div>
-          </HairlineCard>
-          <HairlineCard variant="inner">
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Target Presentation Date
-            </span>
-            <div style={{ fontSize: '1.05rem', fontWeight: 650, color: '#fbbf24', marginTop: '0.35rem' }}>
-              November 14, 2026
-            </div>
-          </HairlineCard>
-        </div>
-      </HairlineCard>
-
-      {/* Verified Data Sources */}
-      <HairlineCard>
-        <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-          <TextMorph>Official Scientific Data Sources & Citations</TextMorph>
-        </h3>
         
         <div className="grid-2">
           <HairlineCard variant="inner">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-              <span style={{ fontWeight: 700, color: '#adc7ff', fontSize: '1.05rem' }}>
+              <span style={{ fontWeight: 700, color: '#adc7ff', fontSize: '1.02rem' }}>
                 Copernicus ERA5 Atmospheric Reanalysis
               </span>
               <HairlineBadge tone="rain" size="sm">Primary Training Data</HairlineBadge>
@@ -88,7 +50,7 @@ export default function AboutProject() {
 
           <HairlineCard variant="inner">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-              <span style={{ fontWeight: 700, color: '#34d399', fontSize: '1.05rem' }}>
+              <span style={{ fontWeight: 700, color: '#34d399', fontSize: '1.02rem' }}>
                 India Meteorological Department (IMD)
               </span>
               <HairlineBadge tone="success" size="sm">Ground-Truth Baseline</HairlineBadge>
@@ -103,55 +65,61 @@ export default function AboutProject() {
         </div>
       </HairlineCard>
 
-      {/* Presentation Deck Outline (13 Slides) */}
+      {/* Model Engine & Operational Pipeline */}
       <HairlineCard>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
-              <TextMorph>College Presentation Slide Deck (13 Slides)</TextMorph>
-            </h3>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-silver)', marginTop: '0.2rem' }}>
-              Word-for-word script matching the syllabus headings approved for November 14, 2026.
-            </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+          <div style={{
+            background: 'rgba(56, 189, 248, 0.18)',
+            padding: '0.65rem',
+            borderRadius: '12px',
+            color: '#38bdf8',
+            borderTop: '1px solid rgba(255, 255, 255, 0.45)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Cpu size={24} />
           </div>
-          <HairlineBadge tone="rain" dot="pulse">13 Slides Complete</HairlineBadge>
+          <div>
+            <HairlineBadge tone="neutral">
+              <TextMorph>System Specifications</TextMorph>
+            </HairlineBadge>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em' }}>
+              <TextMorph>PRECICAST Machine Learning Pipeline</TextMorph>
+            </h3>
+          </div>
         </div>
 
         <div className="grid-3">
-          {[
-            { num: 1, title: 'Title & Team Credentials', desc: 'Project topic, university credentials, and team member roll numbers.' },
-            { num: 2, title: 'Introduction & Local Context', desc: 'Why Kolkata rainfall matters: monsoon drainage, transit, and waterlogging.' },
-            { num: 3, title: 'Literature Review & Gaps', desc: 'Traditional NWP physics models vs. modern data-driven Machine Learning.' },
-            { num: 4, title: 'Study Area & Coordinates', desc: 'Geographic setting: 22.57°N, 88.36°E, proximity to Bay of Bengal.' },
-            { num: 5, title: 'Official Data Architecture', desc: 'Copernicus ECMWF ERA5 reanalysis (2010–2026, 6,153 continuous days).' },
-            { num: 6, title: 'Meteorological Engineering', desc: 'Vapor pressure deficit, dew point depression, wind vectors, pressure delta.' },
-            { num: 7, title: 'Machine Learning Workflow', desc: 'Two-stage compound XGBoost: Binary Classifier + Intensity Regressor.' },
-            { num: 8, title: 'Rigorous Test Results', desc: 'ROC-AUC 0.9126, 83.16% accuracy on 1,039 unseen future days (2024–2026).' },
-            { num: 9, title: 'Historical Climate Analysis', desc: '16-year monsoon trends, Cyclone Amphan and Remal anomaly tracking.' },
-            { num: 10, title: 'Interactive Dashboard Demo', desc: 'Real-time telemetry, what-if weather sliders, municipal waterlogging alerts.' },
-            { num: 11, title: 'Environmental & Civic Impact', desc: 'Municipal flood readiness, KMC pumping station optimization, urban transit.' },
-            { num: 12, title: 'Limitations & Future Scope', desc: 'Doppler radar integration, hyperlocal ward-level modeling (Alipore vs Dum Dum).' },
-            { num: 13, title: 'References & Viva Q&A', desc: 'Citations (ECMWF, IMD, Chen & Guestrin XGBoost) and top 5 defense answers.' },
-          ].map((s) => (
-            <HairlineCard key={s.num} variant="inner">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
-                <span style={{ 
-                  background: 'rgba(82, 46, 230, 0.22)', 
-                  color: '#adc7ff', 
-                  fontSize: '0.75rem', 
-                  fontWeight: 700, 
-                  padding: '0.18rem 0.55rem', 
-                  borderRadius: '6px',
-                  border: '1px solid rgba(173, 199, 255, 0.35)',
-                  fontFamily: 'var(--font-mono)'
-                }}>
-                  Slide {s.num}
-                </span>
-                <span style={{ fontSize: '0.90rem', fontWeight: 650, color: '#ffffff' }}>{s.title}</span>
-              </div>
-              <p style={{ fontSize: '0.78rem', color: 'var(--text-silver)', lineHeight: '1.45' }}>{s.desc}</p>
-            </HairlineCard>
-          ))}
+          <HairlineCard variant="inner">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: '#adc7ff' }}>
+              <CloudRain size={16} />
+              <span style={{ fontWeight: 650, fontSize: '0.92rem' }}>Two-Stage ML Pipeline</span>
+            </div>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-silver)', lineHeight: '1.5' }}>
+              Stage 1 executes binary classification (Rain vs No Rain) using calibrated XGBoost. Stage 2 estimates continuous precipitation depth (mm) conditioned on rainfall occurrence.
+            </p>
+          </HairlineCard>
+
+          <HairlineCard variant="inner">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: '#34d399' }}>
+              <ShieldCheck size={16} />
+              <span style={{ fontWeight: 650, fontSize: '0.92rem' }}>Temporal Generalization</span>
+            </div>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-silver)', lineHeight: '1.5' }}>
+              Strict chronological split: trained on 2010–2023 (5,114 days) and evaluated exclusively on 1,039 unseen future days (2024–2026), preventing data leakage.
+            </p>
+          </HairlineCard>
+
+          <HairlineCard variant="inner">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: '#fbbf24' }}>
+              <Database size={16} />
+              <span style={{ fontWeight: 650, fontSize: '0.92rem' }}>Meteorological Features</span>
+            </div>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-silver)', lineHeight: '1.5' }}>
+              Engineered features include vapor pressure deficit (VPD), dew point depression, barometric tendency (24h delta), and cyclonic vorticity indicators.
+            </p>
+          </HairlineCard>
         </div>
       </HairlineCard>
     </div>
