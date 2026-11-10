@@ -73,6 +73,11 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 html {
   color-scheme: dark;
   background-color: #000000;
@@ -83,7 +88,6 @@ body {
   color: var(--text-pure-white);
   font-family: var(--font-base);
   min-height: 100vh;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -95,9 +99,11 @@ h1, h2, h3, h4, .hero-editorial-title, .kpi-value, .tabular-nums, .font-heading 
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.92);
 }
 
-/* Ensure all children of tabular-nums inherit the Outfit heading font! */
+/* Ensure all children of tabular-nums inherit the Outfit heading font and strict lining alignment! */
 .tabular-nums, .tabular-nums * {
   font-family: var(--font-heading) !important;
+  font-variant-numeric: tabular-nums lining-nums !important;
+  font-feature-settings: "tnum" 1, "lnum" 1 !important;
 }
 
 /* Base interface: cards, descriptions, buttons, badges, inputs use DM Sans */
@@ -180,11 +186,19 @@ body, p, button, input, label, table, .font-base {
   border-left: 1px solid rgba(255, 255, 255, 0.18);
   border-bottom: var(--glass-border-dark);
   border-right: var(--glass-border-dark);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   box-shadow: 
     0 24px 60px -15px rgba(0, 0, 0, 0.98),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.52),
     0 0 35px -5px rgba(110, 110, 248, 0.25);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-navbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Hairline UI Liquid Tabs Spacing, Padding & Ghost Reflection Prevention */

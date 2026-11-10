@@ -140,14 +140,19 @@ export function StageBars({
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
       <div className="p-4 @md:p-6 [--gutter:30px] @md:[--gutter:40px]">
-        {/* Title and Segmented Switch */}
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-2">
-          <p className="text-[13px] text-muted-foreground @md:text-[14px] font-semibold">{title}</p>
-          {periods.length > 1 && (
-            <div role="radiogroup" aria-label="Engine Model Stage" className="relative -my-1 inline-flex shrink-0 rounded-full bg-black/60 border border-white/10 p-1 gap-1">
+        {/* Title Row */}
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-[14px] text-muted-foreground @md:text-[15px] font-semibold tracking-wide">{title}</p>
+          <span className="text-[12px] text-indigo-300 font-medium tracking-wide">SHAP Gini Importance Cascade</span>
+        </div>
+
+        {/* Dedicated Mode Switch Bar with Generous Spacing and Padding */}
+        {periods.length > 1 && (
+          <div className="my-3.5 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div role="radiogroup" aria-label="Engine Model Stage" className="relative inline-flex items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg flex-nowrap">
               <span
                 aria-hidden="true"
-                className="absolute inset-y-1 left-0 rounded-full bg-indigo-600/50 border border-indigo-400/50 shadow-sm"
+                className="absolute inset-y-1.5 left-0 rounded-full bg-indigo-600/75 border border-indigo-400/80 shadow-[0_2px_14px_rgba(99,102,241,0.55)]"
                 style={{
                   width: pill.width,
                   transform: `translateX(${pill.left}px)`,
@@ -174,8 +179,8 @@ export function StageBars({
                       choose(periods[next].id);
                       chipRefs.current[next]?.focus();
                     }}
-                    className={`cursor-pointer relative h-7.5 whitespace-nowrap rounded-full px-3.5 text-[12.5px] font-medium @md:h-8 @md:px-4 @md:text-[13px] transition-colors duration-300 ${FOCUS} ${
-                      selected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                    className={`cursor-pointer relative z-10 h-9 shrink-0 whitespace-nowrap rounded-full px-4.5 text-[13px] font-semibold @md:text-[14px] transition-all duration-300 ${FOCUS} ${
+                      selected ? "text-white" : "text-muted-foreground hover:text-white"
                     }`}
                   >
                     {p.label}
@@ -183,8 +188,8 @@ export function StageBars({
                 );
               })}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Header Metric */}
         <div className="mt-2 flex items-baseline flex-wrap gap-2.5">

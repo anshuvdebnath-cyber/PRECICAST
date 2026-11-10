@@ -83,10 +83,10 @@ export default function ModelPerformance() {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '3.25rem' }}>
       {/* Top Banner KPI Cards with Hairline Glass & Enlarged Outfit Display */}
-      <div className="grid-4">
-        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+      <div className="grid-4" style={{ gap: '1.5rem' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.75rem 1.4rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#34d399', marginBottom: '0.65rem' }}>
             <ShieldCheck size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -101,7 +101,7 @@ export default function ModelPerformance() {
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.75rem 1.4rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#adc7ff', marginBottom: '0.65rem' }}>
             <Target size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -116,7 +116,7 @@ export default function ModelPerformance() {
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.75rem 1.4rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#a78bfa', marginBottom: '0.65rem' }}>
             <BrainCircuit size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -131,7 +131,7 @@ export default function ModelPerformance() {
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.75rem 1.4rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#fbbf24', marginBottom: '0.65rem' }}>
             <TrendingDown size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -148,9 +148,9 @@ export default function ModelPerformance() {
       </div>
 
       {/* Row 2: Confusion Matrix & Hairline UI Earnings Chart */}
-      <div className="grid-2">
+      <div className="grid-2" style={{ gap: '2rem' }}>
         {/* Confusion Matrix Card */}
-        <HairlineCard style={{ padding: '2rem' }}>
+        <HairlineCard style={{ padding: '2.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
             <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
               <TextMorph>Confusion Matrix (1,039 Forward Test Days)</TextMorph>
@@ -205,7 +205,7 @@ export default function ModelPerformance() {
         </HairlineCard>
 
         {/* Hairline UI Official Earnings Chart Card */}
-        <HairlineCard style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
+        <HairlineCard style={{ padding: '2.25rem', display: 'flex', flexDirection: 'column' }}>
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
               <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
@@ -213,7 +213,7 @@ export default function ModelPerformance() {
               </h3>
               <HairlineBadge tone="rain" size="sm">Hairline Earnings Chart</HairlineBadge>
             </div>
-            <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '0.75rem' }}>
               Validating model precision and recall across rainfall intensity bands and decision boundaries.
             </p>
 
@@ -232,8 +232,8 @@ export default function ModelPerformance() {
       </div>
 
       {/* Row 3: Hairline UI Official Stage Bars Chart for Atmospheric Feature Influence */}
-      <HairlineCard style={{ padding: '2rem' }}>
-        <div style={{ marginBottom: '1.5rem' }}>
+      <HairlineCard style={{ padding: '2.25rem' }}>
+        <div style={{ marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
               <TextMorph>Atmospheric Feature Influence & Decision Cascade</TextMorph>

@@ -288,13 +288,18 @@ export function EarningsChart({
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
       <div className="p-4 @md:p-6 [--gutter:54px] @md:[--gutter:66px] [--plot:270px] @md:[--plot:310px]">
-        {/* Title and Segmented Switch with Generous Spacing */}
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 mb-3">
-          <p className="text-[13.5px] text-muted-foreground @md:text-[14.5px] font-semibold">{title}</p>
-          <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex flex-wrap items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg">
+        {/* Title Row */}
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-[14px] text-muted-foreground @md:text-[15px] font-semibold tracking-wide">{title}</p>
+          <span className="text-[12px] text-sky-300 font-medium tracking-wide">Calibrated Multi-Tier Metric</span>
+        </div>
+
+        {/* Dedicated Mode Switch Bar with Generous Spacing and Padding */}
+        <div className="my-3.5 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div role="radiogroup" aria-label="Period" className="relative inline-flex items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg flex-nowrap">
             <span
               aria-hidden="true"
-              className="absolute inset-y-1.5 left-0 rounded-full bg-indigo-600/70 border border-indigo-400/80 shadow-[0_2px_14px_rgba(99,102,241,0.55)]"
+              className="absolute inset-y-1.5 left-0 rounded-full bg-indigo-600/75 border border-indigo-400/80 shadow-[0_2px_14px_rgba(99,102,241,0.55)]"
               style={{
                 width: pill.width,
                 transform: `translateX(${pill.left}px)`,
@@ -321,8 +326,8 @@ export function EarningsChart({
                     choose(periods[next].id);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`cursor-pointer relative h-8.5 rounded-full px-4 text-[13px] font-medium @md:h-9 @md:px-4.5 @md:text-[14px] tabular-nums transition-all duration-300 ${FOCUS} ${
-                    selected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                  className={`cursor-pointer relative z-10 h-9 shrink-0 whitespace-nowrap rounded-full px-4.5 text-[13px] font-semibold @md:text-[14px] tabular-nums transition-all duration-300 ${FOCUS} ${
+                    selected ? "text-white" : "text-muted-foreground hover:text-white"
                   }`}
                 >
                   {p.label}
