@@ -19,7 +19,7 @@ export function createSpring(initial, config, onFrame, precision = 0.01) {
   let value = initial;
   let velocity = 0;
   let target = initial;
-  let { stiffness = 380, damping = 39, mass = 1 } = config;
+  let { stiffness = 380, damping = 39, mass = 1 } = config || {};
   let animId = null;
   let lastTime = performance.now();
 
@@ -35,20 +35,28 @@ export function createSpring(initial, config, onFrame, precision = 0.01) {
     if (Math.abs(value - target) < precision && Math.abs(velocity) < precision * 10) {
       value = target;
       velocity = 0;
-      onFrame(value);
+      onFrame();
       animId = null;
       return;
     }
 
-    onFrame(value);
+    onFrame();
     animId = requestAnimationFrame(step);
   }
 
   return {
     get: () => value,
+    getVelocity: () => velocity,
     getTarget: () => target,
     set(next) {
       target = next;
+      if (!animId) {
+        lastTime = performance.now();
+        animId = requestAnimationFrame(step);
+      }
+    },
+    push(speed) {
+      velocity += speed;
       if (!animId) {
         lastTime = performance.now();
         animId = requestAnimationFrame(step);
@@ -62,7 +70,12 @@ export function createSpring(initial, config, onFrame, precision = 0.01) {
         cancelAnimationFrame(animId);
         animId = null;
       }
-      onFrame(value);
+      onFrame();
+    },
+    configure(next) {
+      if (next.stiffness !== undefined) stiffness = next.stiffness;
+      if (next.damping !== undefined) damping = next.damping;
+      if (next.mass !== undefined) mass = next.mass;
     },
     stop() {
       if (animId) {
@@ -81,4 +94,3 @@ export function rubberBand(overshoot, dimension = 320, constant = 0.55) {
   const abs = Math.abs(overshoot);
   return Math.sign(overshoot) * (1 - 1 / ((abs * constant) / d + 1)) * d;
 }
-
