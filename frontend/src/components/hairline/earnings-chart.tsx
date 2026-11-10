@@ -62,6 +62,9 @@ export interface EarningsChartProps extends Omit<React.HTMLAttributes<HTMLDivEle
   locales?: string | string[];
   /** The bar drawn in your primary colour, by key. Defaults to the last bar. */
   highlight?: string;
+  totalValue?: number;
+  totalLabel?: string;
+  suffix?: string;
 }
 
 type Column = EarningsBar & { left: number; width: number; height: number; index: number; leaving?: "start" | "end" };
@@ -102,16 +105,18 @@ function ColumnView({
   col,
   grown,
   delay,
-  tone,
   reduced,
   label,
+  active,
+  isHighlight,
 }: {
   col: Column;
   grown: boolean;
   delay: number;
-  tone: string;
   reduced: boolean;
   label: boolean;
+  active?: boolean;
+  isHighlight?: boolean;
 }) {
   const [born, setBorn] = React.useState(false);
   React.useEffect(() => {
@@ -135,14 +140,25 @@ function ColumnView({
       }}
     >
       <div
-        className={`absolute bottom-[26px] left-1/2 w-[min(24px,62%)] -translate-x-1/2 rounded-t-[4px] ${tone}`}
+        className="absolute bottom-[26px] left-1/2 w-[min(38px,72%)] -translate-x-1/2 rounded-t-[6px]"
         style={{
-          height: up ? Math.max(2, col.height) : 0,
-          transition: reduced ? "none" : `height 640ms ${EASE} ${delay}ms, background-color 300ms ${EASE}`,
+          height: up ? Math.max(4, col.height) : 0,
+          background: isHighlight
+            ? 'linear-gradient(180deg, #adc7ff 0%, #522ee6 100%)'
+            : active
+              ? 'linear-gradient(180deg, #d9ebff 0%, #6366f1 100%)'
+              : 'linear-gradient(180deg, rgba(138, 162, 255, 0.88) 0%, rgba(82, 46, 230, 0.92) 100%)',
+          boxShadow: isHighlight || active
+            ? '0 0 20px rgba(110, 110, 248, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.85)'
+            : '0 4px 14px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.5)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.85)',
+          borderLeft: '1px solid rgba(255, 255, 255, 0.3)',
+          borderRight: '1px solid rgba(255, 255, 255, 0.3)',
+          transition: reduced ? "none" : `height 640ms ${EASE} ${delay}ms, background 300ms ${EASE}`,
         }}
       />
       <span
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] leading-[18px] text-muted-foreground"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] leading-[18px] text-muted-foreground font-medium"
         style={{ opacity: label ? 1 : 0, transition: reduced ? "none" : `opacity 300ms ${EASE}` }}
       >
         {col.label}
@@ -160,16 +176,18 @@ export function EarningsChart({
   format = DECIMAL,
   locales,
   highlight,
+  totalValue,
+  totalLabel,
+  suffix = "",
   className = "",
   ...props
 }: EarningsChartProps) {
   const reduced = useReducedMotion();
   const id = React.useId();
-  const [own, setOwn] = React.useState(defaultValue ?? periods[periods.length - 1]?.id);
+  const [own, setOwn] = React.useState(defaultValue ?? periods[0]?.id);
   const periodId = value ?? own;
   const period = periods.find((p) => p.id === periodId) ?? periods[0];
   const bars = period?.bars ?? [];
-  // Set by the card's width in CSS and measured below.
   const [plotH, setPlotH] = React.useState(PLOT);
   const total = bars.reduce((sum, b) => sum + b.value, 0);
   const max = niceMax(Math.max(0, ...bars.map((b) => b.value)));
@@ -189,7 +207,6 @@ export function EarningsChart({
   const chipRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
   const [width, setWidth] = React.useState(0);
 
-  // A new period: bars it doesn't have fold away on the side they were on, past the bars both periods share.
   if (prev.id !== periodId) {
     const keys = new Set(bars.map((b) => b.key));
     const shared = prev.layout.filter((c) => keys.has(c.key)).map((c) => c.index);
@@ -199,7 +216,6 @@ export function EarningsChart({
         .filter((c) => !keys.has(c.key))
         .map((c) => {
           const side = c.index < firstShared ? "start" : "end";
-          // Same key as before, so the bar that was there is the one that folds away.
           return { ...c, leaving: side, left: side === "start" ? 0 : 100, width: 0, height: 0 };
         }),
     );
@@ -215,7 +231,6 @@ export function EarningsChart({
     return () => window.clearTimeout(timer);
   }, [leaving]);
 
-  // The plot's height is set by the card's width in CSS; read it so the drawing fits.
   React.useLayoutEffect(() => {
     const el = plotRef.current;
     if (!el) return;
@@ -246,7 +261,6 @@ export function EarningsChart({
     return () => observer.disconnect();
   }, []);
 
-  // Narrow bars show every other label (or fewer), always keeping the latest.
   React.useLayoutEffect(() => {
     const el = barsRef.current;
     if (!el) return;
@@ -294,7 +308,6 @@ export function EarningsChart({
 
   const fmt = (n: number) => new Intl.NumberFormat(locales, format).format(n);
   const change = period?.previous ? (total - period.previous) / period.previous : null;
-  // The chip folds away for a period with nothing to compare against, holding its last figure while it goes.
   const [lastChange, setLastChange] = React.useState(change ?? 0);
   if (change !== null && change !== lastChange) setLastChange(change);
   const shownChange = change ?? lastChange;
@@ -307,9 +320,9 @@ export function EarningsChart({
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
       <div className="p-4 @md:p-5 [--gutter:48px] @md:[--gutter:58px] [--plot:150px] @md:[--plot:180px]">
-        {/* The title and its control share a row; the figures sit under both. */}
+        {/* The title and its control share a row */}
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-[12px] text-muted-foreground @md:text-[13px]">{title}</p>
+          <p className="text-[12px] text-muted-foreground @md:text-[13px] font-medium">{title}</p>
           <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex shrink-0 rounded-full bg-muted p-1 gap-1">
             <span
               aria-hidden="true"
@@ -350,9 +363,18 @@ export function EarningsChart({
             })}
           </div>
         </div>
-        <p className="mt-0.5 text-[22px] font-medium leading-tight tracking-[-0.03em] @md:text-[26px] text-foreground">
-          <NumberRoll value={visible ? total : 0} format={format} locales={locales} duration={1000} />
-        </p>
+
+        <div className="mt-1 flex items-baseline gap-2">
+          <p className="text-[24px] font-bold leading-tight tracking-[-0.03em] @md:text-[28px] text-foreground">
+            <NumberRoll value={visible ? (totalValue ?? total) : 0} format={format} locales={locales} suffix={suffix} duration={1000} />
+          </p>
+          {totalLabel && (
+            <span className="text-[12px] text-muted-foreground">
+              <TextMorph>{totalLabel}</TextMorph>
+            </span>
+          )}
+        </div>
+
         {(comparable || period?.comparison) && (
           <p className="mt-1 flex items-center text-[11.5px] text-muted-foreground @md:text-[12.5px]">
             <span
@@ -410,21 +432,21 @@ export function EarningsChart({
           className={`relative mt-4 touch-pan-y @md:mt-5 select-none rounded-lg ${FOCUS}`}
           style={{ height: `calc(var(--plot) + ${LABELS}px)` }}
         >
-          {/* The scale: rolling labels in the gutter, the top and the middle as hairlines, and the baseline. */}
+          {/* The scale: rolling labels in the gutter */}
           {[1, 0.5, 0].map((f) => (
             <div key={f} aria-hidden="true" className="absolute right-0" style={{ left: 0, top: HEADROOM + (1 - f) * (plotH - HEADROOM) }}>
               <span
                 className="absolute left-0 top-0 -translate-y-1/2 text-[10.5px] tabular-nums leading-none text-muted-foreground/80"
                 style={{ width: "calc(var(--gutter) - 8px)", textAlign: "right" }}
               >
-                <NumberRoll value={visible ? max * f : 0} format={compact} locales={locales} duration={700} />
+                <NumberRoll value={visible ? max * f : 0} format={compact} locales={locales} suffix={suffix} duration={700} />
               </span>
               <div className="border-t border-border" style={{ marginLeft: "var(--gutter)" }} />
             </div>
           ))}
 
           <div ref={barsRef} className="absolute inset-y-0 right-0" style={{ left: "var(--gutter)" }}>
-            {/* The hovered column: a hairline lane from the readout down to the baseline. */}
+            {/* The hovered column */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute rounded-[10px] bg-foreground/[0.02] shadow-[inset_0_0_0_1px_var(--border)]"
@@ -446,19 +468,12 @@ export function EarningsChart({
                 delay={c.leaving ? 0 : Math.min(c.index, 12) * 28}
                 label={!c.leaving && (bars.length - 1 - c.index) % every === 0}
                 reduced={reduced}
-                tone={
-                  c.key === hi
-                    ? "bg-primary"
-                    : active !== null && bars[active]?.key === c.key
-                      ? "bg-foreground/25"
-                      : active !== null
-                        ? "bg-foreground/[0.07]"
-                        : "bg-foreground/[0.11]"
-                }
+                active={active !== null && bars[active]?.key === c.key}
+                isHighlight={c.key === hi}
               />
             ))}
 
-            {/* The readout rides the top of the lane: month morphs, amount rolls. */}
+            {/* Readout tooltip */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute top-[5px] flex h-[22px] -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-background px-2.5 text-[11.5px] shadow-[0_0_0_1px_var(--border)]"
@@ -473,7 +488,7 @@ export function EarningsChart({
                 <TextMorph>{shown ? (shown.title ?? shown.label) : " "}</TextMorph>
               </span>
               <span className="font-medium tabular-nums text-foreground">
-                <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} duration={600} />
+                <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} suffix={suffix} duration={600} />
               </span>
             </div>
           </div>
@@ -499,3 +514,5 @@ export function EarningsChart({
     </div>
   );
 }
+
+export default EarningsChart;

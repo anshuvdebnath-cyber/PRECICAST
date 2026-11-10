@@ -55,12 +55,15 @@
     inset 0 -1px 2px 0 rgba(0, 0, 0, 0.7),
     0 0 32px -6px rgba(82, 46, 230, 0.35);
 
-  /* Typography matching reference image */
+  /* Typography System: Outfit for Headings & KPIs, DM Sans for Base Interface */
   --text-pure-white: #ffffff;
   --text-silver: #e2e8f0;
   --text-muted: #adc7ff;
   --text-dark-muted: #64748b;
-  --font-sans: 'Instrument Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-base: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: var(--font-base);
+  --font-display: var(--font-heading);
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -78,17 +81,55 @@ html {
 body {
   background-color: transparent;
   color: var(--text-pure-white);
-  font-family: var(--font-sans);
+  font-family: var(--font-base);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-sans);
+/* Major headings, hero titles, section headlines, large KPI numbers use Outfit */
+h1, h2, h3, h4, .hero-editorial-title, .kpi-value, .tabular-nums, .font-heading {
+  font-family: var(--font-heading) !important;
   letter-spacing: -0.025em;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.92);
+}
+
+/* Ensure all children of tabular-nums inherit the Outfit heading font! */
+.tabular-nums, .tabular-nums * {
+  font-family: var(--font-heading) !important;
+}
+
+/* Base interface: cards, descriptions, buttons, badges, inputs use DM Sans */
+body, p, button, input, label, table, .font-base {
+  font-family: var(--font-base);
+}
+
+/* Keyframes for Hairline UI NumberRoll place transitions */
+@keyframes ui-col-in {
+  from {
+    opacity: 0;
+    max-width: 0;
+    transform: translateY(0.25em);
+  }
+  to {
+    opacity: 1;
+    max-width: 2em;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ui-col-out {
+  from {
+    opacity: 1;
+    max-width: 2em;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    max-width: 0;
+    transform: translateY(-0.25em);
+  }
 }
 
 /* Custom Inky Scrollbar */

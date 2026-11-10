@@ -5,24 +5,18 @@
 
 import * as React from "react";
 import { NumberRoll } from "./number-roll";
+import { TextMorph } from "./text-morph";
 
 /* ─────────────────────────────────────────────────────────
- * STAGE BARS: a funnel you can read at a glance
+ * STAGE BARS: an atmospheric decision hierarchy you can read at a glance
  *
  *   arrive    the first time it's on screen the bars grow from
  *             the left one after another and every count and
  *             share rolls up from zero
- *   period    This week, Last week, 30 days: the pill is thrown
- *             to the choice, every bar eases to its new width and
- *             every figure rolls; the drop-off between stages
- *             rolls with them
- *   focus     point at a stage and the others dim, leaving it and
- *             the drop-off into it to read
- *
- * One hue that steps lighter down the funnel, every value
- * labelled on its row, and the whole funnel in a table for
- * screen readers.
- * ──────────────��────────────────────────────────────────── */
+ *   period    Engine switch: the pill is thrown to the choice,
+ *             every bar eases to its new width and every figure rolls
+ *   focus     point at a stage and the others dim
+ * ───────────────────────────────────────────────────────── */
 
 export interface Stage {
   id: string;
@@ -31,9 +25,7 @@ export interface Stage {
 
 export interface StagePeriod {
   id: string;
-  /** In the switch, e.g. "This week". */
   label: string;
-  /** One count per stage, in the same order. */
   values: number[];
 }
 
@@ -51,7 +43,6 @@ export interface StageBarsProps extends Omit<React.HTMLAttributes<HTMLDivElement
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
 const THROW = "cubic-bezier(0.34,1.36,0.64,1)";
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40";
-const HUE = "var(--chart-1, var(--primary))";
 
 const reducedQuery = "(prefers-reduced-motion: reduce)";
 const subscribeReduced = (onChange: () => void) => {
@@ -67,7 +58,7 @@ const useReducedMotion = () =>
   );
 
 export function StageBars({
-  title = "Funnel",
+  title = "Atmospheric Feature Cascade",
   stages,
   periods,
   value,
@@ -121,16 +112,15 @@ export function StageBars({
   };
 
   const fmt = (v: number) => new Intl.NumberFormat(locales, format).format(v);
-  const overall = values.length > 1 ? (values[values.length - 1] ?? 0) / first : 1;
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
       <div className="p-4 @md:p-5 [--gutter:30px] @md:[--gutter:40px]">
-        {/* The title and its control share a row; the figures sit under both. */}
+        {/* Title and Segmented Switch */}
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-[12px] text-muted-foreground @md:text-[13px]">{title}</p>
+          <p className="text-[12px] text-muted-foreground @md:text-[13px] font-medium">{title}</p>
           {periods.length > 1 && (
-            <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex shrink-0 rounded-full bg-muted p-1 gap-1">
+            <div role="radiogroup" aria-label="Engine Model Stage" className="relative -my-1 inline-flex shrink-0 rounded-full bg-muted p-1 gap-1">
               <span
                 aria-hidden="true"
                 className="absolute inset-y-1 left-0 rounded-full bg-background shadow-[0_0_0_1px_var(--border)]"
@@ -171,53 +161,73 @@ export function StageBars({
             </div>
           )}
         </div>
-        <p className="mt-0.5 flex items-baseline gap-1.5 text-[22px] font-medium leading-tight tracking-[-0.03em] @md:text-[26px] text-foreground">
-          <NumberRoll value={visible ? overall : 0} format={{ style: "percent", maximumFractionDigits: 1 }} duration={1000} />
-          <span className="text-[13px] font-normal tracking-normal text-muted-foreground">relative factor influence</span>
-        </p>
 
-        <ol className="mt-4 @md:mt-6" onPointerLeave={() => setFocused(null)}>
+        {/* Header Metric */}
+        <div className="mt-1 flex items-baseline gap-2">
+          <p className="text-[24px] font-bold leading-tight tracking-[-0.03em] @md:text-[28px] text-foreground">
+            <NumberRoll value={visible ? 100 : 0} suffix="%" duration={1000} />
+          </p>
+          <span className="text-[12px] text-muted-foreground font-normal">
+            Total Atmospheric Information Content (Gini Split Gain Partitioned)
+          </span>
+        </div>
+
+        {/* Feature Stages List */}
+        <ol className="mt-4 @md:mt-6 space-y-3" onPointerLeave={() => setFocused(null)}>
           {stages.map((s, i) => {
             const v = values[i] ?? 0;
             const share = v / first;
             const step = i > 0 && values[i - 1] ? v / values[i - 1] : 1;
             const dim = focused !== null && focused !== i;
-            // One hue, a step lighter for each stage further down.
-            const strength = 1 - (stages.length > 1 ? (i / (stages.length - 1)) * 0.5 : 0);
+
             return (
-              <li key={s.id}>
+              <li key={s.id} className="relative">
                 {i > 0 && (
-                  <p
+                  <div
                     aria-hidden="true"
-                    className="flex h-5 items-center gap-1 pl-1 text-[10.5px] tabular-nums @md:h-6 @md:text-[11.5px] text-muted-foreground transition-opacity duration-300"
-                    style={{ opacity: dim && focused !== i - 1 ? 0.35 : 1 }}
+                    className="flex h-5 items-center gap-1.5 pl-1 text-[11px] tabular-nums text-muted-foreground transition-opacity duration-300 mb-1"
+                    style={{ opacity: dim && focused !== i - 1 ? 0.35 : 0.85 }}
                   >
-                    <svg viewBox="0 0 12 12" className="size-3" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" className="size-3 text-sky-400" aria-hidden="true">
                       <path d="M6 2.5v7M3 6.6 6 9.5l3-2.9" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <NumberRoll value={visible ? step : 0} format={{ style: "percent", maximumFractionDigits: 0 }} duration={800} />
-                    <span>carried on</span>
-                  </p>
+                    <span className="text-sky-300">
+                      <NumberRoll value={visible ? Math.round(step * 100) : 0} suffix="%" duration={800} />
+                    </span>
+                    <span>relative factor weight vs previous layer</span>
+                  </div>
                 )}
-                <div onPointerEnter={() => setFocused(i)} className={`transition-opacity duration-300 ${dim ? "opacity-40" : ""}`}>
-                  <div className="flex items-baseline justify-between gap-3 text-[12.5px] @md:text-[13px]">
-                    <span className="truncate text-foreground">{s.label}</span>
-                    <span className="flex shrink-0 items-baseline gap-2 tabular-nums">
-                      <span className="font-medium text-foreground">
-                        <NumberRoll value={visible ? v : 0} format={format} locales={locales} duration={900} />
+                <div 
+                  onPointerEnter={() => setFocused(i)} 
+                  className={`transition-all duration-300 p-2.5 rounded-xl ${dim ? "opacity-35" : "bg-white/[0.02]"}`}
+                  style={{
+                    border: focused === i ? '1px solid rgba(138, 162, 255, 0.35)' : '1px solid transparent',
+                  }}
+                >
+                  <div className="flex items-baseline justify-between gap-3 text-[13px] @md:text-[14px]">
+                    <span className="truncate text-foreground font-medium">
+                      {s.label}
+                    </span>
+                    <span className="flex shrink-0 items-baseline gap-3 tabular-nums">
+                      <span className="font-semibold text-foreground">
+                        <NumberRoll value={visible ? v : 0} format={format} locales={locales} suffix=" pts" duration={900} />
                       </span>
-                      <span className="w-10 text-right text-[11px] text-muted-foreground @md:w-11 @md:text-[12px]">
+                      <span className="w-14 text-right text-[12px] font-semibold text-sky-300">
                         <NumberRoll value={visible ? share : 0} format={{ style: "percent", maximumFractionDigits: share < 0.1 ? 1 : 0 }} duration={900} />
                       </span>
                     </span>
                   </div>
-                  <div className="relative mt-1 h-3.5 @md:mt-1.5 @md:h-[18px]">
+                  <div className="relative mt-2 h-4 rounded-full bg-black/40 overflow-hidden border border-white/[0.08]">
                     <div
                       aria-hidden="true"
-                      className="absolute inset-y-0 left-0 rounded-r-[4px]"
+                      className="absolute inset-y-0 left-0 rounded-full"
                       style={{
-                        width: `${visible ? Math.max(0.5, share * 100) : 0}%`,
-                        background: `color-mix(in oklab, ${HUE} ${Math.round(strength * 100)}%, var(--background))`,
+                        width: `${visible ? Math.max(0.8, share * 100) : 0}%`,
+                        background: i === 0 
+                          ? 'linear-gradient(90deg, #522ee6 0%, #8aa2ff 100%)' 
+                          : 'linear-gradient(90deg, #3730a3 0%, #7a8efc 100%)',
+                        boxShadow: '0 0 14px rgba(110, 110, 248, 0.45)',
+                        borderTop: '1px solid rgba(255, 255, 255, 0.55)',
                         transition: reduced ? "none" : `width 820ms ${EASE} ${visible ? i * 90 : 0}ms`,
                       }}
                     />
@@ -230,15 +240,13 @@ export function StageBars({
 
         <table className="sr-only">
           <caption>
-            {title}, {period?.label}: {Math.round(overall * 1000) / 10}% made it from {stages[0]?.label.toLowerCase()} to{" "}
-            {stages[stages.length - 1]?.label.toLowerCase()}
+            {title}, {period?.label}: Feature importance weights
           </caption>
           <thead>
             <tr>
-              <th scope="col">Stage</th>
-              <th scope="col">Count</th>
-              <th scope="col">Share of the first stage</th>
-              <th scope="col">Share of the stage before</th>
+              <th scope="col">Atmospheric Feature</th>
+              <th scope="col">Gini Score</th>
+              <th scope="col">Relative Weight</th>
             </tr>
           </thead>
           <tbody>
@@ -247,7 +255,6 @@ export function StageBars({
                 <th scope="row">{s.label}</th>
                 <td>{fmt(values[i] ?? 0)}</td>
                 <td>{Math.round(((values[i] ?? 0) / first) * 1000) / 10}%</td>
-                <td>{i > 0 && values[i - 1] ? `${Math.round(((values[i] ?? 0) / values[i - 1]) * 1000) / 10}%` : "–"}</td>
               </tr>
             ))}
           </tbody>
@@ -256,3 +263,5 @@ export function StageBars({
     </div>
   );
 }
+
+export default StageBars;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Calendar, CloudRain, AlertTriangle, TrendingUp, Layers, Wind } from 'lucide-react';
 import historicalData from '../data/historical_trends.json';
 import HairlineCard from './hairline/HairlineCard';
@@ -9,7 +9,6 @@ import MorphingChart from './hairline/morphing-chart';
 
 export default function HistoricalAnalytics() {
   const { annual_trends, monthly_averages, historical_cyclones } = historicalData;
-  const [chartView, setChartView] = useState('annual'); // 'annual' | 'monthly'
 
   // Clean Annual data points for Hairline UI MorphingChart (2010–2026)
   const annualLabels = annual_trends.map((d) => String(d.year));
@@ -22,8 +21,8 @@ export default function HistoricalAnalytics() {
   const monthlyTitles = monthly_averages.map((d) => `${d.month}: ${Math.round(d.avg_rainfall_mm).toLocaleString()} mm 16-Year Average Rainfall`);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-      {/* Overview Stat Cards with Hairline Glass & Official Number Rolls */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {/* 1. Overview Stat Cards with Hairline Glass & Official Number Rolls */}
       <div className="grid-3">
         <HairlineCard variant="interactive">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#adc7ff', marginBottom: '0.55rem' }}>
@@ -71,125 +70,108 @@ export default function HistoricalAnalytics() {
         </HairlineCard>
       </div>
 
-      {/* Main Interactive Morphing Chart Section - Strictly Aligned & Contained */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      {/* 2. Card 1: 16-Year Annual Kolkata Rainfall History (2010–2026) */}
+      <HairlineCard style={{ padding: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.2rem' }}>
-              {chartView === 'annual' ? <TrendingUp size={16} /> : <Layers size={16} />}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.25rem' }}>
+              <TrendingUp size={16} />
               <span style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                <TextMorph>{chartView === 'annual' ? 'Atmospheric Precipitation Dynamics' : 'Monsoon Hydrology Distribution'}</TextMorph>
+                <TextMorph>Atmospheric Precipitation Dynamics</TextMorph>
               </span>
             </div>
             <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
-              <TextMorph>{chartView === 'annual' ? 'Annual Kolkata Rainfall History (2010–2026)' : '12-Month Climatological Monsoon Cycle (Southwest Monsoon Surge)'}</TextMorph>
+              <TextMorph>Annual Kolkata Rainfall History (2010–2026)</TextMorph>
             </h3>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginTop: '0.25rem' }}>
+              Total annual precipitation in millimeters compared to 1,650 mm IMD Normal (ECMWF ERA5 continuous records).
+            </p>
           </div>
-
-          {/* Hairline Mode Toggle with generous padding and spacing */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(5, 4, 18, 0.75)', padding: '0.35rem', borderRadius: '9999px', border: '1px solid rgba(255, 255, 255, 0.14)' }}>
-            <button
-              type="button"
-              onClick={() => setChartView('annual')}
-              style={{
-                padding: '0.55rem 1.25rem',
-                borderRadius: '9999px',
-                fontSize: '0.84rem',
-                fontWeight: chartView === 'annual' ? 650 : 500,
-                color: chartView === 'annual' ? '#ffffff' : 'var(--text-muted)',
-                background: chartView === 'annual' ? 'rgba(82, 46, 230, 0.55)' : 'transparent',
-                border: chartView === 'annual' ? '1px solid rgba(173, 199, 255, 0.35)' : '1px solid transparent',
-                boxShadow: chartView === 'annual' ? '0 4px 14px rgba(82, 46, 230, 0.40)' : 'none',
-                cursor: 'pointer',
-                transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              16-Year Annual Rainfall History (2010–2026)
-            </button>
-            <button
-              type="button"
-              onClick={() => setChartView('monthly')}
-              style={{
-                padding: '0.55rem 1.25rem',
-                borderRadius: '9999px',
-                fontSize: '0.84rem',
-                fontWeight: chartView === 'monthly' ? 650 : 500,
-                color: chartView === 'monthly' ? '#ffffff' : 'var(--text-muted)',
-                background: chartView === 'monthly' ? 'rgba(82, 46, 230, 0.55)' : 'transparent',
-                border: chartView === 'monthly' ? '1px solid rgba(173, 199, 255, 0.35)' : '1px solid transparent',
-                boxShadow: chartView === 'monthly' ? '0 4px 14px rgba(82, 46, 230, 0.40)' : 'none',
-                cursor: 'pointer',
-                transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              12-Month Climatological Monsoon Cycle
-            </button>
-          </div>
+          <HairlineBadge tone="rain" size="sm">
+            16-Year Time Series
+          </HairlineBadge>
         </div>
 
-        {/* Morphing Chart Component */}
-        {chartView === 'annual' ? (
-          <MorphingChart
-            key="annual-chart"
-            title="Total Annual Kolkata Rainfall (Millimeters)"
-            caption="Total annual precipitation in millimeters compared to 1,650 mm IMD Normal"
-            labels={annualLabels}
-            titles={annualTitles}
-            values={annualValues}
-            defaultShape="bars"
-            className="glass-morphing-chart"
-          />
-        ) : (
-          <MorphingChart
-            key="monthly-chart"
-            title="Climatological Monthly Precipitation Cycle (Millimeters)"
-            caption="16-year average monthly accumulation highlighting the July–August monsoon peak (mm)"
-            labels={monthlyLabels}
-            titles={monthlyTitles}
-            values={monthlyValues}
-            defaultShape="area"
-            className="glass-morphing-chart"
-          />
-        )}
-      </div>
+        <MorphingChart
+          title="Total Annual Kolkata Rainfall (Millimeters)"
+          labels={annualLabels}
+          values={annualValues}
+          titles={annualTitles}
+          defaultShape="bars"
+          format={{ maximumFractionDigits: 0 }}
+          subtitle="Total annual precipitation in millimeters compared to 1,650 mm IMD Normal"
+          className="w-full bg-transparent shadow-none"
+        />
+      </HairlineCard>
 
-      {/* Extreme Historical Storm Case Studies with full descriptive fields */}
-      <HairlineCard style={{ padding: '1.75rem' }}>
-        <div style={{ marginBottom: '1.25rem' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.35rem', letterSpacing: '-0.02em' }}>
+      {/* 3. Card 2: 12-Month Climatological Monsoon Cycle (Brought Down in Separate Dedicated Section) */}
+      <HairlineCard style={{ padding: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', marginBottom: '0.25rem' }}>
+              <Layers size={16} />
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                <TextMorph>Monsoon Hydrology Distribution</TextMorph>
+              </span>
+            </div>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+              <TextMorph>12-Month Climatological Monsoon Cycle (Southwest Monsoon Surge)</TextMorph>
+            </h3>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginTop: '0.25rem' }}>
+              16-year average monthly precipitation accumulation highlighting the June–September Southwest monsoon surge.
+            </p>
+          </div>
+          <HairlineBadge tone="success" size="sm">
+            Climatological Normal
+          </HairlineBadge>
+        </div>
+
+        <MorphingChart
+          title="Climatological Monthly Precipitation Cycle (Millimeters)"
+          labels={monthlyLabels}
+          values={monthlyValues}
+          titles={monthlyTitles}
+          defaultShape="area"
+          format={{ maximumFractionDigits: 0 }}
+          subtitle="16-year average monthly accumulation highlighting the July–August monsoon peak (mm)"
+          className="w-full bg-transparent shadow-none"
+        />
+      </HairlineCard>
+
+      {/* 4. Card 3: Benchmark Historical Storm Events in Dataset */}
+      <HairlineCard style={{ padding: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.25rem' }}>
+          <Wind size={20} color="#fbbf24" />
+          <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
             <TextMorph>Benchmark Historical Storm Events in ERA5 Dataset</TextMorph>
           </h3>
-          <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)' }}>
-            Supercyclonic systems and severe tropical weather disturbances verified against regional meteorological ground truth.
-          </p>
         </div>
 
-        <div className="grid-3">
-          {historical_cyclones.map((c, i) => (
-            <HairlineCard key={i} variant="inner" style={{ padding: '1.2rem 1.35rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-                <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f87171' }}>
-                  <TextMorph>{c.name}</TextMorph>
-                </span>
-                <HairlineBadge tone="neutral" size="sm">{c.date}</HairlineBadge>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          {historical_cyclones.map((c) => (
+            <HairlineCard key={c.name} variant="inner" style={{ padding: '1.35rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.65rem' }}>
+                <div>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>{c.name}</h4>
+                  <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>{c.date}</span>
+                </div>
+                <HairlineBadge tone="alert" size="sm">
+                  {c.intensity_category}
+                </HairlineBadge>
               </div>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-silver)', marginBottom: '1rem', lineHeight: '1.5' }}>
-                {c.description}
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem', background: 'rgba(5, 4, 18, 0.45)', padding: '0.75rem', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>24-Hour Rainfall Depth:</span>
-                  <strong style={{ color: '#adc7ff' }}><NumberRoll value={c.rainfall_mm} suffix=" mm" /></strong>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginTop: '1rem', textAlign: 'center' }}>
+                <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.65rem 0.35rem', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                  <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Peak Rain</div>
+                  <strong style={{ color: '#adc7ff', fontSize: '0.95rem' }}><NumberRoll value={c.rainfall_mm} suffix=" mm" /></strong>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Minimum Barometric Pressure:</span>
-                  <strong style={{ color: '#adc7ff' }}><NumberRoll value={c.min_pressure_hpa} suffix=" hPa" /></strong>
+                <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.65rem 0.35rem', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                  <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Pressure</div>
+                  <strong style={{ color: '#adc7ff', fontSize: '0.95rem' }}><NumberRoll value={c.min_pressure_hpa} suffix=" hPa" /></strong>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Peak Sustained Wind Speed:</span>
-                  <strong style={{ color: '#fbbf24' }}><NumberRoll value={c.max_wind_kmh} suffix=" km/h" /></strong>
+                <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.65rem 0.35rem', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                  <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Max Wind</div>
+                  <strong style={{ color: '#fbbf24', fontSize: '0.95rem' }}><NumberRoll value={c.max_wind_kmh} suffix=" km/h" /></strong>
                 </div>
               </div>
             </HairlineCard>

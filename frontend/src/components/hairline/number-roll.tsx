@@ -1,11 +1,11 @@
-// Hairline UI Â· number-roll Â· MIT License
-// Copyright (c) 2026 Hairline UI Â· https://hairlineui.com/license#components
+// Hairline UI · number-roll · MIT License
+// Copyright (c) 2026 Hairline UI · https://hairlineui.com/license#components
 
 "use client";
 
 import * as React from "react";
 
-/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ─────────────────────────────────────────────────────────
  * NUMBER ROLL: numbers that change like an odometer
  *
  *   rolling   each digit is a column that rolls to its new
@@ -18,7 +18,7 @@ import * as React from "react";
  *
  * The real number is always there as text for screen readers
  * and copy and paste; the columns are only what you see.
- * âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+ * ───────────────────────────────────────────────────────── */
 
 export interface NumberRollProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   value: number;
@@ -39,7 +39,7 @@ export interface NumberRollProps extends Omit<React.HTMLAttributes<HTMLSpanEleme
 type Column = { key: string; char: string; digit: number | null };
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
-const SETS = 5; // the strip repeats 0â9 five times so a roll never runs out of digits
+const SETS = 5; // the strip repeats 0–9 five times so a roll never runs out of digits
 const MIDDLE = 20;
 /** The strip as one text node, a digit a line: fifty lines, but one element to lay out instead of fifty. */
 const STRIP = Array.from({ length: SETS * 10 }, (_, i) => i % 10).join("\n");
@@ -53,9 +53,6 @@ const subscribeReduced = (onChange: () => void) => {
 const useReducedMotion = () =>
   React.useSyncExternalStore(subscribeReduced, () => window.matchMedia(reducedQuery).matches, () => false);
 
-// Without `locales`, the server and the visitor's browser can format the same number differently ("$29" in Node,
-// "US$29" in an en-GB browser) and hydration would fail. So the server render and the hydrating render share one
-// fixed locale, and the visitor's own takes over straight after; a client-only mount uses the visitor's from the start.
 const HYDRATION_LOCALE = "en-US";
 const subscribeNothing = () => () => {};
 const useHydrated = () =>
@@ -82,8 +79,6 @@ function columns(text: string): Column[] {
 
 // Memoised: a parent that re-renders with the same number doesn't rebuild the strips.
 const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollIn }: { digit: number; trend: number; duration: number; reduced: boolean; rollIn: boolean }) {
-  // Where the strip starts: a digit that arrives after the first paint rolls in from 0. The strip's position from then on
-  // lives in a ref and goes straight to the element, so a roll never re-renders and React never undoes the rebase below.
   const [start] = React.useState(() => MIDDLE + (rollIn ? 0 : digit));
   const posRef = React.useRef(start);
   const stripRef = React.useRef<HTMLSpanElement>(null);
@@ -109,8 +104,6 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
     }
     const up = trend > 0 || (trend === 0 && digit > showing);
     let target = up ? current + ((digit - showing + 10) % 10) : current - ((showing - digit + 10) % 10);
-    // Values arriving faster than a roll (a progress percent) never let it re-centre, so before it runs off the strip,
-    // jump the strip back by whole sets mid-roll (it looks identical) and roll on from there.
     if (target < 10 || target > SETS * 10 - 11) {
       const shift = Math.round((target - MIDDLE) / 10) * 10;
       const strip = stripRef.current;
@@ -129,15 +122,17 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
     place(target, true);
   }, [digit, trend, reduced, place]);
 
-  // After a roll, quietly re-centre on the middle set so the next roll always has room.
   const settle = () => {
     posRef.current = MIDDLE + (((posRef.current % 10) + 10) % 10);
     place(posRef.current, false);
   };
 
   return (
-    <span className="relative inline-flex items-baseline overflow-hidden [clip-path:inset(0)] h-[1em] leading-none">
-      <span className="invisible leading-none select-none">{digit}</span>
+    <span 
+      className="relative inline-flex items-center justify-center overflow-hidden [clip-path:inset(0)] h-[1.15em] leading-none align-middle"
+      style={{ verticalAlign: 'middle' }}
+    >
+      <span className="invisible leading-none select-none px-[0.02em]">{digit}</span>
       <span
         ref={stripRef}
         aria-hidden="true"
@@ -155,7 +150,10 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
 function Place({ enter, children }: { enter: boolean; children: React.ReactNode }) {
   const [entering] = React.useState(enter);
   return (
-    <span className={`inline-flex items-baseline ${entering ? "[clip-path:inset(0)] animate-[ui-col-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]" : ""}`}>
+    <span 
+      className={`inline-flex items-center justify-center ${entering ? "[clip-path:inset(0)] animate-[ui-col-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]" : ""}`}
+      style={{ verticalAlign: 'middle' }}
+    >
       {children}
     </span>
   );
@@ -218,11 +216,19 @@ export function NumberRoll({ value, format, locales, prefix = "", suffix = "", f
   const trend = direction === "up" ? 1 : direction === "down" ? -1 : (view.moved || 0);
 
   return (
-    <span className={`inline-flex items-baseline tabular-nums leading-none ${className}`} {...props}>
+    <span 
+      className={`inline-flex items-center tabular-nums leading-none ${className}`} 
+      style={{ verticalAlign: 'middle' }}
+      {...props}
+    >
       <span className="sr-only">{`${prefix}${formatter.format(value)}${suffix}`}</span>
-      <span aria-hidden="true" className="inline-flex items-baseline whitespace-pre leading-none">
+      <span aria-hidden="true" className="inline-flex items-center whitespace-pre leading-none" style={{ verticalAlign: 'middle' }}>
         {view.leaving.map((c) => (
-          <span key={`out-${c.key}`} className="inline-flex items-baseline leading-none [clip-path:inset(0)] animate-[ui-col-out_400ms_cubic-bezier(0.16,1,0.3,1)_forwards]">
+          <span 
+            key={`out-${c.key}`} 
+            className="inline-flex items-center justify-center leading-none [clip-path:inset(0)] animate-[ui-col-out_400ms_cubic-bezier(0.16,1,0.3,1)_forwards]"
+            style={{ verticalAlign: 'middle' }}
+          >
             {c.char}
           </span>
         ))}
@@ -231,7 +237,12 @@ export function NumberRoll({ value, format, locales, prefix = "", suffix = "", f
           return (
             <Place key={c.key} enter={isNew && !still}>
               {c.digit === null ? (
-                <span className="inline-flex items-baseline leading-none">{c.char}</span>
+                <span 
+                  className="inline-flex items-center justify-center leading-none h-[1.15em]"
+                  style={{ verticalAlign: 'middle' }}
+                >
+                  {c.char}
+                </span>
               ) : (
                 <Digit digit={c.digit} trend={trend} duration={duration} reduced={still} rollIn={isNew} />
               )}
@@ -244,4 +255,3 @@ export function NumberRoll({ value, format, locales, prefix = "", suffix = "", f
 }
 
 export default NumberRoll;
-
