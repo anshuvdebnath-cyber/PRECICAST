@@ -1,15 +1,45 @@
 import React from 'react';
 import { CloudRain, Sliders, LineChart, Cpu, BookOpen } from 'lucide-react';
 import BrandLogo from './BrandLogo';
-import HairlineLiquidTabs from './hairline/HairlineLiquidTabs';
+import { LiquidTabs } from './hairline/liquid-tabs';
 
 export default function FloatingNavbar({ activeTab, setActiveTab }) {
   const tabs = [
-    { id: 'forecast', label: 'Live Forecast', icon: CloudRain },
-    { id: 'simulator', label: 'What-If Simulator', icon: Sliders },
-    { id: 'analytics', label: 'Historical (16y)', icon: LineChart },
-    { id: 'model', label: 'Model (83.2%)', icon: Cpu },
-    { id: 'about', label: 'Syllabus & About', icon: BookOpen },
+    { 
+      value: 'forecast', 
+      label: 'Live Forecast', 
+      icon: <CloudRain className="size-4 shrink-0" />,
+      color: '#4338ca',
+      foreground: '#ffffff'
+    },
+    { 
+      value: 'simulator', 
+      label: 'What-If Simulator', 
+      icon: <Sliders className="size-4 shrink-0" />,
+      color: '#4f46e5',
+      foreground: '#ffffff'
+    },
+    { 
+      value: 'analytics', 
+      label: 'Historical (16y)', 
+      icon: <LineChart className="size-4 shrink-0" />,
+      color: '#4338ca',
+      foreground: '#ffffff'
+    },
+    { 
+      value: 'model', 
+      label: 'Model (83.2%)', 
+      icon: <Cpu className="size-4 shrink-0" />,
+      color: '#4f46e5',
+      foreground: '#ffffff'
+    },
+    { 
+      value: 'about', 
+      label: 'Syllabus & About', 
+      icon: <BookOpen className="size-4 shrink-0" />,
+      color: '#3730a3',
+      foreground: '#ffffff'
+    },
   ];
 
   return (
@@ -18,11 +48,13 @@ export default function FloatingNavbar({ activeTab, setActiveTab }) {
         {/* Brand Identity */}
         <BrandLogo />
 
-        {/* Hairline UI Liquid Tabs with Surface Tension */}
-        <HairlineLiquidTabs
+        {/* Official Hairline UI Liquid Tabs with Surface Tension Physics */}
+        <LiquidTabs
           tabs={tabs}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
+          value={activeTab}
+          onValueChange={setActiveTab}
+          label="PRECICAST Navigation Tabs"
+          size="md"
         />
       </nav>
     </header>

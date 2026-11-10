@@ -1,17 +1,43 @@
+@import "tailwindcss";
+
 :root {
-  /* Strict Palette from Stepped Louver Aurora Shader (Pitch Black + Royal Violet-Indigo + Electric Periwinkle + Ice Blue) */
+  /* Hairline UI Standard Theme Tokens */
+  --primary: #522ee6;
+  --primary-foreground: #ffffff;
+  --foreground: #f8fafc;
+  --background: #030014;
+  --border: rgba(255, 255, 255, 0.14);
+  --muted: rgba(82, 46, 230, 0.16);
+  --muted-foreground: #adc7ff;
+  --ring: #7a8efc;
+
+  /* Hairline UI Chart Tokens harmonized with Stepped Louver Aurora */
+  --chart-1: #6366f1;
+  --chart-2: #38bdf8;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #f87171;
+
+  /* Strict Shader Harmony Palette:
+     c_black:      #000000 (Pure Pitch Black Void)
+     c_deepIndigo: #1a0866 (Deep Midnight Indigo-Violet Corona)
+     c_violetBlue: #522ee6 (Rich Electric Violet Core)
+     c_periwinkle: #7a8efc (Luminous Periwinkle Blue Mid-Tone)
+     c_skyBlue:    #adc7ff (Soft Sky Periwinkle Crest)
+     c_iceWhite:   #d9ebff (Ethereal Ice-White Blue Refraction Base)
+  */
   --bg-deep-black: #000000;
   
-  /* Smoked Optical Glass with Glossiness 0.8 (Ensures crisp contrast over both black void & bright ice-blue glow) */
-  --glass-black: rgba(5, 4, 18, 0.68);
-  --glass-black-hover: rgba(8, 6, 28, 0.78);
-  --glass-inner: rgba(3, 2, 12, 0.62);
-  --glass-inner-hover: rgba(6, 5, 22, 0.74);
+  /* Smoked Optical Glass: high contrast over both dark void & bright base wave */
+  --glass-black: rgba(6, 4, 22, 0.72);
+  --glass-black-hover: rgba(10, 6, 32, 0.82);
+  --glass-inner: rgba(3, 2, 14, 0.65);
+  --glass-inner-hover: rgba(8, 5, 24, 0.76);
   
-  --accent-cyan: #94aeff;
-  --accent-cyan-bright: #b8ceff;
-  --accent-cobalt: #5230e0;
-  --accent-royal: #6e6ef8;
+  --accent-cyan: #38bdf8;
+  --accent-cyan-bright: #adc7ff;
+  --accent-cobalt: #522ee6;
+  --accent-royal: #7a8efc;
   --accent-emerald: #34d399;
   --accent-amber: #fbbf24;
   --accent-rose: #f87171;
@@ -27,12 +53,12 @@
     0 24px 60px -15px rgba(0, 0, 0, 0.95),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.52),
     inset 0 -1px 2px 0 rgba(0, 0, 0, 0.7),
-    0 0 32px -6px rgba(110, 110, 248, 0.22);
+    0 0 32px -6px rgba(82, 46, 230, 0.35);
 
   /* Typography matching reference image */
   --text-pure-white: #ffffff;
   --text-silver: #e2e8f0;
-  --text-muted: #a3b1cc;
+  --text-muted: #adc7ff;
   --text-dark-muted: #64748b;
   --font-sans: 'Instrument Sans', 'Outfit', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -85,7 +111,7 @@ h1, h2, h3, h4 {
 .container {
   max-width: 1260px;
   margin: 0 auto;
-  padding: 0 1.5rem 5rem 1.5rem;
+  padding: 0 1.5rem 3rem 1.5rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -93,9 +119,9 @@ h1, h2, h3, h4 {
 /* -------------------------------------------------------------------------- */
 .floating-navbar-wrapper {
   position: sticky;
-  top: 1.25rem;
+  top: 0.85rem;
   z-index: 100;
-  margin-bottom: 2.75rem;
+  margin-bottom: 1.35rem;
   width: 100%;
 }
 
@@ -118,6 +144,45 @@ h1, h2, h3, h4 {
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.52),
     0 0 35px -5px rgba(110, 110, 248, 0.25);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hairline UI Liquid Tabs Spacing, Padding & Ghost Reflection Prevention */
+.hairline-tabs-row {
+  display: flex !important;
+  align-items: stretch !important;
+  gap: 0.35rem !important; /* 5.6px breathing space between each tab */
+}
+
+.hairline-tab-cell {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.45rem 1.15rem !important; /* Generous 18px horizontal padding */
+  gap: 0.5rem !important; /* 8px spacing between icon & label */
+  font-family: var(--font-sans) !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  border-radius: 9999px !important;
+  min-width: 0 !important;
+  line-height: 1.25 !important;
+}
+
+[data-liquid-tab] {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  user-select: none;
+}
+
+[data-liquid-tab] * {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .nav-tab-container {
@@ -198,7 +263,7 @@ h1, h2, h3, h4 {
 /* Editorial Header (Matching User's Reference Typography)                    */
 /* -------------------------------------------------------------------------- */
 .hero-editorial-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .hero-meta-pill {
@@ -410,6 +475,24 @@ h1, h2, h3, h4 {
   border-right: 1px solid rgba(0, 0, 0, 0.3);
   color: var(--accent-cyan-bright);
   box-shadow: 0 4px 15px rgba(110, 110, 248, 0.25);
+}
+
+/* Hairline UI Morphing Chart Glass Theme */
+.glass-morphing-chart {
+  background: var(--glass-black) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-top: var(--glass-border-specular) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: var(--glass-border-dark) !important;
+  border-right: var(--glass-border-dark) !important;
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.98), 0 0 35px -5px rgba(82, 46, 230, 0.25) !important;
+  border-radius: 20px !important;
+}
+
+.glass-morphing-chart [role="radiogroup"] {
+  background: rgba(3, 2, 14, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
 }
 .preset-pill-cyan:hover {
   background: rgba(110, 110, 248, 0.35);

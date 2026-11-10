@@ -1,0 +1,203 @@
+﻿All 199 Hairline UI components and blocks. Docs for each: get_component, or https://hairlineui.com/ui/<name>.md.
+
+- **Liquid tabs** (`liquid-tabs`): Tabs whose highlight has a little surface tension: it draws out and pinches for a moment, then it is a pill again.
+- **Notification bell** (`notification-bell`): A bell that behaves like one: each notification hits it, a burst rings harder, and the clapper lags behind on its own.
+- **Folder** (`folder`): A project tile that holds your actual files: it opens on a hinge, fans real sheets, and takes a dropped file with weight.
+- **Reactions** (`reactions`): Emoji reactions for comments and messages: press, slide along the tray and let go, and the emoji flies into its chip.
+- **Voice orb** (`voice-orb`): Voice mode for your assistant: ink in water that the voice moves, with the talk button, the microphone and the reply wired to your own backend.
+- **Light writing** (`light-writing`): A welcome that writes itself: one line of light writes the word, then bends into the next word or into your logo.
+- **Delete with undo** (`delete-undo`): One call on any element: it folds in half and in half again, turns edge-on and is gone. unfold() brings it back.
+- **Add to cart** (`add-to-cart`): One call throws the product into the cart on a real arc; it drops in below the rim and the cart dips with the weight.
+- **Spending ring** (`spending-ring`): Where the money went, and what is inside it: thick tiles with their amounts on them, and a category that blooms open into a ring of its own.
+- **Slide to send** (`slide-to-send`): The confirm step of a payment: carry the thumb to the person you are paying and the money drains into their avatar.
+- **Pay button** (`pay-button`): The button at the end of a checkout, through the whole wait: the card being charged, a line of light while it pays, and a receipt that slides out from under it.
+- **Camera key** (`camera-key`): The camera button of a call, built as a lens: seven aperture blades spiral open to show you and shut over you, so nobody wonders if their camera is on.
+- **Button** (`button`): The base action: variants, 24â40px sizes, a 3% press, and status (pending, success, error) shown through an icon slot and a morphing label.
+- **Button group** (`button-group`): Connected actions on one surface: a selection fill that is thrown to the segment you pick, dividers that fade beside it, labels that fold into icons when narrow.
+- **Split button** (`split-button`): Dual-action trigger: primary action on the left, trailing chevron on the right opening an aligned dropdown menu.
+- **Copy button** (`copy-button`): Copies on the press: the icon blurs into a self-drawing check, the label morphs to Copied, and a failed copy shakes and says so.
+- **Action button** (`action-button`): A button that runs a promise and shows it: the icon slot opens for a spinner, a check draws itself, failures shake, and the label morphs through each.
+- **Expanding button group** (`expanding-button-group`): Icon toolbar where the action you point at, tab to or tap opens its label while neighbours slide aside, with ask-first and done states in place.
+- **Floating button group** (`floating-button-group`): Floating canvas toolbar: one indicator thrown to the active tool, a zoom stepper whose value rolls, and a menu that grows out of its chevron.
+- **Icon morph** (`icon-morph`): One icon becoming another: blur pop, direction-aware turn, card flip, or strokes that draw themselves. Fast toggling never jumps.
+- **Input** (`input`): A one-line field with a label, hint and error that trade places, a clear button that folds in, and one shake when an error arrives.
+- **Textarea** (`textarea`): A text box that eases to the height of what you write, scrolls with its own thin thumb and faded edges, and turns into a composer with tools, a send button and ââµ.
+- **Password input** (`password-input`): A password field with an eye that turns into eye-off, a four-step strength meter that fills and names itself, and a Caps Lock warning.
+- **Search input** (`search-input`): The field at the top of every list: âK focuses it from anywhere, search runs after a pause, the magnifier blurs into a spinner while it loads.
+- **Select** (`select`): A choice from a list that is never the browser's dropdown: the pill grows into its list and folds back as the label morphs.
+- **Multi-select** (`multi-select`): Several choices from a short list: the pill names them ("Design, Sales +2"), the list rises off it with ticks that draw, and it stays open while you pick.
+- **Date picker** (`date-picker`): One date, typed or picked: the field reads "tomorrow", "next fri" or "4 nov", and the calendar slides by month while one mark glides between days.
+- **Time picker** (`time-picker`): Type â9:30 pmâ or fling the hour, minute and AM/PM drums; both paths settle into one plain HH:mm value.
+- **Checkbox** (`checkbox`): A real checkbox whose fill grows from the centre and whose tick draws itself, with a mixed state that bends into the tick.
+- **Radio group** (`radio-group`): One choice from a few: the dot pops into the new circle, or, as cards, one selection frame glides from card to card.
+- **Switch** (`switch`): A switch with weight: the thumb stretches on press, is thrown across with a slight overshoot, and spins while an async save settles.
+- **Slider** (`slider`): One value or a range: a press throws the nearest thumb there, a drag tracks the finger, and the value rises out of the thumb.
+- **Color picker** (`color-picker`): A colour field with a real saturation surface, kinetic hue and opacity rails, typed hex, RGB or HSL, and swatches that stay in sync.
+- **Currency input** (`currency-input`): A locale-aware money field with caret-safe typing, currency formatting, keyboard steps and clean numeric values for your backend.
+- **Rating input** (`rating-input`): Whole or half-star ratings with hover previews, rolling values and native radio behaviour for keyboards, forms and screen readers.
+- **Segmented control** (`segmented-control`): One of a few options side by side: the thumb is thrown to the new segment while its width eases to the new label.
+- **Tooltip** (`tooltip`): A name and shortcut for an icon. The first one waits; after that they glide from trigger to trigger like one label travelling along the toolbar.
+- **Popover** (`popover`): A small panel that belongs to a button: it rises off the trigger from the nearest point, flips to fit, and hands focus to what is inside.
+- **Hover card** (`hover-card`): A preview of what a link points to: it rises off the link after a rest, stays open while you move onto it, and closes after a short grace.
+- **Dropdown menu** (`dropdown-menu`): Actions behind a button: the menu rises off the trigger, one highlight glides between rows, and checkbox rows draw their tick in place.
+- **Context menu** (`context-menu`): Actions where you right-click: the menu grows from the exact point, a long press opens it on touch, and Shift+F10 from the keyboard.
+- **Dialog** (`dialog`): A decision that needs the whole screen: the page fades back under a veil of its own colour and the panel rises out of a blur.
+- **Sheet** (`sheet`): A panel that slides in from an edge and can be thrown back: drag it toward its edge and release speed decides whether it closes.
+- **Badge** (`badge`): A status, a tag or a count: statuses ease their colour and morph their word, live dots breathe, counts roll and fold away at zero.
+- **Avatar** (`avatar`): A face, or initials until there is one: the photo rises out of a blur once it has loaded, and a stack of avatars fans open when you point at it.
+- **Spinner** (`spinner`): Something is happening: a ring with one sweeping arc, three rising dots, or eight petals fading round, in currentColor.
+- **Progress** (`progress`): How far along, as a bar or a ring: the fill eases to each value, the percent rolls, and at 100 it turns green and a check draws itself.
+- **Skeleton** (`skeleton`): The shape of what's coming, with one soft band of light sweeping across, and a swap that hands over to the real content without a pop.
+- **Empty state** (`empty-state`): What a list says before there is anything in it: an isometric line drawing in your theme that draws itself, changes with the state and acts out the action.
+- **Alert** (`alert`): A message that sits in the page: its tint, line and icon ease when the tone changes, and dismissing folds it away so the content below slides up.
+- **Kbd** (`kbd`): A keyboard shortcut written for the reader's keyboard (â on a Mac, Ctrl elsewhere) whose keys sink when you press them for real.
+- **Tabs** (`tabs`): Views of one thing: the underline or pill is thrown to the new tab, the panel slides in from the side you moved toward, and counts roll.
+- **Accordion** (`accordion`): Sections that open in place: the height eases open, the content rises out of a blur a beat later, and opening one folds the other at the same time.
+- **Collapsible** (`collapsible`): "Show 4 more" that opens in place: the hidden part eases open through a blur while the button's words morph to "Show less".
+- **Breadcrumb** (`breadcrumb`): Where you are and the way back: a long trail folds its middle into "â¦", which opens the hidden crumbs in place one after another.
+- **Pagination** (`pagination`): Pages of a long list: the current-page mark is thrown to the new number, and in a narrow container it becomes "3 of 12" with a number that rolls.
+- **Toggle group** (`toggle-group`): On/off choices side by side whose fills merge: two pressed toggles next to each other square off their inner corners and read as one shape.
+- **Steps** (`steps`): Where you are in a flow: the line to the next step fills along its length, the finished number blurs into a drawn check, and phones get "Step 2 of 4".
+- **Text morph** (`text-morph`): Text that changes the way it should: shared letters slide over, new ones rise out of a blur, the width eases.
+- **Status button** (`status-button`): Save, Saving, Saved: the spinner opens in, the check draws itself, errors shake, and the label morphs between them.
+- **Number roll** (`number-roll`): Numbers that change like an odometer: every digit rolls in the direction the number moved.
+- **Pricing toggle** (`pricing-toggle`): Monthly or yearly: the thumb slides with a little give, and every price on the page rolls to its new amount.
+- **Waitlist field** (`waitlist-field`): An email field that becomes its own answer: the button stretches across it, then settles as "Youâre on the list Â· #1,248".
+- **Code input** (`code-input`): The six boxes, done properly: digits rise in, a paste cascades, a wrong code shakes and clears, the right one becomes a pill with a check.
+- **Steps form** (`steps-form`): A multi-step form in one card that changes shape: steps slide in from the way youâre going, checks shake and explain, and Create turns into what comes next.
+- **Date range picker** (`date-range-picker`): A range is one liquid band: it follows your pointer between days, presets flow it to their span, and the dates morph as it moves.
+- **Morphing nav** (`morphing-nav`): One dropdown that follows you along the menu, gliding and resizing to each itemâs content.
+- **Feature tabs** (`feature-tabs`): One panel, many features: the line slides between tabs, fills as autoplay runs, and the panel eases to each.
+- **Scroll story** (`scroll-story`): A how-it-works section that tells itself as you scroll: steps light up at the middle, a rail fills, and one card reshapes into each stepâs picture.
+- **Stats band** (`stats-band`): Numbers that arrive when you do: hairlines draw themselves, then each figure rolls up from zero in turn.
+- **Announcement pill** (`announcement-pill`): "New: â¦" above your headline that opens into the news: the pill itself grows into a changelog card.
+- **Testimonials** (`testimonials`): One quote, chosen by its people: faces step forward, the words cross-fade through a blur, a ring keeps time.
+- **FAQ accordion** (`faq-accordion`): Questions on hairlines that open like they mean it: the answer eases to its height, the plus folds into a minus.
+- **Logo marquee** (`logo-marquee`): A quiet strip of logos that notices you: it eases to a stop on hover and the logo you point at stays bright.
+- **Expanding gallery** (`expanding-gallery`): An image opens from its exact place in the grid, becomes a spacious viewer, and finds its way back.
+- **Card deck** (`card-deck`): A tactile stack that fans out, follows your hand, and deals the next card with a measured flick.
+- **Workflow canvas** (`workflow-canvas`): Connected steps you can move, inspect and follow as work flows through them.
+- **Image compare** (`image-compare`): Two images, one precise divide. Drag to reveal what changed, then let the handle settle.
+- **Magnifying dock** (`magnifying-dock`): A dock that makes room for the tool you reach for, then opens it in place.
+- **Hold to confirm** (`hold-to-confirm`): A deliberate action, held for a moment: the ring fills, the label changes, and confirmation settles into a check.
+- **Swipe actions** (`swipe-actions`): A list row that slides over its actions: cells grow with your finger, a full swipe runs the first one, and the row folds away.
+- **Drop zone** (`drop-zone`): A considered file uploader. Clear actions, quiet progress and useful feedback.
+- **Drop zone Â· Membrane** (`drop-zone-membrane`): A drop zone whose border is a membrane: it reaches for the file, holds it, swallows it and passes it through to its row.
+- **Wheel picker** (`wheel-picker`): Drums you can fling: each column is a real cylinder that decays onto a row, with a lens in full colour over the middle.
+- **Morphing chart** (`morphing-chart`): Bars, line and area as one set of marks: bars condense into beads, a thread is strung through them, the fill pours down. Drag the switch to scrub it.
+- **Range ruler** (`range-ruler`): Two hairline needles across a graduated scale. Thumbs glide without layout thrash and repel each other on contact.
+- **Ratio balancer** (`ratio-balancer`): A multi-segment allocation track. Drag dividers to rebalance constrained percentages with zero initial jump.
+- **Split pane** (`split-pane`): A desktop-grade resizable dual panel. Zero-lag drag, rubber-band spring limits, and double-click preset snapping.
+- **Tag input** (`tag-input`): The invite field, done properly: typed letters grow a chip round themselves, pasted lists spill out of the caret, and a duplicate flies into its twin.
+- **Avatar cropper** (`avatar-cropper`): The profile photo field without a modal: the avatar itself grows into the crop, and shrinks back with the face you framed.
+- **Week calendar** (`week-calendar`): A scheduling week you hold in the hand: drag a slot into an event while its times roll, and anything it lands on eases aside.
+- **Inline edit** (`inline-edit`): Rename a title, a project or a row where it stands: the text becomes the field without moving a pixel, and saves itself.
+- **Combobox** (`combobox`): Pick one or several from a list your server searches: results morph between queries instead of flashing, and picks fly into chips.
+- **Cron input** (`cron-input`): A schedule field people can read: cron or plain English in, the meaning in words and the next runs out, with clock changes flagged.
+- **Time range picker** (`time-range-picker`): "Last 15 minutes" for logs, metrics and traces: type 2h or yesterday 14:00â16:00, step by the window, pause live, or drag across a chart to zoom.
+- **JSON inspector** (`json-inspector`): Read, search and quote a webhook payload or an API response, or see exactly what changed between two versions of a record.
+- **Stepper input** (`stepper-input`): A tactile incrementer: tap to step, hold to accelerate, bounds give an elastic bumper shake, and digits roll in place.
+- **Sparkline** (`sparkline`): An ultra-compact inline trendline with magnetic scrubber and auto-trend color for table cells and stat cards.
+- **Privacy mask** (`privacy-mask`): A frosted optical unmasker for sensitive keys, salaries and tokens, with auto-hide timeout and one-tap copy.
+- **Data table** (`data-table`): A table whose rows travel: sort and every row glides to its rank, live data re-ranks itself, and selection turns the toolbar into its actions.
+- **Kanban board** (`kanban-board`): A pipeline you rearrange by hand: the card becomes the stage it's over while still in the air, and every column's total rolls as it passes.
+- **Filter bar** (`filter-bar`): The bar above a list, done like Linearâs: one panel from property to value, chips you change in place, and a sentence that becomes filters.
+- **Tree view** (`tree-view`): The sidebar of pages, folders or files: carry a row up, down and sideways to nest it, and folders open as you hold them.
+- **Doc comments** (`doc-comments`): Review threads beside the text they quote: the one you choose lines up with its line, and the rest make way.
+- **API keys** (`api-keys`): The API keys screen, done properly: the secret rises in once, and Done folds it down into the "sk_live_â¢â¢â¢â¢4f2a" it leaves behind.
+- **Team members** (`team-members`): Settings â Members, done properly: invited addresses fly out of the field onto their rows, role pills grow into the list of roles, and seats roll.
+- **Settings form** (`settings-form`): A settings page that saves the way people expect: switches save themselves, text edits gather into one bar that rises with "2 unsaved changes".
+- **Auth card** (`auth-card`): Sign-in that asks one thing at a time: the email field shrinks into a chip round the address, and your server decides whether a password, a code or a link comes next.
+- **Webhooks** (`webhooks`): Settings â Webhooks, done properly: "Send test" runs a bead down the wire to the endpoint and back in the answer's colour, and every delivery opens into its request and response.
+- **Domain connect** (`domain-connect`): A custom domain from typed to live: copyable records that tick green as DNS finds them, checks that wait longer each time, and a rail that runs to Live.
+- **Log stream** (`log-stream`): A live tail you can actually read: scroll up and it lets go while a "â 128 new" pill counts what arrives, with pause, level counts, search and lines that open into their fields.
+- **Job queue** (`job-queue`): High-throughput background dispatch and HITL approval orchestrator with live telemetry.
+- **CSV import** (`csv-import`): Contacts â Import, done properly: your file's columns thread themselves to your fields, bad cells become fields you fix in place, and the rows go to your server in batches.
+- **Notification inbox** (`notification-inbox`): The bell, done properly: its own circle grows into the inbox, new notifications swing it and roll the count, and read ones fold out of Unread.
+- **Integrations** (`integrations`): Settings â Integrations, done properly: Connect waits on the provider's own window, then folds away as the account it connected opens in its place.
+- **Status bars** (`status-bars`): A status page that reads at a glance: ninety days a service drawn up bar by bar, one card that glides between them, and incidents whose updates open in as they're posted.
+- **Command palette** (`command-palette`): âK that grows out of the search pill: fuzzy search, nested lists, and commands that run in place.
+- **Toast stack** (`toast-stack`): Notifications with continuous squircle geometry that stack, fan out on hover, follow a promise in one toast, and swipe away.
+- **Live activity** (`live-activity`): One pill for whatever is happening now: it updates in place, tap it and it grows into a panel, done blurs into a check.
+- **Live cursors** (`live-cursors`): Other peopleâs cursors gliding over the same page: names that turn into speech bubbles, click ripples, and selections that follow them around.
+- **Live map** (`live-map`): The world as dots, lighting up where things happen: pings ripple, the light lingers, and one card follows the newest event from city to city.
+- **Theme toggle** (`theme-toggle`): The sun sets into a moon, and the new theme spreads from the button in a circle.
+- **Pricing calculator** (`pricing-calculator`): Drag to your size and watch the price roll, the plan morph and, at the top, âLetâs talkâ.
+- **Comparison table** (`comparison-table`): Plans side by side, with a column that glides to the plan under your pointer and prices that roll.
+- **Onboarding checklist** (`onboarding-checklist`): The first five things, ticked off in place: a ring that fills, checks that draw, and a finish worth seeing.
+- **Sortable list** (`sortable-list`): Drag to reorder and everything moves: rows slide out of the way, the dropped one settles, every rank rolls, and presets re-sort the lot.
+- **Changelog timeline** (`changelog-timeline`): What shipped, drawn as you read: a rail that fills, dots that light, filters that fold the rest away.
+- **Changelog trace** (`changelog-trace`): What shipped, routed like a circuit: the line steps aside between releases, and a bead runs down it as you read.
+- **Changelog scrubber** (`changelog-scrubber`): Your release history on a ruler you scrub: drag the playhead, or press play and watch the product ship.
+- **Cookie banner** (`cookie-banner`): Asks once, plainly, then folds into a small cookie button in the corner that grows back into the preferences.
+- **Newsletter footer** (`newsletter-footer`): A footer thatâs still alive: a signup that becomes its own confirmation, drawn link underlines and your name in outline.
+- **Prompt composer** (`prompt-composer`): The input that starts it all: grows as you type, takes files, and turns Send into Stop while answering.
+- **Agent composer** (`agent-composer`): The taller composer for agent surfaces: branch, folder and context on a tab above, permissions and model as pills that grow into their lists.
+- **Mentions and commands** (`mention-menu`): Type @ to pull in context or / for a command. The menu grows from the caret and your text becomes a chip.
+- **Attachment chip** (`attachment-chip`): A file on its way into a prompt: uploading, being read, ready or failed.
+- **Mode switcher** (`mode-switcher`): Fast, Thinking, Research: a segmented switch with a sliding pill and locked paid modes.
+- **Model picker** (`model-picker`): The model pill in your composer grows into the menu: what each model is for, speed, smarts and thinking effort.
+- **Voice input** (`voice-input`): Dictate a prompt: a waveform from your real mic level, a timer, then transcribing.
+- **Voice note** (`voice-note`): A voice message you can scrub and read along with: the waveform fills, the time rolls, and the transcript highlights each word as itâs said.
+- **Thinking indicator** (`thinking-indicator`): Four quiet loaders for the gap before the first token, with a label, a rolling timer and a finish that draws itself.
+- **Thinking trace** (`thinking-trace`): An expandable record of what an agent did: steps, reasoning, search or tool calls.
+- **Tool call** (`tool-call`): One tool invocation from arguments to result: preparing, running, done, failed or denied.
+- **Clarifying question** (`clarifying-question`): The agent pauses to ask. Pick with a click or a number key, or type your own; it folds into a one-line receipt.
+- **Approval card** (`approval-card`): The agent asks before it acts: what it wants to do, the details, Approve or Deny.
+- **Plan** (`plan`): An agentâs checklist that ticks itself off: pending, in progress, done, skipped or failed.
+- **Web research** (`web-research`): Watch the agent search: the query types in, page icons stack up as it reads, then it folds into a trail of searches and the pages each one found.
+- **Command output** (`command-output`): A command the agent runs: the log streams in, folds away on success, and stays open on failure.
+- **Task progress** (`task-progress`): For work that takes minutes: phases, a live timer, stats, cancel, and the result when itâs done.
+- **Task log** (`task-log`): What the agent did, task by task, as it does it: steps arrive on a hairline trail, files sit in chips, titles turn past tense.
+- **Streaming answer** (`streaming-answer`): An answer as it arrives, with inline citations, actions, sources and follow-ups.
+- **Code block** (`code-block`): Code in an answer: highlighted as it streams, copy and wrap, long files folded, and an optional Apply.
+- **Citation** (`citation`): An inline numbered source that previews the site, title and snippet on hover or focus.
+- **Response versions** (`response-versions`): Step between regenerated answers with "2 / 3", and regenerate without losing the old ones.
+- **Selection actions** (`selection-actions`): Select text and a pill appears under it. Pick an action or describe an edit, and the rewrite streams in place.
+- **Inline rewrite** (`inline-rewrite`): Drag a dial and the paragraph rewrites itself in place: shared words glide, the rest blur out and rise in.
+- **Diff review** (`diff-review`): Accept or reject what the AI changed, word by word for prose or line by line for code.
+- **Action receipts** (`action-receipt`): What the agent actually did, one quiet line each, with Undo while a ring drains. Several stack into one.
+- **Error and limit states** (`chat-notice`): Calm, specific notices for failed answers, being offline, rate limits and chats that grow too long.
+- **Usage meter** (`usage-meter`): Credits, messages or context left: quiet when thereâs plenty, clear before it runs out.
+- **Usage limits** (`usage-limits`): What an agent has left: the context window split by what fills it, and each plan limit with its share and a live reset countdown.
+- **Jump to latest** (`chat-scroll`): A chat that follows the answer as it streams, lets go the moment you scroll up, and brings you back.
+- **Edit and resend** (`message-edit`): Fix a sent message where it sits. The bubble grows into an editor, then folds back and branches the reply.
+- **Chat history** (`chat-history`): Past chats grouped by day, searchable, with titles that write themselves, rename in place and delete with Undo.
+- **Earnings chart** (`earnings-chart`): A bar chart that changes instead of redrawing: bars glide between periods, the scale and the total roll, a readout follows the pointer.
+- **Steps chart** (`steps-chart`): A week against a daily goal: days that make it fill in, a wave runs the way you step through the weeks, the totals roll.
+- **Revenue chart** (`revenue-chart`): This year as an area, last year behind it; point at a month and the header becomes the readout, switch the measure and the lines reshape.
+- **Area chart** (`area-chart`): Several series stacked, overlapping or as shares: every band morphs between layouts, and the tiles are the legend, the switches and the readout.
+- **Trend chart** (`trend-chart`): One metric over time, the way an analytics screen needs it: the period before as a dashed line, an unfinished day drawn dashed, a readout that glides with the pointer, and drag to zoom.
+- **Combo chart** (`combo-chart`): Every day as a bar and the trend as a line on one scale: point at a day and the header becomes its readout while the lineâs dot pings where it lands.
+- **Stage bars** (`stage-bars`): A funnel you can read at a glance: every stage as a bar against the first, the drop-off between them, and widths that ease when the period changes.
+- **Activity rings** (`activity-rings`): Three daily goals as concentric rings beside a tight legend, with the week underneath: pick a day and the rings sweep to it.
+- **Donut chart** (`donut-chart`): Parts of a whole as a ring or a half-ring gauge: point at a slice and the centre rolls to it, hide one and the rest slide round.
+- **Activity heatmap** (`activity-heatmap`): Every day as a square, weeks across: one readout glides to the day you point at, and new numbers ripple through week by week.
+- **Live line chart** (`live-line-chart`): One metric as it happens: each point slides in at an even pace, the scale eases, and a Live pill pauses the view.
+- **Agent playback** (`agent-playback`): Your AI product working, hands-off and on a loop: the hero demo built from the real components.
+- **Wallet** (`wallet`): A balance you can send from: the balance panel turns into the transfer, the button goes Sending â Sent, and the money visibly leaves.
+- **Pricing plans** (`pricing-plans`): Plans that turn into their own checkout: pick one and its card becomes the order, seats and totals rolling, then Continue opens your checkout.
+- **Booking** (`booking`): Book a call on one card: the time you pick prints onto the hostâs ticket, then the times turn into your details and the confirmation.
+- **Cart** (`cart`): A cart whose receipt does the maths in front of you: codes are stamped on, a rail of light fills toward free shipping and every total rolls.
+- **Referral** (`referral`): A referral pass that fills as friends join: their faces fly up into its notches, and the last one turns the track into Claim.
+- **Feedback** (`feedback`): A score that changes the question: pick 0â10 or stars, the score rolls into the panel, and the follow-up and its tags fit what you picked.
+- **Buy box** (`buy-box`): A product buy box whose swatches repaint the product: pick a colour and size, and Add to bag throws the product into the bag.
+- **Checkout** (`checkout`): A one-page checkout whose steps stack into a receipt: contact, address, delivery and your payment element, then Place order turns into the order number.
+- **Order status** (`order-status`): An orderâs route with a parcel riding it: stops light as it passes, the arrival day rolls, and the carrierâs scans slide in.
+- **Subscription** (`subscription`): A billing page in one card: the plan with a ring through its billing period, usage, card and invoices, and a cancel that offers a pause first.
+- **File share** (`file-share`): Drop files, watch them upload, and they fold into one share link with an expiry and an optional password.
+- **Poll** (`poll`): A poll whose bars race to their share: vote, and every option fills with light while the percentages roll and live votes keep nudging them.
+- **Cookie consent** (`cookie-consent`): A cookie banner with a mascot: every cookie you allow flies to Crumb, who catches it, nibbles it and gets rounder and happier.
+- **Create password** (`create-password`): A password step with a chameleon: the stronger the password, the better Hide blends in, until only his eye is left.
+- **Verify code** (`verify-code`): A one-time code step with a carrier pigeon: Coo naps through the resend wait with the seconds in a thought bubble, and flies every new code to your mailbox.
+- **Delete workspace** (`delete-workspace`): A danger-zone delete with a ghost: as you type the name, Boo climbs out of the workspaceâs tile, and holding Delete waves him off the stage.
+- **Terms** (`terms`): A terms-of-service step with an owl who reads along: Skim sums up each section in one plain line, gets dizzy if you scroll too fast, and gives a thumbs up at the end.
+- **Not found** (`not-found`): A 404 with a search and a puppy: Fetch sniffs as you type, sprints off to fetch the results and comes back with a newspaper, or a stick.
+- **Waitlist** (`waitlist`): A waitlist that is an actual line: you step in at the end with your number over your head, and every friend who joins lets you hop past the person ahead.
+- **Storage** (`storage`): A storage meter with a raccoon and his suitcase: near the limit the case bulges and Pack sits on it to shut it; clean up and he hops down, upgrade and a roomy trunk arrives.
+- **Username** (`username`): A username picker with a penguin holding a sign: your name appears on it as you type; if itâs taken, its smug owner slides in hugging a sign with your name on it.
+- **Searchlight hero** (`searchlight-hero`): A hero whose picture sits in the dark: a lamp in it casts a cone of light that sweeps the scene, follows the pointer, finds things and lights the headline as it passes.
+- **Tide footer** (`tide-footer`): A footer drawn as one engraved seascape: your name rises out of the water and stands on the horizon, its reflection ripples under the pointer and every link sends a ring across the sea.
+- **Integration beam** (`integration-beam`): An animated product scene: soft light pulses travel along curved beams from your inputs into your product and out to your destinations, with live reflow and interactive pause.
+
+Browse with previews: https://hairlineui.com/ui

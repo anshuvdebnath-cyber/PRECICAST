@@ -2,6 +2,7 @@ import React from 'react';
 import { GraduationCap } from 'lucide-react';
 import HairlineCard from './hairline/HairlineCard';
 import HairlineBadge from './hairline/HairlineBadge';
+import TextMorph from './hairline/text-morph';
 
 export default function AboutProject() {
   return (
@@ -10,12 +11,12 @@ export default function AboutProject() {
       <HairlineCard>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ 
-            background: 'rgba(110, 110, 248, 0.16)', 
+            background: 'rgba(82, 46, 230, 0.20)', 
             padding: '0.85rem', 
             borderRadius: '16px', 
-            color: 'var(--accent-cyan-bright)',
+            color: '#adc7ff',
             borderTop: '1px solid rgba(255, 255, 255, 0.45)',
-            boxShadow: '0 8px 24px rgba(110, 110, 248, 0.25)',
+            boxShadow: '0 8px 24px rgba(82, 46, 230, 0.35)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
@@ -23,7 +24,9 @@ export default function AboutProject() {
             <GraduationCap size={32} />
           </div>
           <div>
-            <HairlineBadge tone="rain" dot="pulse">Academic Credentials</HairlineBadge>
+            <HairlineBadge tone="rain" dot="pulse">
+              <TextMorph>Academic Credentials</TextMorph>
+            </HairlineBadge>
             <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: '#ffffff', marginTop: '0.35rem', letterSpacing: '-0.02em' }}>
               Techno India University, West Bengal
             </h2>
@@ -38,8 +41,8 @@ export default function AboutProject() {
             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Assigned Domain
             </span>
-            <div style={{ fontSize: '1.05rem', fontWeight: 650, color: 'var(--accent-cyan-bright)', marginTop: '0.35rem' }}>
-              Topic 1: Climate Change & Weather Prediction
+            <div style={{ fontSize: '1.05rem', fontWeight: 650, color: '#adc7ff', marginTop: '0.35rem' }}>
+              <TextMorph>Topic 1: Climate Change & Weather Prediction</TextMorph>
             </div>
           </HairlineCard>
           <HairlineCard variant="inner">
@@ -47,7 +50,7 @@ export default function AboutProject() {
               Sub-Topic Focus
             </span>
             <div style={{ fontSize: '1.05rem', fontWeight: 650, color: '#34d399', marginTop: '0.35rem' }}>
-              Rainfall Prediction Using Machine Learning
+              <TextMorph>Rainfall Prediction Using Machine Learning</TextMorph>
             </div>
           </HairlineCard>
           <HairlineCard variant="inner">
@@ -64,13 +67,13 @@ export default function AboutProject() {
       {/* Verified Data Sources */}
       <HairlineCard>
         <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-          Official Scientific Data Sources & Citations
+          <TextMorph>Official Scientific Data Sources & Citations</TextMorph>
         </h3>
         
         <div className="grid-2">
           <HairlineCard variant="inner">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-              <span style={{ fontWeight: 700, color: 'var(--accent-cyan-bright)', fontSize: '1.05rem' }}>
+              <span style={{ fontWeight: 700, color: '#adc7ff', fontSize: '1.05rem' }}>
                 Copernicus ERA5 Atmospheric Reanalysis
               </span>
               <HairlineBadge tone="rain" size="sm">Primary Training Data</HairlineBadge>
@@ -105,7 +108,7 @@ export default function AboutProject() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
             <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
-              College Presentation Slide Deck (13 Slides)
+              <TextMorph>College Presentation Slide Deck (13 Slides)</TextMorph>
             </h3>
             <p style={{ fontSize: '0.82rem', color: 'var(--text-silver)', marginTop: '0.2rem' }}>
               Word-for-word script matching the syllabus headings approved for November 14, 2026.
@@ -133,13 +136,13 @@ export default function AboutProject() {
             <HairlineCard key={s.num} variant="inner">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
                 <span style={{ 
-                  background: 'rgba(110, 110, 248, 0.18)', 
-                  color: 'var(--accent-cyan-bright)', 
+                  background: 'rgba(82, 46, 230, 0.22)', 
+                  color: '#adc7ff', 
                   fontSize: '0.75rem', 
                   fontWeight: 700, 
                   padding: '0.18rem 0.55rem', 
                   borderRadius: '6px',
-                  border: '1px solid rgba(148, 174, 255, 0.35)',
+                  border: '1px solid rgba(173, 199, 255, 0.35)',
                   fontFamily: 'var(--font-mono)'
                 }}>
                   Slide {s.num}

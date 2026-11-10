@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Sliders, Droplets, Gauge, Cloud, CloudRain } from 'lucide-react';
+import { Sliders, Droplets, Gauge, Cloud, CloudRain, Zap, Sun } from 'lucide-react';
 import HairlineCard from './hairline/HairlineCard';
 import HairlineSlider from './hairline/HairlineSlider';
 import HairlineBadge from './hairline/HairlineBadge';
-import HairlineNumberRoll from './hairline/HairlineNumberRoll';
+import NumberRoll from './hairline/number-roll';
+import TextMorph from './hairline/text-morph';
 
 export default function WhatIfSimulator() {
   const [humidity, setHumidity] = useState(85);
@@ -28,16 +29,16 @@ export default function WhatIfSimulator() {
       predAmount = Math.max(0.5, (prob * 18.5) + (rainToday * 0.4) - ((pressure - 1000) * 0.3));
     }
 
-    let cat = 'Dry / No Rain';
+    let cat = 'Dry / Clear Sky';
     let tone = 'success';
     if (predAmount >= 64.5) {
-      cat = 'Heavy Downpour (Severe Waterlogging Risk)';
+      cat = 'Severe Tropical Cloudburst';
       tone = 'warning';
     } else if (predAmount >= 15.6) {
-      cat = 'Moderate Rain';
+      cat = 'Moderate Monsoon Downpour';
       tone = 'rain';
     } else if (predAmount >= 0.1) {
-      cat = 'Light Rain';
+      cat = 'Intermittent Light Showers';
       tone = 'rain';
     }
 
@@ -57,18 +58,18 @@ export default function WhatIfSimulator() {
     <HairlineCard style={{ marginBottom: '2.5rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-cyan-bright)', marginBottom: '0.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.25rem' }}>
             <Sliders size={20} />
             <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
-              Interactive What-If Weather Simulator
+              <TextMorph>Interactive What-If Weather Simulator</TextMorph>
             </h3>
           </div>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-silver)' }}>
-            Simulate custom atmospheric conditions in Kolkata and watch the ML model re-calculate rain probability in real time.
+            Simulate custom atmospheric dynamics in Kolkata and watch the ML engine re-calculate rain probability in real time.
           </p>
         </div>
 
-        {/* Preset Pills with Tactile 3% Give & Hairline Rim */}
+        {/* Preset Pills with Tactile Hairline Press Give */}
         <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
           <button 
             type="button"
@@ -141,20 +142,20 @@ export default function WhatIfSimulator() {
         {/* Live Simulation Hairline Glass Result Card */}
         <HairlineCard variant="inner" style={{ padding: '2rem', textAlign: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            Simulated Forecast Result
+            <TextMorph>Simulated Forecast Result</TextMorph>
           </span>
 
           <div style={{ margin: '1.25rem 0' }}>
             <span style={{ 
               fontSize: '3.75rem', 
               fontWeight: 800, 
-              color: sim.isRain ? '#00c8ff' : '#34d399', 
+              color: sim.isRain ? '#38bdf8' : '#34d399', 
               fontFamily: 'var(--font-sans)',
-              textShadow: sim.isRain ? '0 0 25px rgba(0, 200, 255, 0.45)' : '0 0 25px rgba(52, 211, 153, 0.45)',
+              textShadow: sim.isRain ? '0 0 25px rgba(56, 189, 248, 0.45)' : '0 0 25px rgba(52, 211, 153, 0.45)',
               display: 'inline-flex',
               justifyContent: 'center'
             }}>
-              <HairlineNumberRoll value={sim.prob * 100} decimals={0} suffix="%" />
+              <NumberRoll value={Math.round(sim.prob * 100)} suffix="%" duration={420} />
             </span>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-silver)', marginTop: '0.2rem' }}>
               Simulated Rain Probability
@@ -163,31 +164,31 @@ export default function WhatIfSimulator() {
 
           <div style={{ marginBottom: '1.5rem' }}>
             <HairlineBadge tone={sim.tone} dot="pulse" size="md">
-              {sim.cat}
+              <TextMorph>{sim.cat}</TextMorph>
             </HairlineBadge>
           </div>
 
           <div style={{
-            background: 'rgba(0, 2, 8, 0.55)',
-            padding: '1rem',
+            background: 'rgba(0, 2, 8, 0.65)',
+            padding: '1.1rem',
             borderRadius: '14px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.15)',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.18)',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.6)',
             display: 'flex',
             justifyContent: 'space-around',
             boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.10)'
           }}>
             <div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Estimated Volume</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--accent-cyan-bright)' }}>
-                <HairlineNumberRoll value={sim.predAmount} decimals={1} suffix=" mm" />
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Estimated Volume</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#adc7ff' }}>
+                <NumberRoll value={sim.predAmount} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix=" mm" duration={350} />
               </div>
             </div>
-            <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.10)' }}></div>
+            <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.12)' }}></div>
             <div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Model Decision</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: sim.isRain ? '#00c8ff' : '#34d399' }}>
-                {sim.isRain ? '🌧️ RAIN' : '☀️ DRY'}
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Model Decision</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: sim.isRain ? '#38bdf8' : '#34d399' }}>
+                <TextMorph>{sim.isRain ? '🌧️ RAIN' : '☀️ DRY'}</TextMorph>
               </div>
             </div>
           </div>
