@@ -11,7 +11,7 @@ export default function HairlineNewsletterFooter() {
           background: '#111114',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           borderRadius: '24px',
-          padding: 'clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.25rem, 3.5vw, 2.5rem) clamp(2rem, 4vw, 3.25rem) clamp(1.25rem, 3.5vw, 2.5rem)',
+          padding: 'clamp(1.75rem, 3.5vw, 2.5rem) clamp(1rem, 3vw, 2.25rem) clamp(2.25rem, 4.5vw, 3.75rem) clamp(1rem, 3vw, 2.25rem)',
           overflow: 'hidden',
           boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.65)'
         }}
@@ -61,7 +61,7 @@ export default function HairlineNewsletterFooter() {
           </div>
         </div>
 
-        {/* Big Signature Typography: Connected Letters with Subtle Soft Diminishing Glow */}
+        {/* Big Signature Typography: Connected Letters with Extra Large Scale & Gentle Ambient Sheen */}
         <div 
           style={{ 
             display: 'flex', 
@@ -70,18 +70,18 @@ export default function HairlineNewsletterFooter() {
             userSelect: 'none', 
             width: '100%',
             overflow: 'hidden',
-            lineHeight: 0.85
+            lineHeight: 0.82
           }}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {brandLetters.map((char, idx) => {
             const isHovered = hoveredIndex === idx;
 
-            // Soft, understated glow (low brightness, refined atmospheric sheen)
-            const fillStyle = isHovered ? '#f4f4f5' : 'transparent';
-            const strokeStyle = isHovered ? '0px transparent' : '1.5px rgba(255, 255, 255, 0.22)';
+            // Extra subdued, subtle ambient illumination (matte off-white, low luminous halo)
+            const fillStyle = isHovered ? '#e4e4e7' : 'transparent';
+            const strokeStyle = isHovered ? '0px transparent' : '1.5px rgba(255, 255, 255, 0.18)';
             const shadowStyle = isHovered 
-              ? '0 0 16px rgba(255, 255, 255, 0.45), 0 0 32px rgba(160, 180, 255, 0.22)' 
+              ? '0 0 10px rgba(255, 255, 255, 0.22), 0 0 22px rgba(160, 180, 255, 0.12)' 
               : 'none';
 
             return (
@@ -91,16 +91,16 @@ export default function HairlineNewsletterFooter() {
                 style={{
                   display: 'inline-block',
                   cursor: 'pointer',
-                  // Connected letters, enlarged hero typography
-                  fontSize: 'clamp(4.5rem, 15.5vw, 16.5rem)',
+                  // Extra large scale hero typography with snug connected letter spacing
+                  fontSize: 'clamp(5rem, 17.5vw, 18.5rem)',
                   fontWeight: 800,
-                  letterSpacing: '-0.035em',
-                  margin: '0 -0.015em',
+                  letterSpacing: '-0.04em',
+                  margin: '0 -0.018em',
                   fontFamily: 'Outfit, sans-serif',
                   color: fillStyle,
                   WebkitTextStroke: strokeStyle,
                   textShadow: shadowStyle,
-                  // Responsive ignition on hover (140ms); gentle, slow fade out (850ms) when cursor leaves
+                  // Smooth responsive illumination on hover (140ms); gentle, slow fade out (850ms) when cursor leaves
                   transition: isHovered 
                     ? 'color 140ms ease-out, text-shadow 140ms ease-out, -webkit-text-stroke 140ms ease-out' 
                     : 'color 850ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 850ms cubic-bezier(0.16, 1, 0.3, 1), -webkit-text-stroke 850ms cubic-bezier(0.16, 1, 0.3, 1)'
