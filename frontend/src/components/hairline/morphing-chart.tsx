@@ -278,9 +278,9 @@ export function MorphingChart({
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background text-foreground shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-5 [--gutter:52px] @md:[--gutter:64px] [--plot:160px] @md:[--plot:200px]">
+      <div className="p-4 @md:p-6 [--gutter:54px] @md:[--gutter:66px] [--plot:190px] @md:[--plot:230px]">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-[12px] text-muted-foreground @md:text-[13px]">
+          <p className="text-[13.5px] font-medium text-slate-300 @md:text-[15px]">
             <TextMorph>{title}</TextMorph>
           </p>
           <div
@@ -296,7 +296,7 @@ export function MorphingChart({
               swallowClick.current = false;
               e.stopPropagation();
             }}
-            className={`relative -my-1 inline-grid shrink-0 touch-pan-y select-none auto-cols-fr grid-flow-col rounded-full bg-muted p-1 gap-1 ${dragging ? 'cursor-grabbing' : ''}`}
+            className={`relative -my-1 inline-grid shrink-0 touch-pan-y select-none auto-cols-fr grid-flow-col rounded-full bg-muted p-1 gap-1.5 ${dragging ? 'cursor-grabbing' : ''}`}
           >
             <span ref={thumbRef} aria-hidden="true" className="absolute inset-y-1 left-0 rounded-full bg-background shadow-[0_0_0_1px_var(--border)]" style={{ willChange: 'translate' }} />
             {CHART_SHAPES.map((s, i) => {
@@ -317,7 +317,7 @@ export function MorphingChart({
                     choose(CHART_SHAPES[next]);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`relative flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[12px] font-medium transition-colors duration-300 @md:h-8 @md:gap-2 @md:px-4 @md:text-[13px] ${FOCUS} ${
+                  className={`relative flex h-8 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[12.5px] font-medium transition-colors duration-300 @md:h-9 @md:gap-2 @md:px-4 @md:text-[13.5px] ${FOCUS} ${
                     selected ? `text-foreground ${dragging ? 'cursor-grabbing' : 'cursor-grab'}` : 'cursor-pointer text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -328,17 +328,17 @@ export function MorphingChart({
             })}
           </div>
         </div>
-        <p className="mt-0.5 text-[22px] font-medium leading-tight tracking-[-0.03em] @md:text-[26px]">
+        <p className="mt-1 font-['Outfit'] text-[26px] font-semibold leading-tight tracking-[-0.03em] text-white @md:text-[32px]">
           <NumberRoll value={visible ? (active !== null ? clean[active] : total) : 0} format={format} locales={locales} duration={active !== null ? 600 : 1000} />
         </p>
-        <p className="mt-1 whitespace-nowrap text-[11.5px] text-muted-foreground @md:text-[12.5px]">
+        <p className="mt-1 whitespace-nowrap text-[12.5px] text-sky-200/90 @md:text-[13.5px]">
           <TextMorph>{active !== null ? name(active) : (caption ?? ' ')}</TextMorph>
         </p>
 
         <div ref={chartRef} className="relative mt-4 @md:mt-5" style={{ height: `calc(var(--plot) + ${LABELS}px)` }}>
           {Array.from({ length: STEPS + 1 }, (_, k) => 1 - k / STEPS).map((f) => (
             <div key={f} aria-hidden="true" className="absolute inset-x-0" style={{ top: TOP + (size.height - TOP) * (1 - f) }}>
-              <span className="absolute left-0 top-0 -translate-y-1/2 text-[10px] leading-none tabular-nums text-muted-foreground/80" style={{ width: 'calc(var(--gutter) - 8px)', textAlign: 'right' }}>
+              <span className="absolute left-0 top-0 -translate-y-1/2 text-[11px] leading-none tabular-nums text-muted-foreground/90 font-mono" style={{ width: 'calc(var(--gutter) - 8px)', textAlign: 'right' }}>
                 <NumberRoll value={visible ? max * f : 0} format={scaleFormat} locales={locales} duration={700} />
               </span>
               <div className="border-t border-border" style={{ marginLeft: 'var(--gutter)' }} />

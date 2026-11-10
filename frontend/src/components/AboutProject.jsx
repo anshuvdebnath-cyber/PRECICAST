@@ -26,7 +26,7 @@ export default function AboutProject() {
             <HairlineBadge tone="rain" dot="pulse">
               <TextMorph>Verified Data Architecture</TextMorph>
             </HairlineBadge>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
               <TextMorph>Official Scientific Data Sources & Citations</TextMorph>
             </h3>
           </div>
@@ -84,8 +84,8 @@ export default function AboutProject() {
             <HairlineBadge tone="neutral">
               <TextMorph>System Specifications</TextMorph>
             </HairlineBadge>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em' }}>
-              <TextMorph>PRECICAST Machine Learning Pipeline</TextMorph>
+            <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
+              <TextMorph>precicast Machine Learning Pipeline</TextMorph>
             </h3>
           </div>
         </div>

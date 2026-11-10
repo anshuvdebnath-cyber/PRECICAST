@@ -671,11 +671,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 @media (max-width: 768px) {
   .floating-navbar-wrapper {
-    top: 0.75rem;
+    top: 0.5rem;
+    padding: 0 0.5rem;
   }
   .floating-navbar {
-    padding: 0.35rem 0.5rem 0.35rem 1rem;
+    padding: 0.35rem 0.5rem 0.35rem 0.85rem;
     gap: 0.75rem;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .floating-navbar::-webkit-scrollbar {
+    display: none;
   }
   .nav-tab-container {
     overflow-x: auto;
@@ -690,6 +698,33 @@ input[type="range"]::-webkit-slider-thumb:hover {
   }
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 0.75rem 2.5rem 0.75rem;
+  }
+  .hero-editorial-title {
+    font-size: 1.85rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
+  }
+  .hero-editorial-sub {
+    font-size: 0.92rem !important;
+  }
+  .hairline-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 18px !important;
+  }
+  .hairline-tabs-row {
+    gap: 0.2rem !important;
+  }
+  .hairline-tab-cell {
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.76rem !important;
+    gap: 0.35rem !important;
   }
 }
 

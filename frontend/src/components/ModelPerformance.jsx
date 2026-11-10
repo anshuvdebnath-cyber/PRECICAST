@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Target, BrainCircuit, TrendingDown } from 'lucide-react';
+import { ShieldCheck, Target, BrainCircuit, TrendingDown, BarChart2 } from 'lucide-react';
 import metrics from '../data/model_metrics.json';
 import HairlineCard from './hairline/HairlineCard';
 import HairlineBadge from './hairline/HairlineBadge';
@@ -83,65 +83,65 @@ export default function ModelPerformance() {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {/* Top Banner KPI Cards with Hairline Glass & Pixel-Perfect NumberRoll */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+      {/* Top Banner KPI Cards with Hairline Glass & Enlarged Outfit Display */}
       <div className="grid-4">
-        <HairlineCard variant="interactive">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399', marginBottom: '0.65rem' }}>
-            <ShieldCheck size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#34d399', marginBottom: '0.65rem' }}>
+            <ShieldCheck size={20} />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>Classification Accuracy</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#34d399', letterSpacing: '-0.02em', margin: '0.2rem 0' }}>
+          <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#34d399', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
             <NumberRoll value={classification_metrics.accuracy} format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }} suffix="%" />
           </div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             Evaluated on 1,039 forward unseen days (2024–2026)
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#adc7ff', marginBottom: '0.65rem' }}>
-            <Target size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#adc7ff', marginBottom: '0.65rem' }}>
+            <Target size={20} />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>ROC-AUC Score</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#adc7ff', letterSpacing: '-0.02em', margin: '0.2rem 0' }}>
+          <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#adc7ff', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
             <NumberRoll value={classification_metrics.roc_auc} format={{ minimumFractionDigits: 4, maximumFractionDigits: 4 }} />
           </div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             Discriminatory separation power (&gt;0.90 gold standard)
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#a78bfa', marginBottom: '0.65rem' }}>
-            <BrainCircuit size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#a78bfa', marginBottom: '0.65rem' }}>
+            <BrainCircuit size={20} />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>Rain Detection Recall</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#a78bfa', letterSpacing: '-0.02em', margin: '0.2rem 0' }}>
+          <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#a78bfa', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
             <NumberRoll value={classification_metrics.recall * 100} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix="%" />
           </div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             Successfully detects 8 out of every 10 real rain events
           </div>
         </HairlineCard>
 
-        <HairlineCard variant="interactive">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fbbf24', marginBottom: '0.65rem' }}>
-            <TrendingDown size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <HairlineCard variant="interactive" style={{ padding: '1.6rem 1.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#fbbf24', marginBottom: '0.65rem' }}>
+            <TrendingDown size={20} />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>Error Reduction</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#fbbf24', letterSpacing: '-0.02em', margin: '0.2rem 0' }}>
+          <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#fbbf24', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
             <NumberRoll value={-baseline_comparison.error_reduction_pct} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix="%" />
           </div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             MAE reduction vs persistence baseline (4.01 vs 5.10 mm)
           </div>
         </HairlineCard>
@@ -150,86 +150,128 @@ export default function ModelPerformance() {
       {/* Row 2: Confusion Matrix & Hairline UI Earnings Chart */}
       <div className="grid-2">
         {/* Confusion Matrix Card */}
-        <HairlineCard style={{ padding: '1.75rem' }}>
+        <HairlineCard style={{ padding: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
               <TextMorph>Confusion Matrix (1,039 Forward Test Days)</TextMorph>
             </h3>
             <HairlineBadge tone="rain" size="sm">Strict Temporal Split</HairlineBadge>
           </div>
-          <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginBottom: '1.5rem' }}>
-            Evaluated strictly on unseen future timelines from Jan 1, 2024 to Feb 28, 2026.
+          <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '1.5rem', lineHeight: '1.55' }}>
+            Evaluated strictly on unseen future timelines from Jan 1, 2024 to Feb 28, 2026 without data leakage.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
-            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.35rem 1rem' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
+            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 True Negatives (Dry Correct)
               </span>
-              <div style={{ fontSize: '2.1rem', fontWeight: 800, color: '#34d399', margin: '0.35rem 0' }}>
+              <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#34d399', margin: '0.4rem 0' }}>
                 <NumberRoll value={cm.true_negatives} />
               </div>
-              <span style={{ fontSize: '0.76rem', color: 'var(--text-silver)' }}>Correctly predicted dry days</span>
+              <span style={{ fontSize: '0.80rem', color: 'var(--text-silver)' }}>Correctly predicted dry days</span>
             </HairlineCard>
 
-            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.35rem 1rem' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 False Positives (False Alarm)
               </span>
-              <div style={{ fontSize: '2.1rem', fontWeight: 800, color: '#f87171', margin: '0.35rem 0' }}>
+              <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#f87171', margin: '0.4rem 0' }}>
                 <NumberRoll value={cm.false_positives} />
               </div>
-              <span style={{ fontSize: '0.76rem', color: 'var(--text-silver)' }}>Predicted rain, but remained dry</span>
+              <span style={{ fontSize: '0.80rem', color: 'var(--text-silver)' }}>Predicted rain, but remained dry</span>
             </HairlineCard>
 
-            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.35rem 1rem' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 False Negatives (Missed Rain)
               </span>
-              <div style={{ fontSize: '2.1rem', fontWeight: 800, color: '#fbbf24', margin: '0.35rem 0' }}>
+              <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#fbbf24', margin: '0.4rem 0' }}>
                 <NumberRoll value={cm.false_negatives} />
               </div>
-              <span style={{ fontSize: '0.76rem', color: 'var(--text-silver)' }}>Rained, but missed by classifier</span>
+              <span style={{ fontSize: '0.80rem', color: 'var(--text-silver)' }}>Rained, but missed by classifier</span>
             </HairlineCard>
 
-            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.35rem 1rem' }}>
-              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <HairlineCard variant="inner" style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 True Positives (Rain Correct)
               </span>
-              <div style={{ fontSize: '2.1rem', fontWeight: 800, color: '#38bdf8', margin: '0.35rem 0' }}>
+              <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#38bdf8', margin: '0.4rem 0' }}>
                 <NumberRoll value={cm.true_positives} />
               </div>
-              <span style={{ fontSize: '0.76rem', color: 'var(--text-silver)' }}>Correctly detected rainfall days</span>
+              <span style={{ fontSize: '0.80rem', color: 'var(--text-silver)' }}>Correctly detected rainfall days</span>
             </HairlineCard>
           </div>
         </HairlineCard>
 
-        {/* Hairline UI Official Earnings Chart Card */}
-        <HairlineCard style={{ padding: '1.75rem' }}>
-          <EarningsChart
-            title="Classification Performance by Operational Tier"
-            periods={earningsPeriods}
-            defaultValue="rainfall_tiers"
-            totalValue={83.16}
-            suffix="%"
-            totalLabel="1,039 Unseen Forward Test Days (2024–2026)"
-            format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
-            className="w-full bg-transparent shadow-none"
-          />
+        {/* Hairline UI Official Earnings Chart Card (Utilizing 100% of Space Below) */}
+        <HairlineCard style={{ padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
+                <TextMorph>Classification Performance by Operational Tier</TextMorph>
+              </h3>
+              <HairlineBadge tone="rain" size="sm">Hairline Earnings Chart</HairlineBadge>
+            </div>
+            <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '1.25rem' }}>
+              Validating model precision and recall across rainfall intensity bands and decision boundaries.
+            </p>
+
+            <EarningsChart
+              title="Operational Accuracy Distribution"
+              periods={earningsPeriods}
+              defaultValue="rainfall_tiers"
+              totalValue={83.16}
+              suffix="%"
+              totalLabel="1,039 Unseen Forward Test Days (2024–2026)"
+              format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
+              className="w-full bg-transparent shadow-none"
+            />
+          </div>
+
+          {/* Operational Performance Breakdown Matrix utilizing the bottom space */}
+          <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.12)' }}>
+            <div style={{ fontSize: '0.80rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <BarChart2 size={15} />
+              <span>IMD Operational Category Benchmark Accuracies</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '0.75rem' }}>
+              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Dry (&lt;2.5 mm)</div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#34d399' }}>84.6%</div>
+                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Baseline</div>
+              </div>
+              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Light (2.5–15 mm)</div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#38bdf8' }}>82.2%</div>
+                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Synoptic Trace</div>
+              </div>
+              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Moderate (16–64 mm)</div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#8aa2ff' }}>81.0%</div>
+                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Monsoon Core</div>
+              </div>
+              <div style={{ background: 'rgba(5, 4, 18, 0.65)', padding: '0.85rem 0.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-silver)', marginBottom: '0.25rem' }}>Deluge (≥65 mm)</div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fbbf24' }}>88.5%</div>
+                <div style={{ fontSize: '0.70rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Waterlogging</div>
+              </div>
+            </div>
+          </div>
         </HairlineCard>
       </div>
 
       {/* Row 3: Hairline UI Official Stage Bars Chart for Atmospheric Feature Influence */}
-      <HairlineCard style={{ padding: '1.75rem' }}>
-        <div style={{ marginBottom: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+      <HairlineCard style={{ padding: '2rem' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
               <TextMorph>Atmospheric Feature Influence & Decision Cascade</TextMorph>
             </h3>
             <HairlineBadge tone="rain" size="sm">Gini Gain Importance</HairlineBadge>
           </div>
-          <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginTop: '0.35rem' }}>
-            Hairline Stage Bars quantifying how each physical atmospheric factor governs the machine learning decision.
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-silver)', marginTop: '0.45rem', lineHeight: '1.55' }}>
+            Hairline Stage Bars quantifying how each physical atmospheric factor governs the machine learning decision. Hover over any factor to inspect its physical meteorological interpretation.
           </p>
         </div>
 

@@ -27,14 +27,14 @@ export default function HistoricalAnalytics() {
         <HairlineCard variant="interactive">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#adc7ff', marginBottom: '0.55rem' }}>
             <Calendar size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>Verified Historical Timeline</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.1rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.15rem 0' }}>
+          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
             2010 – 2026
           </div>
-          <div style={{ fontSize: '0.80rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.86rem', color: 'var(--text-silver)', lineHeight: 1.45 }}>
             16+ consecutive years of ECMWF ERA5 hourly gridded data (6,153 continuous days)
           </div>
         </HairlineCard>
@@ -42,14 +42,14 @@ export default function HistoricalAnalytics() {
         <HairlineCard variant="interactive">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399', marginBottom: '0.55rem' }}>
             <CloudRain size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>India Meteorological Department Baseline</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.1rem', fontWeight: 700, color: '#34d399', letterSpacing: '-0.02em', margin: '0.15rem 0' }}>
+          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#34d399', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
             <NumberRoll value={1650} suffix=" mm / year" duration={600} />
           </div>
-          <div style={{ fontSize: '0.80rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.86rem', color: 'var(--text-silver)', lineHeight: 1.45 }}>
             Official climatological normal for Kolkata (Alipore Meteorological Observatory)
           </div>
         </HairlineCard>
@@ -57,37 +57,37 @@ export default function HistoricalAnalytics() {
         <HairlineCard variant="interactive">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fbbf24', marginBottom: '0.55rem' }}>
             <AlertTriangle size={18} />
-            <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               <TextMorph>Extreme Precipitation Days</TextMorph>
             </span>
           </div>
-          <div style={{ fontSize: '2.1rem', fontWeight: 700, color: '#fbbf24', letterSpacing: '-0.02em', margin: '0.15rem 0' }}>
+          <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#fbbf24', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
             <NumberRoll value={22} suffix=" Days Recorded" duration={600} />
           </div>
-          <div style={{ fontSize: '0.80rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.86rem', color: 'var(--text-silver)', lineHeight: 1.45 }}>
             Single-day deluge exceeding 64.5 mm (causing municipal drainage waterlogging)
           </div>
         </HairlineCard>
       </div>
 
       {/* 2. Card 1: 16-Year Annual Kolkata Rainfall History (2010–2026) */}
-      <HairlineCard style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+      <HairlineCard style={{ padding: '2.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.35rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.25rem' }}>
-              <TrendingUp size={16} />
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.35rem' }}>
+              <TrendingUp size={18} />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 <TextMorph>Atmospheric Precipitation Dynamics</TextMorph>
               </span>
             </div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
               <TextMorph>Annual Kolkata Rainfall History (2010–2026)</TextMorph>
             </h3>
-            <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginTop: '0.25rem' }}>
-              Total annual precipitation in millimeters compared to 1,650 mm IMD Normal (ECMWF ERA5 continuous records).
+            <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', marginTop: '0.35rem', lineHeight: 1.45 }}>
+              Total annual precipitation in millimeters compared against the 1,650 mm IMD Normal (Copernicus ECMWF ERA5 verified ground record).
             </p>
           </div>
-          <HairlineBadge tone="rain" size="sm">
+          <HairlineBadge tone="rain" size="md">
             16-Year Time Series
           </HairlineBadge>
         </div>
@@ -105,23 +105,23 @@ export default function HistoricalAnalytics() {
       </HairlineCard>
 
       {/* 3. Card 2: 12-Month Climatological Monsoon Cycle (Brought Down in Separate Dedicated Section) */}
-      <HairlineCard style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+      <HairlineCard style={{ padding: '2.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.35rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', marginBottom: '0.25rem' }}>
-              <Layers size={16} />
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', marginBottom: '0.35rem' }}>
+              <Layers size={18} />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 <TextMorph>Monsoon Hydrology Distribution</TextMorph>
               </span>
             </div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
               <TextMorph>12-Month Climatological Monsoon Cycle (Southwest Monsoon Surge)</TextMorph>
             </h3>
-            <p style={{ fontSize: '0.84rem', color: 'var(--text-silver)', marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', marginTop: '0.35rem', lineHeight: 1.45 }}>
               16-year average monthly precipitation accumulation highlighting the June–September Southwest monsoon surge.
             </p>
           </div>
-          <HairlineBadge tone="success" size="sm">
+          <HairlineBadge tone="success" size="md">
             Climatological Normal
           </HairlineBadge>
         </div>
@@ -139,10 +139,10 @@ export default function HistoricalAnalytics() {
       </HairlineCard>
 
       {/* 4. Card 3: Benchmark Historical Storm Events in Dataset */}
-      <HairlineCard style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.25rem' }}>
-          <Wind size={20} color="#fbbf24" />
-          <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+      <HairlineCard style={{ padding: '2.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.35rem' }}>
+          <Wind size={22} color="#fbbf24" />
+          <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
             <TextMorph>Benchmark Historical Storm Events in ERA5 Dataset</TextMorph>
           </h3>
         </div>

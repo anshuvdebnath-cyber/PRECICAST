@@ -7,47 +7,18 @@ import * as React from "react";
 import { NumberRoll } from "./number-roll";
 import { TextMorph } from "./text-morph";
 
-/* ─────────────────────────────────────────────────────────
- * EARNINGS CHART: a bar chart that changes instead of redrawing
- *
- *   arrive    the first time it's on screen the bars grow up out
- *             of the baseline one after another and the total
- *             rolls up from zero
- *   period    6M, 1Y, All: the pill is thrown to the choice. Bars
- *             the two periods share glide to their new place and
- *             height, bars that leave fold away on their side,
- *             new ones grow in, the scale's labels roll and so
- *             does the total
- *   hover     a hairline column follows the pointer from bar to
- *             bar and the readout at its top slides along, its
- *             month morphing and its amount rolling
- *   change    the difference from the period before sits in a
- *             chip that turns emerald or red, its arrow turning
- *             with it
- *
- * The plot is one tab stop: arrow keys move between bars and
- * the readout is announced. Every figure is also in a table for
- * screen readers.
- * ───────────────────────────────────────────────────────── */
-
 export interface EarningsBar {
-  /** Stays the same across periods for the same month, so shared bars glide instead of popping. */
   key: string;
-  /** Under the bar, e.g. "Aug". */
   label: string;
   value: number;
-  /** In the readout, e.g. "August 2026". Defaults to label. */
   title?: string;
 }
 
 export interface EarningsPeriod {
   id: string;
-  /** In the switch, e.g. "6M". */
   label: string;
   bars: EarningsBar[];
-  /** The total of the period before, for the change chip. */
   previous?: number;
-  /** After the chip, e.g. "vs the 6 months before". */
   comparison?: string;
 }
 
@@ -57,10 +28,8 @@ export interface EarningsChartProps extends Omit<React.HTMLAttributes<HTMLDivEle
   value?: string;
   defaultValue?: string;
   onValueChange?: (id: string) => void;
-  /** Intl.NumberFormat options for amounts. */
   format?: Intl.NumberFormatOptions;
   locales?: string | string[];
-  /** The bar drawn in your primary colour, by key. Defaults to the last bar. */
   highlight?: string;
   totalValue?: number;
   totalLabel?: string;
@@ -73,9 +42,9 @@ const EASE = "cubic-bezier(0.16,1,0.3,1)";
 const THROW = "cubic-bezier(0.34,1.36,0.64,1)";
 const GLIDE = "cubic-bezier(0.77,0,0.175,1)";
 const MORPH = 560;
-const PLOT = 176; // the bars' area
-const HEADROOM = 30; // above the tallest bar, for the readout
-const LABELS = 26;
+const PLOT = 240; // enlarged plot area
+const HEADROOM = 32;
+const LABELS = 28;
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40";
 const DECIMAL: Intl.NumberFormatOptions = { maximumFractionDigits: 1 };
 
@@ -92,7 +61,6 @@ const useReducedMotion = () =>
     () => false,
   );
 
-/** A round top for the scale: 4,820 → 5,000. */
 function niceMax(value: number) {
   if (value <= 0) return 1;
   const step = 10 ** Math.floor(Math.log10(value));
@@ -100,7 +68,6 @@ function niceMax(value: number) {
   return 10 * step;
 }
 
-/** One bar and its label. It grows out of the baseline when it first appears, and folds away when it leaves. */
 function ColumnView({
   col,
   grown,
@@ -140,25 +107,25 @@ function ColumnView({
       }}
     >
       <div
-        className="absolute bottom-[26px] left-1/2 w-[min(38px,72%)] -translate-x-1/2 rounded-t-[6px]"
+        className="absolute bottom-[28px] left-1/2 w-[min(44px,74%)] -translate-x-1/2 rounded-t-[8px]"
         style={{
-          height: up ? Math.max(4, col.height) : 0,
+          height: up ? Math.max(6, col.height) : 0,
           background: isHighlight
             ? 'linear-gradient(180deg, #adc7ff 0%, #522ee6 100%)'
             : active
               ? 'linear-gradient(180deg, #d9ebff 0%, #6366f1 100%)'
-              : 'linear-gradient(180deg, rgba(138, 162, 255, 0.88) 0%, rgba(82, 46, 230, 0.92) 100%)',
+              : 'linear-gradient(180deg, rgba(138, 162, 255, 0.90) 0%, rgba(82, 46, 230, 0.95) 100%)',
           boxShadow: isHighlight || active
-            ? '0 0 20px rgba(110, 110, 248, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.85)'
-            : '0 4px 14px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.5)',
+            ? '0 0 24px rgba(110, 110, 248, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.85)'
+            : '0 6px 18px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.5)',
           borderTop: '1px solid rgba(255, 255, 255, 0.85)',
-          borderLeft: '1px solid rgba(255, 255, 255, 0.3)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.3)',
+          borderLeft: '1px solid rgba(255, 255, 255, 0.35)',
+          borderRight: '1px solid rgba(255, 255, 255, 0.35)',
           transition: reduced ? "none" : `height 640ms ${EASE} ${delay}ms, background 300ms ${EASE}`,
         }}
       />
       <span
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] leading-[18px] text-muted-foreground font-medium"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-[12.5px] leading-[20px] text-muted-foreground font-semibold"
         style={{ opacity: label ? 1 : 0, transition: reduced ? "none" : `opacity 300ms ${EASE}` }}
       >
         {col.label}
@@ -307,7 +274,8 @@ export function EarningsChart({
   };
 
   const fmt = (n: number) => new Intl.NumberFormat(locales, format).format(n);
-  const change = period?.previous ? (total - period.previous) / period.previous : null;
+  const baseVal = totalValue ?? total;
+  const change = period?.previous && totalValue ? (totalValue - period.previous) / period.previous : null;
   const [lastChange, setLastChange] = React.useState(change ?? 0);
   if (change !== null && change !== lastChange) setLastChange(change);
   const shownChange = change ?? lastChange;
@@ -319,14 +287,14 @@ export function EarningsChart({
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-5 [--gutter:48px] @md:[--gutter:58px] [--plot:150px] @md:[--plot:180px]">
-        {/* The title and its control share a row */}
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-[12px] text-muted-foreground @md:text-[13px] font-medium">{title}</p>
-          <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex shrink-0 rounded-full bg-muted p-1 gap-1">
+      <div className="p-4 @md:p-6 [--gutter:52px] @md:[--gutter:64px] [--plot:220px] @md:[--plot:250px]">
+        {/* Title and Segmented Switch */}
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5 mb-2">
+          <p className="text-[13px] text-muted-foreground @md:text-[14px] font-semibold">{title}</p>
+          <div role="radiogroup" aria-label="Period" className="relative -my-1 inline-flex shrink-0 rounded-full bg-black/60 border border-white/10 p-1 gap-1">
             <span
               aria-hidden="true"
-              className="absolute inset-y-1 left-0 rounded-full bg-background shadow-[0_0_0_1px_var(--border)]"
+              className="absolute inset-y-1 left-0 rounded-full bg-indigo-600/50 border border-indigo-400/50 shadow-sm"
               style={{
                 width: pill.width,
                 transform: `translateX(${pill.left}px)`,
@@ -353,8 +321,8 @@ export function EarningsChart({
                     choose(periods[next].id);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`cursor-pointer relative h-7 rounded-full px-3 text-[12px] font-medium @md:h-8 @md:px-4 @md:text-[13px] tabular-nums transition-colors duration-300 ${FOCUS} ${
-                    selected ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  className={`cursor-pointer relative h-7.5 rounded-full px-3 text-[12px] font-medium @md:h-8 @md:px-3.5 @md:text-[13px] tabular-nums transition-colors duration-300 ${FOCUS} ${
+                    selected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {p.label}
@@ -364,31 +332,26 @@ export function EarningsChart({
           </div>
         </div>
 
-        <div className="mt-1 flex items-baseline gap-2">
-          <p className="text-[24px] font-bold leading-tight tracking-[-0.03em] @md:text-[28px] text-foreground">
-            <NumberRoll value={visible ? (totalValue ?? total) : 0} format={format} locales={locales} suffix={suffix} duration={1000} />
+        {/* Primary KPI Header */}
+        <div className="mt-2 flex items-baseline flex-wrap gap-2.5">
+          <p className="text-[26px] font-bold leading-tight tracking-[-0.03em] @md:text-[32px] text-foreground">
+            <NumberRoll value={visible ? baseVal : 0} format={format} locales={locales} suffix={suffix} duration={1000} />
           </p>
           {totalLabel && (
-            <span className="text-[12px] text-muted-foreground">
+            <span className="text-[12.5px] text-muted-foreground font-medium">
               <TextMorph>{totalLabel}</TextMorph>
             </span>
           )}
         </div>
 
+        {/* Comparison Callout */}
         {(comparable || period?.comparison) && (
-          <p className="mt-1 flex items-center text-[11.5px] text-muted-foreground @md:text-[12.5px]">
-            <span
-              className="grid"
-              style={{
-                gridTemplateColumns: change !== null ? "1fr" : "0fr",
-                opacity: change !== null ? 1 : 0,
-                transition: reduced ? "none" : `grid-template-columns 420ms ${EASE}, opacity 240ms ${EASE}`,
-              }}
-            >
-              <span className="min-w-0 pr-2 [clip-path:inset(-4px_-2px)]">
+          <p className="mt-1 flex items-center text-[12px] text-muted-foreground @md:text-[13px]">
+            {change !== null && (
+              <span className="min-w-0 pr-2">
                 <span
-                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-1.5 py-px font-medium tabular-nums transition-colors duration-300 ${
-                    up ? "bg-emerald-500/10 text-emerald-600" : "bg-red-500/10 text-red-600 dark:text-red-400"
+                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums transition-colors duration-300 ${
+                    up ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"
                   }`}
                 >
                   <svg
@@ -409,13 +372,14 @@ export function EarningsChart({
                   <NumberRoll value={visible ? Math.abs(shownChange) : 0} format={{ style: "percent", maximumFractionDigits: 1 }} duration={800} />
                 </span>
               </span>
-            </span>
-            <span className="whitespace-nowrap">
+            )}
+            <span className="whitespace-nowrap font-medium text-slate-300">
               <TextMorph>{period?.comparison ?? " "}</TextMorph>
             </span>
           </p>
         )}
 
+        {/* The Plot Area */}
         <div
           ref={plotRef}
           role="group"
@@ -432,11 +396,11 @@ export function EarningsChart({
           className={`relative mt-4 touch-pan-y @md:mt-5 select-none rounded-lg ${FOCUS}`}
           style={{ height: `calc(var(--plot) + ${LABELS}px)` }}
         >
-          {/* The scale: rolling labels in the gutter */}
+          {/* The Scale */}
           {[1, 0.5, 0].map((f) => (
             <div key={f} aria-hidden="true" className="absolute right-0" style={{ left: 0, top: HEADROOM + (1 - f) * (plotH - HEADROOM) }}>
               <span
-                className="absolute left-0 top-0 -translate-y-1/2 text-[10.5px] tabular-nums leading-none text-muted-foreground/80"
+                className="absolute left-0 top-0 -translate-y-1/2 text-[11px] tabular-nums leading-none text-muted-foreground/80 font-medium"
                 style={{ width: "calc(var(--gutter) - 8px)", textAlign: "right" }}
               >
                 <NumberRoll value={visible ? max * f : 0} format={compact} locales={locales} suffix={suffix} duration={700} />
@@ -446,10 +410,10 @@ export function EarningsChart({
           ))}
 
           <div ref={barsRef} className="absolute inset-y-0 right-0" style={{ left: "var(--gutter)" }}>
-            {/* The hovered column */}
+            {/* The hovered column highlight lane */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute rounded-[10px] bg-foreground/[0.02] shadow-[inset_0_0_0_1px_var(--border)]"
+              className="pointer-events-none absolute rounded-[10px] bg-foreground/[0.04] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]"
               style={{
                 top: 2,
                 height: plotH - 2,
@@ -473,21 +437,21 @@ export function EarningsChart({
               />
             ))}
 
-            {/* Readout tooltip */}
+            {/* Readout Tooltip (Enlarged and Clear) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute top-[5px] flex h-[22px] -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-background px-2.5 text-[11.5px] shadow-[0_0_0_1px_var(--border)]"
+              className="pointer-events-none absolute top-[2px] flex h-[28px] -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-slate-950/95 px-3 text-[13px] border border-white/20 shadow-xl backdrop-blur-md"
               style={{
-                left: col ? `clamp(56px, ${col.left + col.width / 2}%, calc(100% - 56px))` : "50%",
+                left: col ? `clamp(70px, ${col.left + col.width / 2}%, calc(100% - 70px))` : "50%",
                 opacity: shown ? 1 : 0,
                 scale: shown ? "1" : "0.94",
                 transition: reduced ? "none" : `left 380ms ${THROW}, opacity 200ms ${EASE}, scale 260ms ${EASE}`,
               }}
             >
-              <span className="text-muted-foreground">
+              <span className="text-muted-foreground font-medium">
                 <TextMorph>{shown ? (shown.title ?? shown.label) : " "}</TextMorph>
               </span>
-              <span className="font-medium tabular-nums text-foreground">
+              <span className="font-bold tabular-nums text-foreground">
                 <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} suffix={suffix} duration={600} />
               </span>
             </div>
@@ -497,19 +461,6 @@ export function EarningsChart({
         <p aria-live="polite" className="sr-only">
           {keyboard && shown ? `${shown.title ?? shown.label}: ${fmt(shown.value)}` : ""}
         </p>
-        <table className="sr-only">
-          <caption>
-            {title}, {period?.label}: {fmt(total)}
-          </caption>
-          <tbody>
-            {bars.map((b) => (
-              <tr key={b.key} id={`${id}-${b.key}`}>
-                <th scope="row">{b.title ?? b.label}</th>
-                <td>{fmt(b.value)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );
