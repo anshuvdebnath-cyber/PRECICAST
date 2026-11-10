@@ -1,4 +1,4 @@
-﻿// Hairline UI · morphing-chart · MIT License
+// Hairline UI · morphing-chart · MIT License
 // Copyright (c) 2026 Hairline UI · https://hairlineui.com/license#components
 
 'use client';

@@ -272,13 +272,13 @@ export function MorphingChart({
 
   const fmt = (v: number) => new Intl.NumberFormat(locales, format).format(v);
   const name = (i: number) => titles?.[i] ?? labels[i];
-  const scaleFormat: Intl.NumberFormatOptions = { ...format, notation: 'compact', minimumFractionDigits: 0, maximumFractionDigits: 1 };
+  const scaleFormat: Intl.NumberFormatOptions = { ...format, minimumFractionDigits: 0, maximumFractionDigits: 0 };
   const every = size.width && n ? Math.max(1, Math.ceil(38 / (size.width / n))) : 1;
   const label = (i: number) => active === i || ((n - 1 - i) % every === 0 && (active === null || every === 1 || Math.abs(i - active) >= every));
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background text-foreground shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-5 [--gutter:30px] @md:[--gutter:40px] [--plot:150px] @md:[--plot:190px]">
+      <div className="p-4 @md:p-5 [--gutter:52px] @md:[--gutter:64px] [--plot:160px] @md:[--plot:200px]">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <p className="text-[12px] text-muted-foreground @md:text-[13px]">
             <TextMorph>{title}</TextMorph>
@@ -296,9 +296,9 @@ export function MorphingChart({
               swallowClick.current = false;
               e.stopPropagation();
             }}
-            className={`relative -my-1 inline-grid shrink-0 touch-pan-y select-none auto-cols-fr grid-flow-col rounded-full bg-muted p-0.5 ${dragging ? 'cursor-grabbing' : ''}`}
+            className={`relative -my-1 inline-grid shrink-0 touch-pan-y select-none auto-cols-fr grid-flow-col rounded-full bg-muted p-1 gap-1 ${dragging ? 'cursor-grabbing' : ''}`}
           >
-            <span ref={thumbRef} aria-hidden="true" className="absolute inset-y-0.5 left-0 rounded-full bg-background shadow-[0_0_0_1px_var(--border)]" style={{ willChange: 'translate' }} />
+            <span ref={thumbRef} aria-hidden="true" className="absolute inset-y-1 left-0 rounded-full bg-background shadow-[0_0_0_1px_var(--border)]" style={{ willChange: 'translate' }} />
             {CHART_SHAPES.map((s, i) => {
               const selected = s === shape;
               return (
@@ -317,7 +317,7 @@ export function MorphingChart({
                     choose(CHART_SHAPES[next]);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`relative flex h-6 items-center justify-center gap-1 whitespace-nowrap rounded-full px-2 text-[11.5px] font-medium transition-colors duration-300 @md:h-7 @md:gap-1.5 @md:px-3 @md:text-[12.5px] ${FOCUS} ${
+                  className={`relative flex h-7 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[12px] font-medium transition-colors duration-300 @md:h-8 @md:gap-2 @md:px-4 @md:text-[13px] ${FOCUS} ${
                     selected ? `text-foreground ${dragging ? 'cursor-grabbing' : 'cursor-grab'}` : 'cursor-pointer text-muted-foreground hover:text-foreground'
                   }`}
                 >

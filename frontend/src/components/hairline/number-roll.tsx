@@ -136,13 +136,13 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
   };
 
   return (
-    <span className="relative inline-block overflow-hidden [clip-path:inset(0)]" style={{ verticalAlign: 'baseline' }}>
-      <span className="invisible">{digit}</span>
+    <span className="relative inline-flex items-baseline overflow-hidden [clip-path:inset(0)] h-[1em] leading-none">
+      <span className="invisible leading-none select-none">{digit}</span>
       <span
         ref={stripRef}
         aria-hidden="true"
         onTransitionEnd={settle}
-        className="absolute inset-x-0 top-0 block whitespace-pre text-center"
+        className="absolute inset-x-0 top-0 block whitespace-pre text-center leading-none select-none"
         style={{ transform: `translateY(${(-start * 100) / (SETS * 10)}%)` }}
       >
         {STRIP}
@@ -155,7 +155,7 @@ const Digit = React.memo(function Digit({ digit, trend, duration, reduced, rollI
 function Place({ enter, children }: { enter: boolean; children: React.ReactNode }) {
   const [entering] = React.useState(enter);
   return (
-    <span className={`inline-block ${entering ? "[clip-path:inset(0)] animate-[ui-col-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]" : ""}`}>
+    <span className={`inline-flex items-baseline ${entering ? "[clip-path:inset(0)] animate-[ui-col-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]" : ""}`}>
       {children}
     </span>
   );
@@ -163,7 +163,7 @@ function Place({ enter, children }: { enter: boolean; children: React.ReactNode 
 
 const NOTHING_NEW: ReadonlySet<string> = new Set();
 
-export function NumberRoll({ value, format, locales, prefix = "", suffix = "", from, duration = 900, direction, className = "", ...props }: NumberRollProps) {
+export function NumberRoll({ value, format, locales, prefix = "", suffix = "", from = 0, duration = 900, direction, className = "", ...props }: NumberRollProps) {
   const reduced = useReducedMotion();
   const [shown, setShown] = React.useState(from ?? value);
 
@@ -218,11 +218,11 @@ export function NumberRoll({ value, format, locales, prefix = "", suffix = "", f
   const trend = direction === "up" ? 1 : direction === "down" ? -1 : (view.moved || 0);
 
   return (
-    <span className={`inline-flex tabular-nums ${className}`} {...props}>
+    <span className={`inline-flex items-baseline tabular-nums leading-none ${className}`} {...props}>
       <span className="sr-only">{`${prefix}${formatter.format(value)}${suffix}`}</span>
-      <span aria-hidden="true" className="inline-flex items-baseline whitespace-pre">
+      <span aria-hidden="true" className="inline-flex items-baseline whitespace-pre leading-none">
         {view.leaving.map((c) => (
-          <span key={`out-${c.key}`} className="inline-block [clip-path:inset(0)] animate-[ui-col-out_400ms_cubic-bezier(0.16,1,0.3,1)_forwards]">
+          <span key={`out-${c.key}`} className="inline-flex items-baseline leading-none [clip-path:inset(0)] animate-[ui-col-out_400ms_cubic-bezier(0.16,1,0.3,1)_forwards]">
             {c.char}
           </span>
         ))}
@@ -230,7 +230,11 @@ export function NumberRoll({ value, format, locales, prefix = "", suffix = "", f
           const isNew = view.entering.has(c.key);
           return (
             <Place key={c.key} enter={isNew && !still}>
-              {c.digit === null ? c.char : <Digit digit={c.digit} trend={trend} duration={duration} reduced={still} rollIn={isNew} />}
+              {c.digit === null ? (
+                <span className="inline-flex items-baseline leading-none">{c.char}</span>
+              ) : (
+                <Digit digit={c.digit} trend={trend} duration={duration} reduced={still} rollIn={isNew} />
+              )}
             </Place>
           );
         })}
