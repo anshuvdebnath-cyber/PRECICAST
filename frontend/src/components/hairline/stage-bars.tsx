@@ -139,7 +139,7 @@ export function StageBars({
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-6 [--gutter:30px] @md:[--gutter:40px]">
+      <div className="p-5 @md:p-8 [--gutter:36px] @md:[--gutter:48px] pb-6">
         {/* Title Row */}
         <div className="flex items-center justify-between mb-1">
           <p className="text-[14px] text-muted-foreground @md:text-[15px] font-semibold tracking-wide">{title}</p>
@@ -148,7 +148,7 @@ export function StageBars({
 
         {/* Dedicated Mode Switch Bar with Generous Spacing and Padding */}
         {periods.length > 1 && (
-          <div className="my-3.5 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="my-5 @md:my-6 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div role="radiogroup" aria-label="Engine Model Stage" className="relative inline-flex items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg flex-nowrap">
               <span
                 aria-hidden="true"
@@ -179,7 +179,7 @@ export function StageBars({
                       choose(periods[next].id);
                       chipRefs.current[next]?.focus();
                     }}
-                    className={`cursor-pointer relative z-10 h-9 shrink-0 whitespace-nowrap rounded-full px-4.5 text-[13px] font-semibold @md:text-[14px] transition-all duration-300 ${FOCUS} ${
+                    className={`cursor-pointer relative z-10 h-10 shrink-0 whitespace-nowrap rounded-full px-5 text-[13.5px] font-semibold @md:text-[14px] transition-all duration-300 ${FOCUS} ${
                       selected ? "text-white" : "text-muted-foreground hover:text-white"
                     }`}
                   >
@@ -192,8 +192,8 @@ export function StageBars({
         )}
 
         {/* Header Metric */}
-        <div className="mt-2 flex items-baseline flex-wrap gap-2.5">
-          <p className="text-[26px] font-bold leading-tight tracking-[-0.03em] @md:text-[32px] text-foreground">
+        <div className="mt-3 flex items-center flex-wrap gap-3">
+          <p className="text-[28px] font-bold leading-tight tracking-[-0.03em] @md:text-[34px] text-foreground font-heading">
             <NumberRoll value={visible ? 100 : 0} suffix="%" duration={1000} />
           </p>
           <span className="text-[13px] text-muted-foreground font-medium">
@@ -202,7 +202,7 @@ export function StageBars({
         </div>
 
         {/* Feature Stages List */}
-        <ol className="mt-5 space-y-3.5" onPointerLeave={() => setFocused(null)}>
+        <ol className="mt-6 space-y-4.5 @md:space-y-5.5" onPointerLeave={() => setFocused(null)}>
           {stages.map((s, i) => {
             const v = values[i] ?? 0;
             const share = v / first;
@@ -214,38 +214,40 @@ export function StageBars({
                 {i > 0 && (
                   <div
                     aria-hidden="true"
-                    className="flex h-5 items-center gap-1.5 pl-1.5 text-[11.5px] tabular-nums text-muted-foreground transition-opacity duration-300 mb-1"
-                    style={{ opacity: dim && focused !== i - 1 ? 0.35 : 0.85 }}
+                    className="flex items-center my-2 pl-1 text-[11.5px] tabular-nums text-muted-foreground transition-opacity duration-300"
+                    style={{ opacity: dim && focused !== i - 1 ? 0.35 : 0.90 }}
                   >
-                    <svg viewBox="0 0 12 12" className="size-3 text-sky-400" aria-hidden="true">
-                      <path d="M6 2.5v7M3 6.6 6 9.5l3-2.9" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="text-sky-300 font-semibold">
-                      <NumberRoll value={visible ? Math.round(step * 100) : 0} suffix="%" duration={800} />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/40 border border-indigo-400/25 text-sky-300 font-medium">
+                      <svg viewBox="0 0 12 12" className="size-3 text-sky-400" aria-hidden="true">
+                        <path d="M6 2.5v7M3 6.6 6 9.5l3-2.9" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      <span className="font-bold">
+                        <NumberRoll value={visible ? Math.round(step * 100) : 0} suffix="%" duration={800} />
+                      </span>
+                      <span className="text-slate-300">relative weight vs previous layer</span>
                     </span>
-                    <span>relative weight vs previous layer</span>
                   </div>
                 )}
                 <div 
                   onPointerEnter={() => setFocused(i)} 
-                  className={`transition-all duration-300 p-3 rounded-xl cursor-pointer ${
-                    focused === i ? "bg-white/[0.06] border border-white/20 shadow-lg scale-[1.008]" : dim ? "opacity-35 bg-transparent border border-transparent" : "bg-white/[0.02] border border-white/[0.08]"
+                  className={`transition-all duration-300 p-3.5 @md:p-4.5 rounded-2xl cursor-pointer ${
+                    focused === i ? "bg-white/[0.07] border border-white/25 shadow-xl scale-[1.008]" : dim ? "opacity-35 bg-transparent border border-transparent" : "bg-white/[0.025] border border-white/[0.09]"
                   }`}
                 >
-                  <div className="flex items-baseline justify-between gap-3 text-[14px] @md:text-[15px]">
+                  <div className="flex items-baseline justify-between gap-4 text-[14.5px] @md:text-[15.5px]">
                     <span className="truncate text-foreground font-semibold">
                       {s.label}
                     </span>
                     <span className="flex shrink-0 items-baseline gap-3 tabular-nums">
-                      <span className="font-bold text-foreground text-[14px] @md:text-[15px]">
+                      <span className="font-bold text-foreground text-[14.5px] @md:text-[15.5px]">
                         <NumberRoll value={visible ? v : 0} format={format} locales={locales} suffix=" pts" duration={900} />
                       </span>
-                      <span className="w-16 text-right text-[13px] @md:text-[14px] font-bold text-sky-300">
+                      <span className="w-16 text-right text-[13.5px] @md:text-[14.5px] font-bold text-sky-300">
                         <NumberRoll value={visible ? share : 0} format={{ style: "percent", maximumFractionDigits: share < 0.1 ? 1 : 0 }} duration={900} />
                       </span>
                     </span>
                   </div>
-                  <div className="relative mt-2.5 h-4.5 rounded-full bg-black/50 overflow-hidden border border-white/[0.12]">
+                  <div className="relative mt-3 h-5 rounded-full bg-black/60 overflow-hidden border border-white/[0.14]">
                     <div
                       aria-hidden="true"
                       className="absolute inset-y-0 left-0 rounded-full"
@@ -266,23 +268,23 @@ export function StageBars({
           })}
         </ol>
 
-        {/* Enlarged Interactive Feature Detail Card (Appears on Hover) */}
+        {/* Enlarged Interactive Feature Detail Card (Appears on Hover) with Generous Breathing Room */}
         {activeFeature && activeExpl && (
           <div 
-            className="mt-5 p-4 rounded-xl bg-indigo-950/40 border border-indigo-400/30 backdrop-blur-md transition-all duration-300 shadow-xl"
+            className="mt-8 @md:mt-10 p-5 @md:p-6 rounded-2xl bg-indigo-950/50 border border-indigo-400/35 backdrop-blur-xl transition-all duration-300 shadow-2xl mb-2"
             style={{ animation: 'fluidTabSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
           >
-            <div className="flex items-center gap-2 text-sky-300 mb-1">
+            <div className="flex items-center gap-2 text-sky-300 mb-1.5">
               <Info size={16} />
               <span className="text-[12px] font-bold uppercase tracking-wider">Meteorological Interpretation</span>
             </div>
-            <h4 className="text-[16px] font-bold text-white mb-1">
+            <h4 className="text-[16.5px] font-bold text-white mb-1.5">
               {activeFeature.label}
             </h4>
-            <div className="text-[13.5px] font-medium text-indigo-200 mb-1">
+            <div className="text-[14px] font-medium text-indigo-200 mb-1.5">
               Role: <span className="text-white font-semibold">{activeExpl.role}</span>
             </div>
-            <p className="text-[13px] text-slate-300 leading-relaxed">
+            <p className="text-[13.5px] text-slate-300 leading-relaxed">
               {activeExpl.physics}
             </p>
           </div>

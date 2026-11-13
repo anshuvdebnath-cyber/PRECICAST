@@ -16,7 +16,7 @@ export default function HairlineNewsletterFooter() {
           borderRight: '1px solid rgba(0, 0, 0, 0.75)',
           borderBottom: '1px solid rgba(0, 0, 0, 0.85)',
           borderRadius: '26px',
-          padding: 'clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3.5vw, 2.75rem) clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 3.5vw, 2.75rem)',
+          padding: 'clamp(2rem, 3.5vw, 3rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem)',
           overflow: 'hidden',
           boxShadow: '0 28px 70px -15px rgba(0, 0, 0, 0.95), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35)'
         }}
@@ -29,7 +29,7 @@ export default function HairlineNewsletterFooter() {
             justifyContent: 'space-between', 
             flexWrap: 'wrap', 
             gap: '1rem', 
-            marginBottom: 'clamp(3rem, 6.5vw, 5.5rem)' 
+            marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)' 
           }}
         >
           {/* Left: Clean Brand Copyright */}
@@ -67,7 +67,7 @@ export default function HairlineNewsletterFooter() {
           </div>
         </div>
 
-        {/* Big Signature Typography: Connected Letters with Extra-Large Scale & Gentle Atmospheric Sheen */}
+        {/* Big Signature Typography: Connected Letters with Heroic Scale & Subtle Atmospheric Sheen */}
         <div 
           style={{ 
             display: 'flex', 
@@ -76,18 +76,18 @@ export default function HairlineNewsletterFooter() {
             userSelect: 'none', 
             width: '100%',
             overflow: 'hidden',
-            lineHeight: 0.80
+            lineHeight: 0.85
           }}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {brandLetters.map((char, idx) => {
             const isHovered = hoveredIndex === idx;
 
-            // Soft atmospheric illumination (matte off-white, ambient periwinkle/violet halo)
-            const fillStyle = isHovered ? '#f1f5f9' : 'transparent';
-            const strokeStyle = isHovered ? '0px transparent' : '1.5px rgba(255, 255, 255, 0.22)';
+            // Matte off-white fill on hover, hollow outline by default, gentle ambient sheen (not over-bright)
+            const fillStyle = isHovered ? '#e2e8f0' : 'transparent';
+            const strokeStyle = isHovered ? '0px transparent' : '1.5px rgba(255, 255, 255, 0.28)';
             const shadowStyle = isHovered 
-              ? '0 0 16px rgba(173, 199, 255, 0.40), 0 0 35px rgba(122, 142, 252, 0.22)' 
+              ? '0 0 14px rgba(173, 199, 255, 0.32), 0 0 28px rgba(122, 142, 252, 0.16)' 
               : 'none';
 
             return (
@@ -97,19 +97,19 @@ export default function HairlineNewsletterFooter() {
                 style={{
                   display: 'inline-block',
                   cursor: 'pointer',
-                  // Extra-large scale hero typography with snug connected letter spacing
-                  fontSize: 'clamp(5.5rem, 19.5vw, 21.5rem)',
+                  // Perfectly proportioned hero typography that spans full container width seamlessly
+                  fontSize: 'clamp(3.8rem, 12.2vw, 15.5rem)',
                   fontWeight: 800,
-                  letterSpacing: '-0.045em',
-                  margin: '0 -0.02em',
+                  letterSpacing: '-0.04em',
+                  margin: '0 -0.015em',
                   fontFamily: 'Outfit, sans-serif',
                   color: fillStyle,
                   WebkitTextStroke: strokeStyle,
                   textShadow: shadowStyle,
-                  // Smooth responsive illumination on hover (140ms); gentle, slow fade out (850ms) when cursor leaves
+                  // Smooth responsive illumination on hover (120ms); gentle, slow fade out (900ms) when cursor leaves
                   transition: isHovered 
-                    ? 'color 140ms ease-out, text-shadow 140ms ease-out, -webkit-text-stroke 140ms ease-out' 
-                    : 'color 850ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 850ms cubic-bezier(0.16, 1, 0.3, 1), -webkit-text-stroke 850ms cubic-bezier(0.16, 1, 0.3, 1)'
+                    ? 'color 120ms ease-out, text-shadow 120ms ease-out, -webkit-text-stroke 120ms ease-out' 
+                    : 'color 900ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 900ms cubic-bezier(0.16, 1, 0.3, 1), -webkit-text-stroke 900ms cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
                 {char}

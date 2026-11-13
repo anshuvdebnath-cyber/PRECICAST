@@ -73,7 +73,7 @@ export default function WhatIfSimulator() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.35rem' }}>
             <Sliders size={22} color="#8aa2ff" />
             <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
-              <TextMorph>Interactive What-If Weather Simulator</TextMorph>
+              Interactive What-If Weather Simulator
             </h2>
           </div>
           <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', maxWidth: '640px', lineHeight: '1.55' }}>

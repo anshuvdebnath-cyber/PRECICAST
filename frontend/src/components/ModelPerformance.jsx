@@ -20,10 +20,10 @@ export default function ModelPerformance() {
       comparison: 'vs 80.8% Persistence baseline (+2.4% gain)',
       previous: 80.8,
       bars: [
-        { key: 'dry', label: 'Dry Days', value: 84.6, title: 'Dry Conditions (<2.5 mm, 605 days): 84.6% Accuracy' },
-        { key: 'light', label: 'Light Rain', value: 77.8, title: 'Light Rainfall (2.5–15.5 mm, 297 days): 77.8% Accuracy' },
-        { key: 'moderate', label: 'Moderate Rain', value: 88.1, title: 'Moderate Rain (15.6–64.4 mm, 135 days): 88.1% Accuracy' },
-        { key: 'heavy', label: 'Heavy Deluge', value: 100.0, title: 'Heavy Inundation (≥64.5 mm, 2 days): 100.0% Accuracy' },
+        { key: 'dry', label: 'Dry Days', value: 84.6, title: 'Dry Conditions (<2.5 mm, 605 days)' },
+        { key: 'light', label: 'Light Rain', value: 77.8, title: 'Light Rainfall (2.5–15.5 mm, 297 days)' },
+        { key: 'moderate', label: 'Moderate Rain', value: 88.1, title: 'Moderate Rain (15.6–64.4 mm, 135 days)' },
+        { key: 'heavy', label: 'Heavy Deluge', value: 100.0, title: 'Heavy Inundation (≥64.5 mm, 2 days)' },
       ],
     },
     {
@@ -32,10 +32,10 @@ export default function ModelPerformance() {
       comparison: 'Southwest Monsoon Performance: 83.1% Accuracy',
       previous: 80.3,
       bars: [
-        { key: 'winter', label: 'Winter', value: 93.2, title: 'Winter (Jan–Feb, 177 days): 93.2% Accuracy' },
-        { key: 'premonsoon', label: 'Pre-Monsoon', value: 71.7, title: 'Pre-Monsoon Nor\'westers (Mar–May, 276 days): 71.7% Accuracy' },
-        { key: 'monsoon', label: 'SW Monsoon', value: 83.1, title: 'Southwest Monsoon (Jun–Sep, 366 days): 83.1% Accuracy' },
-        { key: 'postmonsoon', label: 'Post-Monsoon', value: 89.5, title: 'Post-Monsoon Cyclones (Oct–Dec, 220 days): 89.5% Accuracy' },
+        { key: 'winter', label: 'Winter', value: 93.2, title: 'Winter Season (Jan–Feb, 177 days)' },
+        { key: 'premonsoon', label: 'Pre-Monsoon', value: 71.7, title: 'Pre-Monsoon Nor\'westers (Mar–May, 276 days)' },
+        { key: 'monsoon', label: 'SW Monsoon', value: 83.1, title: 'Southwest Monsoon (Jun–Sep, 366 days)' },
+        { key: 'postmonsoon', label: 'Post-Monsoon', value: 89.5, title: 'Post-Monsoon Cyclones (Oct–Dec, 220 days)' },
       ],
     },
     {
@@ -44,11 +44,11 @@ export default function ModelPerformance() {
       comparison: 'Area Under ROC Curve: 0.9126 (Gold Standard)',
       previous: 75.0,
       bars: [
-        { key: 't20', label: '0.20 Cutoff', value: 91.9, title: 'Early Warning Alert: 91.9% Recall (67.4% Precision)' },
-        { key: 't35', label: '0.35 Cutoff', value: 86.4, title: 'Pre-Monsoon Drainage: 86.4% Recall (73.8% Precision)' },
-        { key: 't50', label: '0.50 Cutoff', value: 81.1, title: 'Balanced Boundary: 81.1% Recall (79.1% Precision)' },
-        { key: 't65', label: '0.65 Cutoff', value: 74.0, title: 'High-Confidence Rain: 74.0% Recall (84.9% Precision)' },
-        { key: 't80', label: '0.80 Cutoff', value: 59.2, title: 'Severe Downpour Only: 59.2% Recall (88.0% Precision)' },
+        { key: 't20', label: '0.20 Cutoff', value: 91.9, title: '0.20 Cutoff (Early Warning Alert)' },
+        { key: 't35', label: '0.35 Cutoff', value: 86.4, title: '0.35 Cutoff (Pre-Monsoon Drainage)' },
+        { key: 't50', label: '0.50 Cutoff', value: 81.1, title: '0.50 Cutoff (Balanced Boundary)' },
+        { key: 't65', label: '0.65 Cutoff', value: 74.0, title: '0.65 Cutoff (High-Confidence Rain)' },
+        { key: 't80', label: '0.80 Cutoff', value: 59.2, title: '0.80 Cutoff (Severe Downpour Only)' },
       ],
     },
   ];
@@ -205,15 +205,15 @@ export default function ModelPerformance() {
         </HairlineCard>
 
         {/* Hairline UI Official Earnings Chart Card */}
-        <HairlineCard style={{ padding: '2.25rem', display: 'flex', flexDirection: 'column' }}>
+        <HairlineCard style={{ padding: 'clamp(2rem, 3.5vw, 2.75rem)', display: 'flex', flexDirection: 'column' }}>
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
               <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
                 Classification Performance by Operational Tier
               </h3>
               <HairlineBadge tone="rain" size="sm">Hairline Earnings Chart</HairlineBadge>
             </div>
-            <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '0.75rem' }}>
+            <p style={{ fontSize: '0.86rem', color: 'var(--text-silver)', marginBottom: '1rem', lineHeight: '1.5' }}>
               Validating model precision and recall across rainfall intensity bands and decision boundaries.
             </p>
 
@@ -232,15 +232,15 @@ export default function ModelPerformance() {
       </div>
 
       {/* Row 3: Hairline UI Official Stage Bars Chart for Atmospheric Feature Influence */}
-      <HairlineCard style={{ padding: '2.25rem' }}>
-        <div style={{ marginBottom: '1.25rem' }}>
+      <HairlineCard style={{ padding: 'clamp(2rem, 3.5vw, 2.75rem)' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
               Atmospheric Feature Influence & Decision Cascade
             </h3>
             <HairlineBadge tone="rain" size="sm">Gini Gain Importance</HairlineBadge>
           </div>
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-silver)', marginTop: '0.45rem', lineHeight: '1.55' }}>
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-silver)', marginTop: '0.5rem', lineHeight: '1.55' }}>
             Hairline Stage Bars quantifying how each physical atmospheric factor governs the machine learning decision. Hover over any factor to inspect its physical meteorological interpretation.
           </p>
         </div>

@@ -287,7 +287,7 @@ export function EarningsChart({
 
   return (
     <div ref={rootRef} className={`@container w-full rounded-[22px] bg-background shadow-[0_0_0_1px_var(--border)] ${className}`} {...props}>
-      <div className="p-4 @md:p-6 [--gutter:54px] @md:[--gutter:66px] [--plot:270px] @md:[--plot:310px]">
+      <div className="p-5 @md:p-8 [--gutter:58px] @md:[--gutter:72px] [--plot:300px] @md:[--plot:340px] pb-6">
         {/* Title Row */}
         <div className="flex items-center justify-between mb-1">
           <p className="text-[14px] text-muted-foreground @md:text-[15px] font-semibold tracking-wide">{title}</p>
@@ -295,7 +295,7 @@ export function EarningsChart({
         </div>
 
         {/* Dedicated Mode Switch Bar with Generous Spacing and Padding */}
-        <div className="my-3.5 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="my-5 @md:my-6 w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div role="radiogroup" aria-label="Period" className="relative inline-flex items-center rounded-full bg-black/80 border border-white/20 p-1.5 gap-2 backdrop-blur-md shadow-lg flex-nowrap">
             <span
               aria-hidden="true"
@@ -326,7 +326,7 @@ export function EarningsChart({
                     choose(periods[next].id);
                     chipRefs.current[next]?.focus();
                   }}
-                  className={`cursor-pointer relative z-10 h-9 shrink-0 whitespace-nowrap rounded-full px-4.5 text-[13px] font-semibold @md:text-[14px] tabular-nums transition-all duration-300 ${FOCUS} ${
+                  className={`cursor-pointer relative z-10 h-10 shrink-0 whitespace-nowrap rounded-full px-5 text-[13.5px] font-semibold @md:text-[14px] tabular-nums transition-all duration-300 ${FOCUS} ${
                     selected ? "text-white" : "text-muted-foreground hover:text-white"
                   }`}
                 >
@@ -338,24 +338,24 @@ export function EarningsChart({
         </div>
 
         {/* Primary KPI Header */}
-        <div className="mt-2 flex items-baseline flex-wrap gap-2.5">
-          <p className="text-[26px] font-bold leading-tight tracking-[-0.03em] @md:text-[32px] text-foreground">
+        <div className="mt-3 flex items-center flex-wrap gap-3">
+          <p className="text-[28px] font-bold leading-tight tracking-[-0.03em] @md:text-[34px] text-foreground font-heading">
             <NumberRoll value={visible ? baseVal : 0} format={format} locales={locales} suffix={suffix} duration={1000} />
           </p>
           {totalLabel && (
-            <span className="text-[12.5px] text-muted-foreground font-medium">
-              <TextMorph>{totalLabel}</TextMorph>
+            <span className="text-[13px] text-muted-foreground font-medium">
+              {totalLabel}
             </span>
           )}
         </div>
 
         {/* Comparison Callout */}
         {(comparable || period?.comparison) && (
-          <p className="mt-1 flex items-center text-[12px] text-muted-foreground @md:text-[13px]">
+          <p className="mt-1.5 flex items-center text-[12.5px] text-muted-foreground @md:text-[13.5px]">
             {change !== null && (
               <span className="min-w-0 pr-2">
                 <span
-                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums transition-colors duration-300 ${
+                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11.5px] font-semibold tabular-nums transition-colors duration-300 ${
                     up ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"
                   }`}
                 >
@@ -445,19 +445,20 @@ export function EarningsChart({
             {/* Readout Tooltip (Enlarged, Clear & Prominent) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute top-[2px] flex h-[36px] -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full bg-slate-950/95 px-4 text-[14px] border border-indigo-400/50 shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(99,102,241,0.4)] backdrop-blur-xl"
+              className="pointer-events-none absolute top-[2px] flex h-[38px] -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-slate-950/95 px-4 text-[13.5px] border border-indigo-400/50 shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(99,102,241,0.4)] backdrop-blur-xl"
               style={{
-                left: col ? `clamp(110px, ${col.left + col.width / 2}%, calc(100% - 110px))` : "50%",
+                left: col ? `clamp(120px, ${col.left + col.width / 2}%, calc(100% - 120px))` : "50%",
                 opacity: shown ? 1 : 0,
                 scale: shown ? "1" : "0.94",
                 transition: reduced ? "none" : `left 380ms ${THROW}, opacity 200ms ${EASE}, scale 260ms ${EASE}`,
               }}
             >
-              <span className="text-sky-200 font-medium text-[13.5px]">
-                <TextMorph>{shown ? (shown.title ?? shown.label) : " "}</TextMorph>
+              <span className="text-sky-200 font-medium">
+                {shown ? (shown.title ?? shown.label) : " "}
               </span>
-              <span className="font-extrabold tabular-nums text-white text-[15px]">
-                <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} suffix={suffix} duration={600} />
+              <span className="text-slate-400 font-bold">&bull;</span>
+              <span className="font-extrabold tabular-nums text-white text-[14px]">
+                <NumberRoll value={shown?.value ?? 0} format={format} locales={locales} suffix={suffix} duration={600} /> Accuracy
               </span>
             </div>
           </div>

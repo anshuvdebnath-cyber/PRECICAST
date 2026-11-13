@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloudRain, Sun, Wind, Droplets, Gauge, AlertTriangle, CheckCircle, RefreshCw, Calendar, Radio } from 'lucide-react';
 import recentData from '../data/recent_observations.json';
 import HairlineBadge from './hairline/HairlineBadge';
@@ -8,8 +8,10 @@ import TextMorph from './hairline/text-morph';
 import HairlineCard from './hairline/HairlineCard';
 
 export default function LiveForecastHero() {
-  const latestObs = recentData[recentData.length - 1]; // Latest verified observation
-  const [forecastSource, setForecastSource] = useState('Copernicus ERA5 Verified Archive');
+  const latestObs = recentData[recentData.length - 1]; // Latest verified ERA5 observation
+  const [forecastSource, setForecastSource] = useState('Open-Meteo Real-Time Satellite Feed');
+  const [isLoading, setIsLoading] = useState(false);
+  const [liveDate, setLiveDate] = useState(() => new Date());
   const [telemetryState, setTelemetryState] = useState({
     humidity: latestObs.humidity_mean,
     pressure: latestObs.surface_pressure_mean,
@@ -18,13 +20,58 @@ export default function LiveForecastHero() {
     rainToday: latestObs.precipitation_sum,
   });
 
-  // Today's formatted real-world date for live telemetry identification
-  const liveDateFormatted = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  // Fetch real-time live telemetry from Open-Meteo GFS/ECMWF API for Kolkata (22.57°N, 88.36°E)
+  const fetchLiveTelemetry = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        'https://api.open-meteo.com/v1/forecast?latitude=22.57&longitude=88.36&current=temperature_2m,relative_humidity_2m,surface_pressure,cloud_cover,wind_speed_10m,precipitation'
+      );
+      if (!res.ok) throw new Error('Live telemetry response not ok');
+      const data = await res.json();
+      const curr = data.current;
+
+      setTelemetryState({
+        humidity: Math.round(curr.relative_humidity_2m * 10) / 10,
+        pressure: Math.round(curr.surface_pressure * 10) / 10,
+        wind: Math.round(curr.wind_speed_10m * 10) / 10,
+        cloud: Math.round(curr.cloud_cover * 10) / 10,
+        rainToday: Math.round((curr.precipitation ?? 0.0) * 10) / 10,
+      });
+
+      if (curr.time) {
+        setLiveDate(new Date(curr.time));
+      } else {
+        setLiveDate(new Date());
+      }
+      setForecastSource('Open-Meteo Real-Time GFS/ECMWF Satellite Feed');
+    } catch (err) {
+      console.warn('Live Open-Meteo API unavailable, falling back to verified ERA5 archive:', err);
+      setForecastSource('Copernicus ERA5 Verified Archive');
+      setTelemetryState({
+        humidity: latestObs.humidity_mean,
+        pressure: latestObs.surface_pressure_mean,
+        wind: latestObs.wind_speed_max,
+        cloud: latestObs.cloud_cover_mean,
+        rainToday: latestObs.precipitation_sum,
+      });
+      setLiveDate(new Date());
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Synchronize with live satellite feed on mount
+  useEffect(() => {
+    fetchLiveTelemetry();
+  }, []);
+
+  // Formatted date and time components for NumberRoll display
+  const dayNumber = liveDate.getDate();
+  const yearNumber = liveDate.getFullYear();
+  const monthName = liveDate.toLocaleDateString('en-US', { month: 'short' });
+  const weekdayName = liveDate.toLocaleDateString('en-US', { weekday: 'short' });
+  const timeFormatted = liveDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   // Calibrated decision logic from trained XGBoost model
   let prob = 0.05;
@@ -37,46 +84,17 @@ export default function LiveForecastHero() {
   const isRain = prob >= 0.5;
   const predAmount = isRain ? (telemetryState.rainToday > 10 ? 14.8 : 6.2) : 0.0;
 
-  const handleRefresh = async () => {
-    // Simulate real-time satellite telemetry fetch & sync
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setForecastSource('Copernicus GFS / Open-Meteo Live API');
-    setTelemetryState({
-      humidity: Math.min(95, Math.max(40, latestObs.humidity_mean + (Math.random() * 2 - 1))),
-      pressure: Math.min(1020, Math.max(995, latestObs.surface_pressure_mean + (Math.random() * 0.8 - 0.4))),
-      wind: Math.min(45, Math.max(5, latestObs.wind_speed_max + (Math.random() * 1.5 - 0.75))),
-      cloud: Math.min(100, Math.max(0, latestObs.cloud_cover_mean + (Math.random() * 3 - 1.5))),
-      rainToday: latestObs.precipitation_sum,
-    });
-  };
-
   return (
     <div style={{ marginBottom: '2rem' }}>
-      {/* 1. Refined Editorial Header with Large Outfit Headings & Date Badge */}
+      {/* 1. Refined Editorial Header with Large Outfit Headings & Clean Badges */}
       <div className="hero-editorial-header">
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <HairlineBadge tone="rain" dot="pulse">
             <TextMorph>KOLKATA MICROCLIMATE</TextMorph>
           </HairlineBadge>
-          
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            background: 'rgba(82, 46, 230, 0.20)',
-            padding: '0.35rem 0.85rem',
-            borderRadius: '9999px',
-            border: '1px solid rgba(138, 162, 255, 0.35)',
-            color: '#d9ebff',
-            fontSize: '0.84rem',
-            fontWeight: 600
-          }}>
-            <Calendar size={14} className="text-sky-300" />
-            <span>Today's Date: {liveDateFormatted}</span>
-          </div>
 
           <span style={{ fontSize: '0.84rem', color: 'var(--text-silver)', fontWeight: 400 }}>
-            22.57°N, 88.36°E • 16-Year Reanalysis Baseline
+            22.57°N, 88.36°E &bull; 16-Year Reanalysis Baseline
           </span>
         </div>
 
@@ -99,12 +117,13 @@ export default function LiveForecastHero() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-silver)', background: 'rgba(5, 4, 18, 0.6)', padding: '0.38rem 0.85rem', borderRadius: '999px', border: '1px solid rgba(255, 255, 255, 0.12)' }}>
             <Radio size={14} className="text-emerald-400" />
-            <span>Telemetry Synchronized: <strong>{liveDateFormatted}</strong></span>
+            <span>Telemetry Synchronized: <strong>{weekdayName}, {monthName} {dayNumber}, {yearNumber} ({timeFormatted})</strong></span>
           </div>
 
-          {/* Hairline UI Tactile Action Button */}
-          <HairlineActionButton onClick={handleRefresh}>
-            Live Telemetry Refresh
+          {/* Hairline UI Tactile Action Button with Spinning Sync Feedback */}
+          <HairlineActionButton onClick={fetchLiveTelemetry} disabled={isLoading}>
+            <RefreshCw size={14} className={isLoading ? 'hairline-spin' : ''} />
+            <span>{isLoading ? 'Synchronizing Satellites...' : 'Live Telemetry Refresh'}</span>
           </HairlineActionButton>
         </div>
       </div>
@@ -113,16 +132,40 @@ export default function LiveForecastHero() {
       <HairlineCard style={{ marginTop: '1.5rem', padding: '2rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '2rem', alignItems: 'stretch' }}>
           
-          {/* Left Column: Big Prediction Summary Card */}
+          {/* Left Column: Big Prediction Summary Card with Live Date NumberRoll Tab */}
           <HairlineCard variant="inner" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '1.75rem' }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <HairlineBadge tone={isRain ? 'rain' : 'success'} dot="pulse">
                   <TextMorph>{isRain ? 'Rainy Day Expected' : 'Dry / Clear Weather Expected'}</TextMorph>
                 </HairlineBadge>
-                <span style={{ fontSize: '0.84rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-                  Horizon: Next 24 Hours
-                </span>
+
+                {/* Live Observation Date Tab with Hairline UI NumberRoll */}
+                <div 
+                  style={{ 
+                    display: 'inline-flex', 
+                    alignItems: 'center', 
+                    gap: '0.4rem', 
+                    background: 'rgba(82, 46, 230, 0.16)', 
+                    border: '1px solid rgba(138, 162, 255, 0.28)', 
+                    borderRadius: '9999px', 
+                    padding: '0.32rem 0.85rem', 
+                    fontSize: '0.82rem', 
+                    color: '#d9ebff', 
+                    fontWeight: 500,
+                    fontFamily: 'DM Sans, sans-serif'
+                  }}
+                >
+                  <Calendar size={13} className="text-sky-300" />
+                  <span>{weekdayName}, {monthName}</span>
+                  <strong style={{ color: '#ffffff', fontWeight: 700 }}>
+                    <NumberRoll value={dayNumber} duration={600} />
+                  </strong>
+                  <span>,</span>
+                  <strong style={{ color: '#ffffff', fontWeight: 700 }}>
+                    <NumberRoll value={yearNumber} format={{ useGrouping: false }} duration={600} />
+                  </strong>
+                </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.25rem' }}>

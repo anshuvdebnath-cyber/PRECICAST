@@ -115,24 +115,22 @@ const Digit = React.memo(function Digit({
 
   return (
     <span 
-      className="relative inline-block overflow-hidden tabular-nums"
+      className="relative inline-flex items-center justify-center overflow-hidden tabular-nums select-none"
       style={{
-        height: '1.05em',
-        lineHeight: '1.05em',
+        height: '1.14em',
         width: '0.62em',
         verticalAlign: 'baseline',
-        textAlign: 'center',
         clipPath: 'inset(0)',
       }}
     >
-      <span className="invisible select-none leading-none">8</span>
+      <span className="invisible select-none leading-none" aria-hidden="true">0</span>
       <span
         ref={stripRef}
         aria-hidden="true"
         onTransitionEnd={settle}
         className="absolute inset-x-0 top-0 block whitespace-pre text-center select-none"
         style={{
-          lineHeight: '1.05em',
+          lineHeight: '1.14em',
           transform: `translateY(${(-(MIDDLE + digit) * 100) / (SETS * 10)}%)`,
           willChange: 'transform',
         }}
@@ -197,7 +195,7 @@ export function NumberRoll({
   return (
     <span 
       className={`inline-flex items-baseline tabular-nums leading-none ${className}`} 
-      style={{ verticalAlign: 'baseline' }}
+      style={{ verticalAlign: 'baseline', ...props.style }}
       {...props}
     >
       <span className="sr-only">{`${prefix}${formatter.format(value)}${suffix}`}</span>
@@ -210,10 +208,14 @@ export function NumberRoll({
           >
             {c.digit === null ? (
               <span 
-                className="inline-block select-none leading-none"
-                style={{ verticalAlign: 'baseline' }}
+                className="relative inline-flex items-center justify-center select-none tabular-nums"
+                style={{ 
+                  height: '1.14em',
+                  verticalAlign: 'baseline',
+                  padding: c.char === '.' || c.char === ',' ? '0 0.04em' : c.char === '%' ? '0 0.07em' : undefined,
+                }}
               >
-                {c.char}
+                <span className="leading-none">{c.char}</span>
               </span>
             ) : (
               <Digit 
