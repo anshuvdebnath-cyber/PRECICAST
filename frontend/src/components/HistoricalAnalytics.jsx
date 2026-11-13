@@ -28,7 +28,7 @@ export default function HistoricalAnalytics() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#adc7ff', marginBottom: '0.55rem' }}>
             <Calendar size={18} />
             <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>Verified Historical Timeline</TextMorph>
+              Verified Historical Timeline
             </span>
           </div>
           <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
@@ -43,7 +43,7 @@ export default function HistoricalAnalytics() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399', marginBottom: '0.55rem' }}>
             <CloudRain size={18} />
             <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>India Meteorological Department Baseline</TextMorph>
+              India Meteorological Department Baseline
             </span>
           </div>
           <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#34d399', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
@@ -58,7 +58,7 @@ export default function HistoricalAnalytics() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fbbf24', marginBottom: '0.55rem' }}>
             <AlertTriangle size={18} />
             <span style={{ fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>Extreme Precipitation Days</TextMorph>
+              Extreme Precipitation Days
             </span>
           </div>
           <div style={{ fontSize: '2.3rem', fontWeight: 700, color: '#fbbf24', letterSpacing: '-0.02em', margin: '0.15rem 0', fontFamily: 'Outfit, sans-serif' }}>
@@ -77,11 +77,11 @@ export default function HistoricalAnalytics() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8aa2ff', marginBottom: '0.35rem' }}>
               <TrendingUp size={18} />
               <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                <TextMorph>Atmospheric Precipitation Dynamics</TextMorph>
+                Atmospheric Precipitation Dynamics
               </span>
             </div>
             <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-              <TextMorph>Annual Kolkata Rainfall History (2010–2026)</TextMorph>
+              Annual Kolkata Rainfall History (2010–2026)
             </h3>
             <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', marginTop: '0.35rem', lineHeight: 1.45 }}>
               Total annual precipitation in millimeters compared against the 1,650 mm IMD Normal (Copernicus ECMWF ERA5 verified ground record).
@@ -111,11 +111,11 @@ export default function HistoricalAnalytics() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', marginBottom: '0.35rem' }}>
               <Layers size={18} />
               <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                <TextMorph>Monsoon Hydrology Distribution</TextMorph>
+                Monsoon Hydrology Distribution
               </span>
             </div>
             <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-              <TextMorph>12-Month Climatological Monsoon Cycle (Southwest Monsoon Surge)</TextMorph>
+              12-Month Climatological Monsoon Cycle (Southwest Monsoon Surge)
             </h3>
             <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', marginTop: '0.35rem', lineHeight: 1.45 }}>
               16-year average monthly precipitation accumulation highlighting the June–September Southwest monsoon surge.
@@ -143,7 +143,7 @@ export default function HistoricalAnalytics() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.35rem' }}>
           <Wind size={22} color="#fbbf24" />
           <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-            <TextMorph>Benchmark Historical Storm Events in ERA5 Dataset</TextMorph>
+            Benchmark Historical Storm Events in ERA5 Dataset
           </h3>
         </div>
 

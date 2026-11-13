@@ -158,13 +158,13 @@ export default function LiveForecastHero() {
 
               <p style={{ fontSize: '0.90rem', color: 'var(--text-silver)', lineHeight: '1.6', marginBottom: '1.5rem' }}>
                 {isRain ? (
-                  <TextMorph>
+                  <>
                     Trained XGBoost models detect strong low-pressure convective forcing with high saturation. Expected precipitation: <strong>{predAmount} mm</strong> over 24-hour horizon.
-                  </TextMorph>
+                  </>
                 ) : (
-                  <TextMorph>
+                  <>
                     Barometric stability establishes high probability of dry conditions ({Math.round(prob * 100)}% rain probability, &lt;0.1 mm). Stable continental air mass across Kolkata.
-                  </TextMorph>
+                  </>
                 )}
               </p>
             </div>
@@ -183,14 +183,16 @@ export default function LiveForecastHero() {
                 <>
                   <AlertTriangle size={22} color="#f87171" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '0.86rem', color: '#fca5a5', lineHeight: '1.5' }}>
-                    <strong>Municipal Waterlogging Advisory:</strong> <TextMorph>Elevated water accumulation risk along Central Avenue, Behala, and low-lying EM Bypass corridors.</TextMorph>
+                    <strong>Municipal Waterlogging Advisory:</strong>{' '}
+                    <TextMorph>Elevated water accumulation risk along Central Avenue, Behala, and low-lying EM Bypass corridors.</TextMorph>
                   </span>
                 </>
               ) : (
                 <>
                   <CheckCircle size={22} color="#34d399" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '0.86rem', color: '#34d399', lineHeight: '1.5' }}>
-                    <strong>Municipal Advisory:</strong> <TextMorph>Standard stormwater drainage capacity nominal. No urban waterlogging alert active.</TextMorph>
+                    <strong>Municipal Advisory:</strong>{' '}
+                    <TextMorph>Standard stormwater drainage capacity nominal. No urban waterlogging alert active.</TextMorph>
                   </span>
                 </>
               )}

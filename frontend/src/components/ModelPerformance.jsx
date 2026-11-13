@@ -12,7 +12,7 @@ export default function ModelPerformance() {
   const { classification_metrics, baseline_comparison } = metrics;
   const cm = classification_metrics.confusion_matrix;
 
-  // Hairline UI Earnings Chart Periods for Model Performance Validation
+  // Hairline UI Earnings Chart Periods for Model Performance Validation (100% Verified on 1,039 Test Days)
   const earningsPeriods = [
     {
       id: 'rainfall_tiers',
@@ -20,22 +20,22 @@ export default function ModelPerformance() {
       comparison: 'vs 80.8% Persistence baseline (+2.4% gain)',
       previous: 80.8,
       bars: [
-        { key: 'dry', label: 'Dry Days', value: 84.6, title: 'Dry Conditions (<2.5 mm): 84.6% Accuracy' },
-        { key: 'light', label: 'Light Rain', value: 82.2, title: 'Light Rainfall (2.5–15.5 mm): 82.2% Accuracy' },
-        { key: 'moderate', label: 'Moderate Rain', value: 81.0, title: 'Moderate Rain (15.6–64.4 mm): 81.0% Accuracy' },
-        { key: 'heavy', label: 'Heavy Deluge', value: 88.5, title: 'Heavy Inundation (≥64.5 mm): 88.5% Accuracy' },
+        { key: 'dry', label: 'Dry Days', value: 84.6, title: 'Dry Conditions (<2.5 mm, 605 days): 84.6% Accuracy' },
+        { key: 'light', label: 'Light Rain', value: 77.8, title: 'Light Rainfall (2.5–15.5 mm, 297 days): 77.8% Accuracy' },
+        { key: 'moderate', label: 'Moderate Rain', value: 88.1, title: 'Moderate Rain (15.6–64.4 mm, 135 days): 88.1% Accuracy' },
+        { key: 'heavy', label: 'Heavy Deluge', value: 100.0, title: 'Heavy Inundation (≥64.5 mm, 2 days): 100.0% Accuracy' },
       ],
     },
     {
-      id: 'monsoon_months',
-      label: 'Monsoon Core Months',
-      comparison: 'vs 78.5% Seasonal Climatology (+7.1% gain)',
-      previous: 78.5,
+      id: 'seasons',
+      label: 'IMD Climatological Seasons',
+      comparison: 'Southwest Monsoon Performance: 83.1% Accuracy',
+      previous: 80.3,
       bars: [
-        { key: 'jun', label: 'June', value: 83.7, title: 'June Monsoon Surge: 83.7% Accuracy' },
-        { key: 'jul', label: 'July', value: 84.8, title: 'July Peak Precipitation: 84.8% Accuracy' },
-        { key: 'aug', label: 'August', value: 85.5, title: 'August Active Depressions: 85.5% Accuracy' },
-        { key: 'sep', label: 'September', value: 82.9, title: 'September Monsoon Retreat: 82.9% Accuracy' },
+        { key: 'winter', label: 'Winter', value: 93.2, title: 'Winter (Jan–Feb, 177 days): 93.2% Accuracy' },
+        { key: 'premonsoon', label: 'Pre-Monsoon', value: 71.7, title: 'Pre-Monsoon Nor\'westers (Mar–May, 276 days): 71.7% Accuracy' },
+        { key: 'monsoon', label: 'SW Monsoon', value: 83.1, title: 'Southwest Monsoon (Jun–Sep, 366 days): 83.1% Accuracy' },
+        { key: 'postmonsoon', label: 'Post-Monsoon', value: 89.5, title: 'Post-Monsoon Cyclones (Oct–Dec, 220 days): 89.5% Accuracy' },
       ],
     },
     {
@@ -44,11 +44,11 @@ export default function ModelPerformance() {
       comparison: 'Area Under ROC Curve: 0.9126 (Gold Standard)',
       previous: 75.0,
       bars: [
-        { key: 't20', label: '0.20 Threshold', value: 96.0, title: 'Early Waterlogging Alert: 96.0% Recall' },
-        { key: 't35', label: '0.35 Threshold', value: 88.0, title: 'Pre-Monsoon Operations: 88.0% Recall' },
-        { key: 't50', label: '0.50 Threshold', value: 81.1, title: 'Balanced Boundary: 81.1% Recall' },
-        { key: 't65', label: '0.65 Threshold', value: 68.0, title: 'High-Certainty Rainfall: 68.0% Recall' },
-        { key: 't80', label: '0.80 Threshold', value: 49.0, title: 'Severe Cloudburst Only: 49.0% Recall' },
+        { key: 't20', label: '0.20 Cutoff', value: 91.9, title: 'Early Warning Alert: 91.9% Recall (67.4% Precision)' },
+        { key: 't35', label: '0.35 Cutoff', value: 86.4, title: 'Pre-Monsoon Drainage: 86.4% Recall (73.8% Precision)' },
+        { key: 't50', label: '0.50 Cutoff', value: 81.1, title: 'Balanced Boundary: 81.1% Recall (79.1% Precision)' },
+        { key: 't65', label: '0.65 Cutoff', value: 74.0, title: 'High-Confidence Rain: 74.0% Recall (84.9% Precision)' },
+        { key: 't80', label: '0.80 Cutoff', value: 59.2, title: 'Severe Downpour Only: 59.2% Recall (88.0% Precision)' },
       ],
     },
   ];
@@ -60,25 +60,25 @@ export default function ModelPerformance() {
     { id: 'rain_streak_days', label: 'Consecutive Precipitation Streak (Convective Continuity)' },
     { id: 'is_monsoon_core', label: 'Southwest Monsoon Window (Seasonal Climatological Forcing)' },
     { id: 'dew_point_depression', label: 'Dew Point Depression (Boundary Layer Vapor Saturation)' },
+    { id: 'dew_point_mean', label: 'Mean Surface Dew Point (Absolute Moisture Mass)' },
     { id: 'cloud_cover_mean', label: 'Mean Cloud Cover Fraction (Solar Radiative Shielding)' },
-    { id: 'surface_pressure_min', label: 'Minimum Barometric Pressure (Cyclonic Trough Depth)' },
   ];
 
   const stagePeriods = [
     {
       id: 'compound_model',
       label: 'Compound XGBoost Engine',
-      values: [666, 103, 44, 38, 15, 12, 6],
+      values: [666, 103, 43, 38, 15, 12, 10],
     },
     {
       id: 'binary_classifier',
       label: 'Stage 1: Binary Classifier',
-      values: [710, 95, 48, 32, 14, 10, 7],
+      values: [666, 103, 43, 38, 15, 12, 10],
     },
     {
       id: 'intensity_regressor',
       label: 'Stage 2: Intensity Regressor',
-      values: [480, 195, 36, 46, 24, 16, 11],
+      values: [109, 102, 24, 58, 23, 27, 63],
     },
   ];
 
@@ -90,7 +90,7 @@ export default function ModelPerformance() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#34d399', marginBottom: '0.65rem' }}>
             <ShieldCheck size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>Classification Accuracy</TextMorph>
+              Classification Accuracy
             </span>
           </div>
           <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#34d399', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
@@ -105,7 +105,7 @@ export default function ModelPerformance() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#adc7ff', marginBottom: '0.65rem' }}>
             <Target size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>ROC-AUC Score</TextMorph>
+              ROC-AUC Score
             </span>
           </div>
           <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#adc7ff', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
@@ -120,7 +120,7 @@ export default function ModelPerformance() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#a78bfa', marginBottom: '0.65rem' }}>
             <BrainCircuit size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>Rain Detection Recall</TextMorph>
+              Rain Detection Recall
             </span>
           </div>
           <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#a78bfa', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
@@ -135,7 +135,7 @@ export default function ModelPerformance() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', color: '#fbbf24', marginBottom: '0.65rem' }}>
             <TrendingDown size={20} />
             <span style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              <TextMorph>Error Reduction</TextMorph>
+              Error Reduction
             </span>
           </div>
           <div style={{ fontSize: '2.6rem', fontWeight: 800, color: '#fbbf24', letterSpacing: '-0.03em', margin: '0.2rem 0' }}>
@@ -153,7 +153,7 @@ export default function ModelPerformance() {
         <HairlineCard style={{ padding: '2.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
             <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
-              <TextMorph>Confusion Matrix (1,039 Forward Test Days)</TextMorph>
+              Confusion Matrix (1,039 Forward Test Days)
             </h3>
             <HairlineBadge tone="rain" size="sm">Strict Temporal Split</HairlineBadge>
           </div>
@@ -209,7 +209,7 @@ export default function ModelPerformance() {
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
               <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
-                <TextMorph>Classification Performance by Operational Tier</TextMorph>
+                Classification Performance by Operational Tier
               </h3>
               <HairlineBadge tone="rain" size="sm">Hairline Earnings Chart</HairlineBadge>
             </div>
@@ -236,7 +236,7 @@ export default function ModelPerformance() {
         <div style={{ marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em' }}>
-              <TextMorph>Atmospheric Feature Influence & Decision Cascade</TextMorph>
+              Atmospheric Feature Influence & Decision Cascade
             </h3>
             <HairlineBadge tone="rain" size="sm">Gini Gain Importance</HairlineBadge>
           </div>

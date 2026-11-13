@@ -1,29 +1,25 @@
-// Hairline UI Â· text-morph Â· MIT License
-// Copyright (c) 2026 Hairline UI Â· https://hairlineui.com/license#components
+// Hairline UI · text-morph · MIT License
+// Copyright (c) 2026 Hairline UI · https://hairlineui.com/license#components
 
 "use client";
 
 import * as React from "react";
 
-/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ─────────────────────────────────────────────────────────────────
  * TEXT MORPH: text that changes the way it should
  *
  *   shared   letters both texts share stay alive and slide to
- *            their new place ("Save" â "Saving" keeps "Sav")
+ *            their new place ("Save" → "Saving" keeps "Sav")
  *   new      letters that weren't there rise in out of a blur,
  *            one after another
  *   gone     letters that leave lift away and blur out where
  *            they stood
  *   width    the box eases to its new width, so a button or
  *            pill holding it resizes with it
- *
- * Texts with little in common crossfade as a whole instead of
- * flinging single letters across. The real text is always
- * there for screen readers.
- * âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+ * ───────────────────────────────────────────────────────────────── */
 
-export interface TextMorphProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
-  children: string;
+export interface TextMorphProps extends React.HTMLAttributes<HTMLSpanElement> {
+  children?: React.ReactNode;
   /** Morph time in ms. */
   duration?: number;
   /** Where new letters come from: below ("up") or above ("down"). */
@@ -46,9 +42,20 @@ const subscribeReduced = (onChange: () => void) => {
 const useReducedMotion = () =>
   React.useSyncExternalStore(
     subscribeReduced,
-    () => window.matchMedia(reducedQuery).matches,
+    () => (typeof window !== "undefined" ? window.matchMedia(reducedQuery).matches : false),
     () => false,
   );
+
+/** Recursively extracts plain text from strings, numbers, arrays, and React nodes safely */
+function extractText(node: React.ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (React.isValidElement(node) && node.props && (node.props as Record<string, unknown>).children) {
+    return extractText((node.props as Record<string, unknown>).children as React.ReactNode);
+  }
+  return String(node);
+}
 
 /** Keep the letters two texts share (longest common subsequence); everything else is new. */
 function morph(previous: Glyph[], text: string, nextKey: () => number): Glyph[] {
@@ -59,7 +66,8 @@ function morph(previous: Glyph[], text: string, nextKey: () => number): Glyph[] 
 
   const dp = Array.from({ length: a.length + 1 }, () => new Uint16Array(b.length + 1));
   for (let i = a.length - 1; i >= 0; i--)
-    for (let j = b.length - 1; j >= 0; j--) dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    for (let j = b.length - 1; j >= 0; j--)
+      dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
 
   // Too little in common reads as two different words: crossfade them instead.
   if (dp[0][0] < Math.min(a.length, b.length) * 0.5) return fresh();
@@ -71,8 +79,11 @@ function morph(previous: Glyph[], text: string, nextKey: () => number): Glyph[] 
     if (i < a.length && a[i] === b[j]) {
       out.push(previous[i++]);
       j++;
-    } else if (i < a.length && dp[i + 1][j] >= dp[i][j + 1]) i++;
-    else out.push({ key: nextKey(), char: b[j++] });
+    } else if (i < a.length && dp[i + 1][j] >= dp[i][j + 1]) {
+      i++;
+    } else {
+      out.push({ key: nextKey(), char: b[j++] });
+    }
   }
   return out;
 }
@@ -99,7 +110,15 @@ function LeavingGlyph({ glyph, lift, duration, onDone }: { glyph: Leaving; lift:
   );
 }
 
-export function TextMorph({ children: text, duration = 460, direction = "up", animateWidth = true, className = "", ...props }: TextMorphProps) {
+export function TextMorph({
+  children,
+  duration = 460,
+  direction = "up",
+  animateWidth = true,
+  className = "",
+  ...props
+}: TextMorphProps) {
+  const text = extractText(children);
   const reduced = useReducedMotion();
   const counter = React.useRef(text.length);
   const nextKey = React.useCallback(() => ++counter.current, []);
@@ -162,7 +181,6 @@ export function TextMorph({ children: text, duration = 460, direction = "up", an
       }
     }
     if (animateWidth && Math.abs(prev.width - box.width) > 0.5) {
-      // Hold the words on one line while the box is narrower than them, or "No credits left" would wrap mid-morph.
       root.style.whiteSpace = "nowrap";
       const resize = root.animate([{ width: `${prev.width}px` }, { width: `${box.width}px` }], { duration, easing: EASE });
       resize.onfinish = resize.oncancel = () => {
@@ -207,4 +225,3 @@ export function TextMorph({ children: text, duration = 460, direction = "up", an
 }
 
 export default TextMorph;
-

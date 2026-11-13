@@ -1,0 +1,231 @@
+{
+  "source": "Computed by scripts/export_model_diagnostics.py from the saved XGBoost models on the 2024-01-01 onward test window.",
+  "test_days": 1039,
+  "test_first_day": "2024-01-01",
+  "test_last_target_day": "2026-11-05",
+  "data_last_day": "2026-11-05",
+  "overall": {
+    "model_accuracy_pct": 83.2,
+    "persistence_accuracy_pct": 80.8
+  },
+  "tiers": [
+    {
+      "key": "dry",
+      "label": "No Rain",
+      "range": "Below 2.5 mm (IMD non-rainy day)",
+      "days": 605,
+      "model_pct": 84.6,
+      "persistence_pct": 83.5
+    },
+    {
+      "key": "light",
+      "label": "Light Rain",
+      "range": "2.5 to 15.5 mm",
+      "days": 297,
+      "model_pct": 77.8,
+      "persistence_pct": 73.4
+    },
+    {
+      "key": "moderate",
+      "label": "Moderate Rain",
+      "range": "15.6 to 64.4 mm",
+      "days": 135,
+      "model_pct": 88.1,
+      "persistence_pct": 84.4
+    },
+    {
+      "key": "heavy",
+      "label": "Heavy Rain",
+      "range": "64.5 mm and above",
+      "days": 2,
+      "model_pct": 100.0,
+      "persistence_pct": 100.0
+    }
+  ],
+  "seasons": [
+    {
+      "key": "winter",
+      "label": "Winter",
+      "range": "January to February",
+      "days": 177,
+      "model_pct": 93.2,
+      "persistence_pct": 91.0
+    },
+    {
+      "key": "premonsoon",
+      "label": "Pre-Monsoon",
+      "range": "March to May",
+      "days": 276,
+      "model_pct": 71.7,
+      "persistence_pct": 70.7
+    },
+    {
+      "key": "monsoon",
+      "label": "Southwest Monsoon",
+      "range": "June to September",
+      "days": 366,
+      "model_pct": 83.1,
+      "persistence_pct": 80.3
+    },
+    {
+      "key": "postmonsoon",
+      "label": "Post-Monsoon",
+      "range": "October to December",
+      "days": 220,
+      "model_pct": 89.5,
+      "persistence_pct": 85.9
+    }
+  ],
+  "thresholds": [
+    {
+      "threshold": 0.2,
+      "recall_pct": 91.9,
+      "precision_pct": 67.4,
+      "accuracy_pct": 78.1
+    },
+    {
+      "threshold": 0.35,
+      "recall_pct": 86.4,
+      "precision_pct": 73.8,
+      "accuracy_pct": 81.5
+    },
+    {
+      "threshold": 0.5,
+      "recall_pct": 81.1,
+      "precision_pct": 79.1,
+      "accuracy_pct": 83.2
+    },
+    {
+      "threshold": 0.65,
+      "recall_pct": 74.0,
+      "precision_pct": 84.9,
+      "accuracy_pct": 83.6
+    },
+    {
+      "threshold": 0.8,
+      "recall_pct": 59.2,
+      "precision_pct": 88.0,
+      "accuracy_pct": 79.6
+    }
+  ],
+  "importance": {
+    "features": [
+      "rain_today_flag",
+      "precip_today",
+      "rain_streak_days",
+      "is_monsoon_core",
+      "dew_point_depression",
+      "dew_point_mean",
+      "cloud_cover_mean"
+    ],
+    "classifier_gain_pct": [
+      66.6,
+      10.3,
+      4.3,
+      3.8,
+      1.5,
+      1.2,
+      1.0
+    ],
+    "classifier_split_pct": [
+      0.0,
+      4.6,
+      0.7,
+      0.1,
+      1.6,
+      3.6,
+      7.7
+    ],
+    "regressor_gain_pct": [
+      10.9,
+      10.2,
+      2.4,
+      5.8,
+      2.3,
+      2.7,
+      6.3
+    ]
+  },
+  "monthly_climatology": [
+    {
+      "month": "Jan",
+      "avg_rainfall_mm": 12.1,
+      "years": 17
+    },
+    {
+      "month": "Feb",
+      "avg_rainfall_mm": 22.1,
+      "years": 17
+    },
+    {
+      "month": "Mar",
+      "avg_rainfall_mm": 36.6,
+      "years": 17
+    },
+    {
+      "month": "Apr",
+      "avg_rainfall_mm": 69.9,
+      "years": 17
+    },
+    {
+      "month": "May",
+      "avg_rainfall_mm": 128.4,
+      "years": 17
+    },
+    {
+      "month": "Jun",
+      "avg_rainfall_mm": 265.2,
+      "years": 17
+    },
+    {
+      "month": "Jul",
+      "avg_rainfall_mm": 370.9,
+      "years": 17
+    },
+    {
+      "month": "Aug",
+      "avg_rainfall_mm": 364.7,
+      "years": 17
+    },
+    {
+      "month": "Sep",
+      "avg_rainfall_mm": 291.4,
+      "years": 17
+    },
+    {
+      "month": "Oct",
+      "avg_rainfall_mm": 160.2,
+      "years": 17
+    },
+    {
+      "month": "Nov",
+      "avg_rainfall_mm": 27.5,
+      "years": 16
+    },
+    {
+      "month": "Dec",
+      "avg_rainfall_mm": 19.7,
+      "years": 16
+    }
+  ],
+  "storm_check": [
+    {
+      "date": "2020-05-20",
+      "rainfall_mm": 99.1,
+      "min_pressure_hpa": 964.5,
+      "max_wind_kmh": 68.9
+    },
+    {
+      "date": "2019-11-09",
+      "rainfall_mm": 89.3,
+      "min_pressure_hpa": 1002.0,
+      "max_wind_kmh": 37.7
+    },
+    {
+      "date": "2021-09-20",
+      "rainfall_mm": 58.8,
+      "min_pressure_hpa": 1000.7,
+      "max_wind_kmh": 14.4
+    }
+  ]
+}

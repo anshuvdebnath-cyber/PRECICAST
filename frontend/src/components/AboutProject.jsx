@@ -24,10 +24,10 @@ export default function AboutProject() {
           </div>
           <div>
             <HairlineBadge tone="rain" dot="pulse">
-              <TextMorph>Verified Data Architecture</TextMorph>
+              Verified Data Architecture
             </HairlineBadge>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-              <TextMorph>Official Scientific Data Sources & Citations</TextMorph>
+              Official Scientific Data Sources & Citations
             </h3>
           </div>
         </div>
@@ -82,10 +82,10 @@ export default function AboutProject() {
           </div>
           <div>
             <HairlineBadge tone="neutral">
-              <TextMorph>System Specifications</TextMorph>
+              System Specifications
             </HairlineBadge>
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: '#ffffff', marginTop: '0.25rem', letterSpacing: '-0.02em', fontFamily: 'Outfit, sans-serif' }}>
-              <TextMorph>Precicast Machine Learning Pipeline</TextMorph>
+              Precicast Machine Learning Pipeline
             </h3>
           </div>
         </div>

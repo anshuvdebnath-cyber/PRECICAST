@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #030014;
+  --color-foreground: #f8fafc;
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-muted: rgba(82, 46, 230, 0.16);
+  --color-muted-foreground: #adc7ff;
+  --color-ring: #7a8efc;
+  --color-primary: #522ee6;
+  --color-primary-foreground: #ffffff;
+  --color-chart-1: #6366f1;
+  --color-chart-2: #38bdf8;
+  --color-chart-3: #34d399;
+  --color-chart-4: #fbbf24;
+  --color-chart-5: #f87171;
+}
+
 :root {
   /* Hairline UI Standard Theme Tokens */
   --primary: #522ee6;
